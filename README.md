@@ -1,13 +1,9 @@
-# hippercampus
-
-## Test back- and front- ends
-
 - For the test (React) Express (backend), see: https://github.com/kowaraj/hippercampus_test_be
 - For the test React client (frontend), see: https://github.com/kowaraj/hippercampus_test_fe
 
+# Hippercampus
 
-## Run Project
-
+## Run it
 ```
 npm install
 npm start = to trans-pile *.re to *.js
@@ -17,10 +13,7 @@ npm run webpack = to bundle *.js to Index.js
 ```
 
 
-
-
-
-# More info
+## More info
 
 After you see the webpack compilation succeed (the `npm run webpack` step), open up `build/index.html` (**no server needed!**). Then modify whichever `.re` file in `src` and refresh the page to see the changes.
 
