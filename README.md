@@ -1,18 +1,20 @@
 # hippercampus
 
-## Run Project
-
-```sh
-npm install
-npm start
-# in another tab
-npm run webpack
-```
-
 ## Test back- and front- ends
 
-For the test (React) Express (backend), see: https://github.com/kowaraj/hippercampus_test_be
-For the test React client (frontend), see: https://github.com/kowaraj/hippercampus_test_fe
+- For the test (React) Express (backend), see: https://github.com/kowaraj/hippercampus_test_be
+- For the test React client (frontend), see: https://github.com/kowaraj/hippercampus_test_fe
+
+
+## Run Project
+
+```
+npm install
+npm start = to trans-pile *.re to *.js
+
+# In another tab
+npm run webpack = to bundle *.js to Index.js
+```
 
 
 
