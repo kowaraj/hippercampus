@@ -22,5 +22,6 @@ let make = () => {
         <CardCenter />
         {str("------------------------------")}
         <CardBottom />
+        <FetchData />
     </div>
 };
