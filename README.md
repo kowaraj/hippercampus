@@ -9,6 +9,17 @@ npm start
 npm run webpack
 ```
 
+## Test back- and front- ends
+
+For the test (React) Express (backend), see: https://github.com/kowaraj/hippercampus_test_be
+For the test React client (frontend), see: https://github.com/kowaraj/hippercampus_test_fe
+
+
+
+
+
+# More info
+
 After you see the webpack compilation succeed (the `npm run webpack` step), open up `build/index.html` (**no server needed!**). Then modify whichever `.re` file in `src` and refresh the page to see the changes.
 
 **For more elaborate ReasonReact examples**, please see https://github.com/reasonml-community/reason-react-example
