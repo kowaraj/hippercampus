@@ -67,66 +67,67 @@ let make = () => {
         Js.log("fileSelected triggered!!!! ");
     };
     
-
+    {
     <div>
-        <button onClick={_event => dispatch(Click)}>
-            {str(message)}
-        </button>
-        <button onClick={_event => dispatch(GetForm)}>
-            {str("GET FORM")}
-        </button>
 
-        <button onClick={_event => dispatch(Toggle)}>
-            {str("TOGGLE")}
-        </button>
-        {state.show ? str("No greetings today") : ReasonReact.null}
+    //     <button onClick={_event => dispatch(Click)}>
+    //         {str(message)}
+    //     </button>
+    //     <button onClick={_event => dispatch(GetForm)}>
+    //         {str("GET FORM")}
+    //     </button>
 
-        <div>
-            {get_form()}
-        </div>
+    //     <button onClick={_event => dispatch(Toggle)}>
+    //         {str("TOGGLE")}
+    //     </button>
+    //     {state.show ? str("No greetings today") : ReasonReact.null}
 
-        <button onClick={_event => dispatch(Upload)}>
-            {str("UPLOAD-with-FETCH")}
-        </button>
+    //     <div>
+    //         {get_form()}
+    //     </div>
 
-        <input type_="file" onClick={_event => fileSelected()}>
+    //     <button onClick={_event => dispatch(Upload)}>
+    //         {str("UPLOAD-with-FETCH")}
+    //     </button>
 
-        </input>
+    //     <input type_="file" onClick={_event => fileSelected()}>
 
-    <div className="items">
-        (
-        React.array(Array.of_list(
-            List.map((item : TodoItem.todoitem) => <TodoItem 
-                                    key=(string_of_int(item.id))
-                                    item />, 
-                    testitems)
-         ))
-       )
-     </div>
+    //     </input>
 
-    <div className="item1">
-        <TodoItem key=(string_of_int(testitem1.id)) item=testitem1 />
+    // <div className="items">
+    //     (
+    //     React.array(Array.of_list(
+    //         List.map((item : TodoItem.todoitem) => <TodoItem 
+    //                                 key=(string_of_int(item.id))
+    //                                 item />, 
+    //                 testitems)
+    //      ))
+    //    )
+    //  </div>
 
-    </div>
+    // <div className="item1">
+    //     <TodoItem key=(string_of_int(testitem1.id)) item=testitem1 />
+
+    // </div>
  
-    <div className="title">
-        (str("What to do"))
-        <Input onSubmit=((text) => dispatch(InputText(text))) />
-    </div>
+    // <div className="title">
+    //     (str("What to do"))
+    //     <Input onSubmit=((text) => dispatch(InputText(text))) />
+    // </div>
 
-    <div className="title">
-        (str("What to do"))
-        <FilePicker onSubmit=((text) => dispatch(InputText(text))) />
-    </div>
+    // <div className="title">
+    //     (str("What to do"))
+    //     <FilePicker onSubmit=((text) => dispatch(InputText(text))) />
+    // </div>
 
         <div>
-            
-           <form 
+            {str("File Uploader:")}
+            <form 
                 id="uploadForm"
-                action="http://localhost:3000/upload"
+                action=Config.url_be
                 method="post"
                 encType="multipart/form-data">
-                <input type_="file" name="sampleFile" />
+                <input type_="file" name="sampleFile" /> <br />
                 <input type_="submit" value="Upload!" />
             </form>
 
@@ -134,4 +135,5 @@ let make = () => {
         </div>
           
     </div>;
+    }
 };
