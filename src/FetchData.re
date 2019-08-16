@@ -35,23 +35,22 @@ type action =
 
 [@react.component]
 let make = () => {
-    let (state, dispatch) = 
+    let (ss, dispatch) = 
     React.useReducer( (state, action) => 
         switch (action) { 
         | Load => 
             ReasonReact.UpdateWithSideEffects(
             Loading,
-            (
-            self =>
-                Js.Promise.(
-                fetchMemes()
-                |> then_(result =>
-                    switch (result) {
-                    | Some(memes) => resolve(self.send(Display(memes)))
-                    | None => resolve(self.send(LoadFailed))
-                    }
-                    )
-                |> ignore
+            ( self => Js.Promise.
+                (
+                    fetchMemes()
+                    |> then_(result =>
+                        switch (result) {
+                        | Some(memes) => resolve(self.send(Display(memes)))
+                        | None => resolve(self.send(LoadFailed))
+                        }
+                        )
+                    |> ignore
                 )
             ),
         )
@@ -62,12 +61,52 @@ let make = () => {
     );
 
 
-        switch (state) {
-            | NotAsked => <p> {str("Not asked")}</p>
-            | Loading => <p> {str("Not asked")}</p>
-            | Failure => <p> {str("Not asked")}</p>
-            | Success(memes) => <p> {str("Not asked")}</p>
-        };
-
+    <div>
+        {
+            str("Not asked")}
+    </div>
 
 };
+
+
+
+// [@react.component]
+// let make = () => {
+//     let (ss, dispatch) = 
+//     React.useReducer( (state, action) => 
+//         switch (action) { 
+//         | Load => 
+//             ReasonReact.UpdateWithSideEffects(
+//             Loading,
+//             ( self => Js.Promise.
+//                 (
+//                     fetchMemes()
+//                     |> then_(result =>
+//                         switch (result) {
+//                         | Some(memes) => resolve(self.send(Display(memes)))
+//                         | None => resolve(self.send(LoadFailed))
+//                         }
+//                         )
+//                     |> ignore
+//                 )
+//             ),
+//         )
+//         | LoadFailed => ReasonReact.Update(Failure)
+//         | Display(memes) => ReasonReact.Update(Success(memes))
+//         }, 
+//         ReasonReact.Update(NotAsked)
+//     );
+
+
+//     <div>
+//         {str("Not asked")}
+//         // { switch state {
+//         //     | NotAsked => <div> {str("Not asked")}</div>
+//         //     | Loading => <div> {str("Not asked")}</div>
+//         //     | Failure => <div> {str("Not asked")}</div>
+//         //     | Success(memes) => <div> {str("Not asked")}</div>
+//         //     };
+//         // };
+//     </div>
+
+// };

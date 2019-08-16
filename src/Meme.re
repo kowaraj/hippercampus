@@ -18,6 +18,6 @@ let make = () => {
     <div>
         <img 
             style=(ReactDOMRe.Style.make(~maxWidth="400px", ~maxHeight="200px", () ))  
-            src="http://localhost:8000/uploads/ss_0.png" /> 
+            src="http://localhost:3000/uploads/ss_0.png" /> 
     </div>
 };
