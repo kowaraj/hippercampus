@@ -21,8 +21,6 @@ let upload_file = () => {
 };
 
 
-let testitems : list(TodoItem.todoitem) = [{id: 0, title: "testItem1name", completed: false}];
-let testitem1 : TodoItem.todoitem = {id: 0, title: "testItem1name", completed: false};
 
 
 
@@ -49,23 +47,23 @@ let make = () => {
     } 
     }, {count: 0, show: true});
 
-    let message =
-        "CLICK " ++ string_of_int(state.count) ++ " # ";
+    // let message =
+    //     "CLICK " ++ string_of_int(state.count) ++ " # ";
 
-    let get_form = () => {
-            <form 
-                id="uploadForm"
-                action="http://localhost:3000/upload"
-                method="post"
-                encType="multipart/form-data">
-                <input type_="file" name="sampleFile" />
-                <input type_="submit" value="Upload!" />
-            </form>
-    };
+    // let get_form = () => {
+    //         <form 
+    //             id="uploadForm"
+    //             action="http://localhost:3000/upload"
+    //             method="post"
+    //             encType="multipart/form-data">
+    //             <input type_="file" name="sampleFile" />
+    //             <input type_="submit" value="Upload!" />
+    //         </form>
+    // };
         
-    let fileSelected = () => {
-        Js.log("fileSelected triggered!!!! ");
-    };
+    // let fileSelected = () => {
+    //     Js.log("fileSelected triggered!!!! ");
+    // };
     
     {
     <div>
@@ -94,16 +92,6 @@ let make = () => {
 
     //     </input>
 
-    // <div className="items">
-    //     (
-    //     React.array(Array.of_list(
-    //         List.map((item : TodoItem.todoitem) => <TodoItem 
-    //                                 key=(string_of_int(item.id))
-    //                                 item />, 
-    //                 testitems)
-    //      ))
-    //    )
-    //  </div>
 
     // <div className="item1">
     //     <TodoItem key=(string_of_int(testitem1.id)) item=testitem1 />
@@ -121,7 +109,7 @@ let make = () => {
     // </div>
 
         <div>
-            {str("File Uploader:")}
+            {str("FILE UPLOADER:")}
             <form 
                 id="uploadForm"
                 action=Config.url_be
