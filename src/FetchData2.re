@@ -19,9 +19,11 @@ let doFetchData = () => {
       Fetch.fetch("http://localhost:3000/test_be")
       |> then_(Fetch.Response.json)
       |> then_(res => {
-        Js.log(res);
-        resolve();
-      })
+            Js.log(res);
+            resolve();
+            })
+      |> catch( { _err => {Js.log(_err); resolve()} })
+
     );
 };
 
