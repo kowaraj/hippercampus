@@ -17,12 +17,15 @@ let doFetchData = () => {
     Js.log("fake fetching data..........");
     Js.Promise.(
       Fetch.fetch("http://localhost:3000/test_be")
-      |> then_(Fetch.Response.json)
+      |> then_(Fetch.Response.text)
       |> then_(res => {
             Js.log(res);
-            resolve();
+            resolve(res);
             })
-      |> catch( { _err => {Js.log(_err); resolve()} })
+      |> catch( { 
+          _err => {Js.log(_err); 
+          resolve("errr");
+          } })
 
     );
 };
@@ -30,13 +33,28 @@ let doFetchData = () => {
 [@react.component]
 let make = () => {
     let (x, setX) = React.useState( () => "initial value of x" );
+    let (y, setY) = React.useState( () => "initial y" );
 
-    React.useEffect1( // TODO: How NOT to triffer this "effect" at the componentMount time
+    React.useEffect1( // TODO: How NOT to trigger this "effect" at the componentMount time
         () => { 
             Js.log("Fired: useEffect1")
             Js.log(x); 
             Js.log("HERE you can call fetching the data from the backend!")
-            doFetchData();
+
+
+            //setY(_ => doFetchData());
+
+            Js.Promise.(
+                doFetchData()
+                |> then_( result => {
+                            Js.log(result);
+                            setY(_ => result);
+                            resolve();
+                            })
+                |> ignore                            
+            )
+
+            
             None;
             }, 
         [|x|],
@@ -80,6 +98,8 @@ let make = () => {
         <br />
 
         {str("Input: " ++ ss.input ++ ", isLoading? = " ++ string_of_bool(ss.isLoading))}
+        <br/>
+        {str("Y === " ++ y)}
     </div>
     }
 };
