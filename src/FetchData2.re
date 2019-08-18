@@ -10,7 +10,8 @@ type state = {
 
 type action = 
     | UpdateInput(string)
-    | FetchData;
+    | FetchData
+    | FetchDataX(string);
 
 
 let doFetchData = () => {
@@ -20,11 +21,11 @@ let doFetchData = () => {
       |> then_(Fetch.Response.text)
       |> then_(res => {
             Js.log(res);
-            resolve(res);
+            resolve(Some(res));
             })
       |> catch( { 
           _err => {Js.log(_err); 
-          resolve("errr");
+          resolve(None);
           } })
 
     );
@@ -47,10 +48,19 @@ let make = () => {
             Js.Promise.(
                 doFetchData()
                 |> then_( result => {
-                            Js.log(result);
-                            setY(_ => result);
-                            resolve();
-                            })
+                            switch (result) {
+                                | Some(data) => {
+                                    Js.log(data);
+                                    setY(_ => data);
+                                    resolve();
+                                    }
+                                | None => {
+                                    Js.log("no data fetched");
+                                    setY(_ => "no data fetched");
+                                    resolve();
+                                    }
+                            }
+                        })
                 |> ignore                            
             )
 
@@ -64,7 +74,8 @@ let make = () => {
         React.useReducer( 
             (state, action) => switch (action) { 
                 | UpdateInput(newInput) => {...state, input: newInput}
-                | FetchData => { setX(_ => "test"); {...state, isLoading: true }}
+                | FetchData => { Js.log("STATE=2"); setX(_ => "test"); {...state, isLoading: true }}
+                | FetchDataX(d) => { Js.log("STATE=3, d=="++d); setX(_ => d); {...state, isLoading: true }}
                 },
             {input: "Initial input", isLoading: false}
         );
@@ -76,8 +87,11 @@ let make = () => {
         <br />
             <form
                 onSubmit={ ev => {
+                    Js.log("onSubmit called...")
+                    let ev_val = ReactEvent.Form.target(ev)##value;
                     ReactEvent.Form.preventDefault(ev);
-                    dispatch(FetchData);
+//                    dispatch(FetchData);
+                    dispatch(FetchDataX(ss.input));
                 }}>
 
                 <label htmlFor="search"> {str("Search")} </label>
