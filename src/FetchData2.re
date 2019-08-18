@@ -1,28 +1,53 @@
 let str = ReasonReact.string;
-
-let testitems : list(TodoItem.todoitem) = [{id: 0, title: "testItem1name", completed: false}];
-// let testitem1 : TodoItem.todoitem = {id: 0, title: "testItem1name", completed: false};
-
 type state = {
     input: string, 
     isLoading: bool
 };
-
 type action = 
     | UpdateInput(string)
     | FetchData
     | FetchDataX(string);
 
 
+
+
+module Decode = {
+
+type f  = {
+    fn: string, 
+    tags: list(string)
+    };
+
+let file_decoder = file_json => {
+    Json.Decode.{
+        fn: field("fn", string, file_json),
+        tags: field("tags", list(string), file_json)
+    }
+
+}
+
+let files = json => {
+    Js.log(json);
+    Json.Decode.list(file_decoder, json);
+}
+
+}
+
+
 let doFetchData = () => {
     Js.log("fake fetching data..........");
     Js.Promise.(
-      Fetch.fetch("http://localhost:3000/test_be")
-      |> then_(Fetch.Response.text)
-      |> then_(res => {
-            Js.log(res);
-            resolve(Some(res));
-            })
+        Fetch.fetch("http://localhost:3000/test_be/2")
+        |> then_(Fetch.Response.json)
+        |> then_({res => {
+            res
+            |> Decode.files 
+            |> ( fs => {
+                    Js.log(fs);
+                    Some(fs)
+                    } 
+                    |> resolve)
+            }})
       |> catch( { 
           _err => {Js.log(_err); 
           resolve(None);
@@ -35,6 +60,7 @@ let doFetchData = () => {
 let make = () => {
     let (x, setX) = React.useState( () => "initial value of x" );
     let (y, setY) = React.useState( () => "initial y" );
+    let (z, setZ) = React.useState( () => [] );
 
     React.useEffect1( // TODO: How NOT to trigger this "effect" at the componentMount time
         () => { 
@@ -51,7 +77,8 @@ let make = () => {
                             switch (result) {
                                 | Some(data) => {
                                     Js.log(data);
-                                    setY(_ => data);
+                                    setY(_ => "some files have been fetched!");
+                                    setZ(_ => data);
                                     resolve();
                                     }
                                 | None => {
@@ -114,6 +141,17 @@ let make = () => {
         {str("Input: " ++ ss.input ++ ", isLoading? = " ++ string_of_bool(ss.isLoading))}
         <br/>
         {str("Y === " ++ y)}
+        <br/>
+        <div className="items-files">
+        (
+            React.array(Array.of_list(
+                List.map((zi : Decode.f) => <p> {str(zi.fn ++ ", with tags: " ++ List.hd(zi.tags))} </p>, 
+                        z)
+            ))
+        )
+        </div>
+
+
     </div>
     }
 };
