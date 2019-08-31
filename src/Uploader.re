@@ -24,7 +24,7 @@ let make = () => {
 
     // .reduce
 
-    let (state, dispatch) = React.useReducer((state, action) =>
+    let (_state, _dispatch) = React.useReducer((state, action) =>
     switch (action) {
     | Click => {...state, count: state.count + 1}
     // | Toggle => {...state, show: ! state.show}

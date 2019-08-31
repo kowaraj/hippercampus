@@ -22,6 +22,8 @@ let doFetchData = () => {
     );
 };
 
+let test_url = "http://localhost:3000/uploads/ss_6.png";
+
 [@react.component]
 let make = () => {
 
@@ -83,7 +85,7 @@ let make = () => {
             <form
                 onSubmit={ ev => {
                     Js.log("onSubmit called...")
-                    let ev_val = ReactEvent.Form.target(ev)##value;
+                    let _ev_val = ReactEvent.Form.target(ev)##value;
                     ReactEvent.Form.preventDefault(ev);
                     dispatch(FetchDataX(ss.input));
                 }}>
@@ -111,15 +113,20 @@ let make = () => {
         <br/>
         {str("Y === " ++ y)}
         <br/>
+
         <div className="items-files">
         (
-            React.array(Array.of_list(
-                List.map((zi : Decode.f) => <p> {str(zi.fn ++ ", with tags: " ++ List.hd(zi.tags))} </p>, 
-                        z)
-            ))
+            React.array(
+                Array.of_list(
+                    List.map(
+                        (zi : Decode.f) => 
+                            <RenderItem url={"http://localhost:3000/uploads/" ++ zi.fn} />,
+                        z
+                    )
+                )
+            )
         )
         </div>
-
 
     </div>
     }
