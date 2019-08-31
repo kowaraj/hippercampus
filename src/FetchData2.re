@@ -116,15 +116,12 @@ let make = () => {
 
         <div className="items-files">
         (
-            React.array(
-                Array.of_list(
-                    List.map(
-                        (zi : Decode.f) => 
-                            <RenderItem url={"http://localhost:3000/uploads/" ++ zi.fn} />,
-                        z
-                    )
-                )
-            )
+            List.map(
+                (zi : Decode.f) => 
+                <RenderItem url={"http://localhost:3000/uploads/" ++ zi.fn} />,
+                z)
+            |> Array.of_list
+            |> React.array
         )
         </div>
 
