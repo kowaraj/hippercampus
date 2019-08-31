@@ -117,13 +117,26 @@ let make = () => {
         <div className="items-files">
         (
             List.map(
-                (zi : Decode.f) => 
-                <RenderItem url={"http://localhost:3000/uploads/" ++ zi.fn} />,
+                (zi : Decode.f) => {
+                    let i : RenderItem2.item = { url: "http://localhost:3000/uploads/" ++ zi.fn, id: zi.id};
+                    <RenderItem2 item=i />
+                },
                 z)
             |> Array.of_list
             |> React.array
         )
         </div>
+
+        // <div className="items-files">
+        // (
+        //     List.map(
+        //         (zi : Decode.f) => 
+        //         <RenderItem url={"http://localhost:3000/uploads/" ++ zi.fn} />,
+        //         z)
+        //     |> Array.of_list
+        //     |> React.array
+        // )
+        // </div>
 
     </div>
     }
