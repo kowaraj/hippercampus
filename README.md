@@ -12,11 +12,38 @@ npm start = to trans-pile *.re to *.js
 npm run webpack = to bundle *.js to Index.js
 ```
 
+## Run the _test_be
+
+It expects a backend to be found on `localhost:3000/upload` and `localhost:3000/2`
+
+# How it works
+
+index.html has 2 tags - index_uploader and index_content
+Index.re binds 2 components to these 2 tags - Uploader and FetchData2
+
+### Uploader 
+
+Uploader is a Reducer. It does the following:
+- display upload form (pure HTML)
+  - 'submit' makes a POST to "http://localhost:3000/upload" (see: Config.re)
+- TODO: no need to be a Reducer = no state, no action
+
+### FetchData2
+
+FetchData2 is a component with hooks:
+- 3 useState
+- 1 useEffect1
+- 1 useReducer
+
+`doFetchData` makes a GET to "http://localhost:3000/test_be/2" to query the (future) database for the info.
+
+It renders a form which by 'onSubmit' "reduces" to `FetchDataX(str)` the info.
 
 
 
 
-## More info
+# More info
+
 
 After you see the webpack compilation succeed (the `npm run webpack` step), open up `build/index.html` (**no server needed!**). Then modify whichever `.re` file in `src` and refresh the page to see the changes.
 
