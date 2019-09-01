@@ -22,7 +22,6 @@ let doFetchData = () => {
     );
 };
 
-let test_url = "http://localhost:3000/uploads/ss_6.png";
 
 [@react.component]
 let make = () => {

@@ -59,6 +59,19 @@ let make = () => {
 
             </form>
         </div>
+
+
+         <div>
+            {str("FILE UPLOADER:")} <br />
+            <form 
+                id="uploadForm"
+                action= Config.url_ql
+                method="post"
+                encType="text/plain">
+                <input type_="text" name="sampleFile" /> <br />
+                <input type_="submit" value="Upload!" />
+            </form>
+        </div>
     </div>;
     }
 };
