@@ -3,10 +3,12 @@ let str = ReasonReact.string;
 type state = {
   count: int,
   show: bool,
+  tags: string
 };
 
 type action =
-  | Click;
+  | Click
+  | UpdateTags(string);
 //   | Toggle
 //   | GetForm
 //   | Upload
@@ -24,26 +26,12 @@ let make = () => {
 
     // .reduce
 
-    let (_state, _dispatch) = React.useReducer((state, action) =>
-    switch (action) {
-    | Click => {...state, count: state.count + 1}
-    // | Toggle => {...state, show: ! state.show}
-    // | GetForm => state
-    // | Upload => {
-    //     Js.log("fake uploading....");
-    //     upload_file();
-    //     state
-    // }
-    // | Submit => {
-    //     Js.log("fake submit");
-    //     state
-    // }
-    // | InputText(text) => {
-    //     Js.log("fake InputText " ++ text);
-    //     state
-    // } 
-    }, {count: 0, show: true});
-
+    let (ss, dispatch) = React.useReducer((state, action) =>
+      switch (action) {
+      | Click => {...state, count: state.count + 1}
+      | UpdateTags(tags_string) => {...state, tags: tags_string}
+      }, 
+      {count: 0, show: true, tags: ""});
   
     // .render
 
@@ -53,11 +41,22 @@ let make = () => {
             {str("FILE UPLOADER:")} <br />
             <form 
                 id="uploadForm"
-                action=Config.url_be
+                action= (Config.url_be ++ "?testvar=testval")
                 method="post"
                 encType="multipart/form-data">
                 <input type_="file" name="sampleFile" /> <br />
                 <input type_="submit" value="Upload!" />
+                <input 
+                    type_="text"
+                    id="search" 
+                    name="tags" 
+                    value={ss.tags} 
+                    onChange={ev => {
+                        let value = ReactEvent.Form.target(ev)##value;
+                        dispatch(UpdateTags(value))
+                    }}
+                />
+
             </form>
         </div>
     </div>;
