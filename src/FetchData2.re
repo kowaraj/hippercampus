@@ -13,13 +13,19 @@ type action =
 
 
 let doFetchData_ql = (x2) => {
-    Js.log("doFetchData_ql: fetching.." ++x2);
+    let req_str = "{\"query\":\"{allPosts {edges {node {id } }}}\",\"variables\":null,\"operationName\":null}";
+//  ___________ = {"query":"{allPosts {edges {node {id } }}}","variables":null,"operationName":null}
+//  ___________ = {"query":"{allPosts {edges {node {id } }}}"}
+    Js.log(">> arq: " ++x2);
+    Js.log(">> req: " ++req_str);
+    
     Js.Promise.(
         Fetch.fetchWithInit(
             Config.url_ql, // ++ ql_req2, 
             Fetch.RequestInit.make(
                 ~method_=Post, 
-                ~body=Fetch.BodyInit.make("{\"query\":\"{allPosts {edges {node {id } }}}\",\"variables\":null,\"operationName\":null}"),
+                ~body=Fetch.BodyInit.make(x2),
+//                ~body=Fetch.BodyInit.make(req_str),
                 ~headers=Fetch.HeadersInit.make({"Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }),
 
                 ()), 
@@ -59,11 +65,12 @@ let make = () => {
     // .state 
 
     let (x, setX) = React.useState( () => "initial value of x" );
-    let (x2, setX2) = React.useState( () => "initial value of x2" );
+    let (x2, setX2) = React.useState( () => "{\"query\":\"{allPosts {edges {node {id } }}}\"}" );
     let (x3, setX3) = React.useState( () => "initial value of x3" );
     let (y, setY) = React.useState( () => "initial y" );
     let (z, setZ) = React.useState( () => [] );
     let (z2, setZ2) = React.useState( () => "");
+    let (z3, setZ3) = React.useState( () => "");
 
     // .effect
 
@@ -101,6 +108,7 @@ let make = () => {
     React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
         () => { 
             Js.log("Fired: useEffect1, X3 == [" ++ x3 ++ "] ")
+            setZ3(_=>x3)
             Js.Promise.(
                 doFetchData_ql(x3)
                 |> then_( result => {
@@ -166,6 +174,7 @@ let make = () => {
                 // />
                 
                 <input 
+                    style=(ReactDOMRe.Style.make(~width="600px", () ))  
                     id="x2_input_id" 
                     name="x2_input_name" 
                     value={x2} 
@@ -191,9 +200,8 @@ let make = () => {
         <br/>
         {str("Y === " ++ y)}
         <br/>
-        <br/>
-        {str("Z2 === " ++ z2)}
-        <br/>
+        <br/>        {str("Z3 (request)=== " ++ z3)}        <br/>
+        <br/>        {str("Z2 (reply)=== " ++ z2)}        <br/>
         <div className="items-files">
         (
             List.map(
