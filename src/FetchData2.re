@@ -8,6 +8,47 @@ type action =
     | FetchData
     | FetchDataX(string);
 
+
+
+let ql_req2 = "{
+  allPosts {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}";
+
+let doFetchData_ql = () => {
+    Js.log("doFetchData_ql: fetching..");
+    Js.Promise.(
+        Fetch.fetchWithInit(
+            Config.url_ql, // ++ ql_req2, 
+            Fetch.RequestInit.make(
+                ~method_=Post, 
+                ~body=Fetch.BodyInit.make("{\"query\":\"{allPosts {edges {node {id } }}}\",\"variables\":null,\"operationName\":null}"),
+                ~headers=Fetch.HeadersInit.make({"Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }),
+
+                ()), 
+
+        )
+        |> then_(Fetch.Response.text)
+        |> then_({res => {
+            Some(res) |> resolve
+            |> ( fs => {  Js.log(fs);    Some(fs)   }    |> resolve)
+            }})
+        |> catch({_err => { Js.log(_err);     resolve(None); } })
+    );
+};
+
+let req_ql = (e) => {
+    Js.log("REQ_QL: !!!")
+    doFetchData_ql() |>ignore;
+    e |>ignore;
+    ();
+}
+
 let doFetchData = () => {
     Js.log("doFetchData: fetching :3000/test_be/2 ");
     Js.Promise.(
@@ -37,6 +78,10 @@ let make = () => {
     React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
         () => { 
             Js.log("Fired: useEffect1: [" ++ x ++ "] - HERE you can call fetching the data from the backend!")
+
+            //doFetchData_ql() |> ignore;
+
+
             Js.Promise.(
                 doFetchData()
                 |> then_( result => {
@@ -101,6 +146,10 @@ let make = () => {
                 />
                 <button type_="submit">
                     {str("Submit Search")}
+                </button>
+                
+                <button onClick=req_ql>
+                    {str("QL req")}
                 </button>
                 
             </form>

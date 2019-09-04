@@ -20,6 +20,15 @@ type action =
 //     Js.log("upload completed !")
 // };
 
+let ql_req = "{
+  allPosts {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}";
 
 [@react.component]
 let make = () => {
@@ -61,14 +70,14 @@ let make = () => {
         </div>
 
 
-         <div>
-            {str("FILE UPLOADER:")} <br />
+        <div>
+            {str("QL:")} <br />
             <form 
                 id="uploadForm"
-                action= Config.url_ql
+                action= (Config.url_ql ++ ql_req)
                 method="post"
                 encType="text/plain">
-                <input type_="text" name="sampleFile" /> <br />
+                <input type_="text" name="query" /> <br />
                 <input type_="submit" value="Upload!" />
             </form>
         </div>
