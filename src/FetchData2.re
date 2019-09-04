@@ -10,18 +10,10 @@ type action =
 
 
 
-let ql_req2 = "{
-  allPosts {
-    edges {
-      node {
-        id
-      }
-    }
-  }
-}";
 
-let doFetchData_ql = () => {
-    Js.log("doFetchData_ql: fetching..");
+
+let doFetchData_ql = (x2) => {
+    Js.log("doFetchData_ql: fetching.." ++x2);
     Js.Promise.(
         Fetch.fetchWithInit(
             Config.url_ql, // ++ ql_req2, 
@@ -35,19 +27,16 @@ let doFetchData_ql = () => {
         )
         |> then_(Fetch.Response.text)
         |> then_({res => {
-            Some(res) |> resolve
+            Js.log("post-Fetching of _ql:")
+            // Some(res) |> resolve
+            res
             |> ( fs => {  Js.log(fs);    Some(fs)   }    |> resolve)
             }})
         |> catch({_err => { Js.log(_err);     resolve(None); } })
     );
 };
 
-let req_ql = (e) => {
-    Js.log("REQ_QL: !!!")
-    doFetchData_ql() |>ignore;
-    e |>ignore;
-    ();
-}
+
 
 let doFetchData = () => {
     Js.log("doFetchData: fetching :3000/test_be/2 ");
@@ -70,8 +59,11 @@ let make = () => {
     // .state 
 
     let (x, setX) = React.useState( () => "initial value of x" );
+    let (x2, setX2) = React.useState( () => "initial value of x2" );
+    let (x3, setX3) = React.useState( () => "initial value of x3" );
     let (y, setY) = React.useState( () => "initial y" );
     let (z, setZ) = React.useState( () => [] );
+    let (z2, setZ2) = React.useState( () => "");
 
     // .effect
 
@@ -105,7 +97,35 @@ let make = () => {
             }, 
         [|x|],
     );
-    
+
+    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
+        () => { 
+            Js.log("Fired: useEffect1, X3 == [" ++ x3 ++ "] ")
+            Js.Promise.(
+                doFetchData_ql(x3)
+                |> then_( result => {
+                            switch (result) {
+                                | Some(data) => {
+                                    Js.log("End of promise! data = ")
+                                    Js.log(data);
+                                    setY(_ => "X3: some files have been fetched!");
+                                    setZ2(_ => data);
+                                    resolve();
+                                    }
+                                | None => {
+                                    Js.log("NONE! no data fetched");
+                                    setY(_ => "X3: no data fetched");
+                                    resolve();
+                                    }
+                            }
+                        })
+                |> ignore                            
+            )
+            None;
+            }, 
+        [|x3|],
+    );
+     
     // .reducer
 
     let (ss, dispatch) = 
@@ -134,22 +154,32 @@ let make = () => {
                     dispatch(FetchDataX(ss.input));
                 }}>
 
-                <label htmlFor="search"> {str("Search")} </label>
+                <label htmlFor="search"> {str("Request: ")} </label>
+                // <input 
+                //     id="search" 
+                //     name="search " 
+                //     value={ss.input} 
+                //     onChange={ev => {
+                //         let value = ReactEvent.Form.target(ev)##value;
+                //         dispatch(UpdateInput(value))
+                //     }}
+                // />
+                
                 <input 
-                    id="search" 
-                    name="search " 
-                    value={ss.input} 
+                    id="x2_input_id" 
+                    name="x2_input_name" 
+                    value={x2} 
                     onChange={ev => {
                         let value = ReactEvent.Form.target(ev)##value;
-                        dispatch(UpdateInput(value))
+                        setX2(value)
                     }}
                 />
-                <button type_="submit">
-                    {str("Submit Search")}
-                </button>
-                
-                <button onClick=req_ql>
-                    {str("QL req")}
+
+                <button 
+                    onClick={_ev => {
+                        setX3(_ => x2)
+                        }}>
+                    {str("X2->X3")}
                 </button>
                 
             </form>
@@ -161,7 +191,9 @@ let make = () => {
         <br/>
         {str("Y === " ++ y)}
         <br/>
-
+        <br/>
+        {str("Z2 === " ++ z2)}
+        <br/>
         <div className="items-files">
         (
             List.map(
