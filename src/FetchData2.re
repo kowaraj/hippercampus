@@ -8,16 +8,14 @@ type action =
     | FetchData
     | FetchDataX(string);
 
-
-
-
-
 let doFetchData_ql = (x2) => {
     let req_str = "{\"query\":\"{allPosts {edges {node {id } }}}\",\"variables\":null,\"operationName\":null}";
 //  ___________ = {"query":"{allPosts {edges {node {id } }}}","variables":null,"operationName":null}
 //  ___________ = {"query":"{allPosts {edges {node {id } }}}"}
+//  ___________ = {"query": "mutation {  createPost(username:"johndoe", title:"Hello 2", body:"Hello body 2"){post{title body author{ username }}}}""
     Js.log(">> arq: " ++x2);
     Js.log(">> req: " ++req_str);
+    
     
     Js.Promise.(
         Fetch.fetchWithInit(
@@ -27,7 +25,6 @@ let doFetchData_ql = (x2) => {
                 ~body=Fetch.BodyInit.make(x2),
 //                ~body=Fetch.BodyInit.make(req_str),
                 ~headers=Fetch.HeadersInit.make({"Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }),
-
                 ()), 
 
         )
@@ -42,8 +39,6 @@ let doFetchData_ql = (x2) => {
     );
 };
 
-
-
 let doFetchData = () => {
     Js.log("doFetchData: fetching :3000/test_be/2 ");
     Js.Promise.(
@@ -57,7 +52,6 @@ let doFetchData = () => {
         |> catch({_err => { /*Js.log(_err);*/     resolve(None); } })
     );
 };
-
 
 [@react.component]
 let make = () => {
@@ -107,6 +101,9 @@ let make = () => {
 
     React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
         () => { 
+         switch (x3) {
+         | "" => {Js.log("x3 hasn't changed"); None}
+         | x3 => {
             Js.log("Fired: useEffect1, X3 == [" ++ x3 ++ "] ")
             setZ3(_=>x3)
             Js.Promise.(
@@ -130,7 +127,8 @@ let make = () => {
                 |> ignore                            
             )
             None;
-            }, 
+         }}
+        },          
         [|x3|],
     );
      
@@ -162,17 +160,7 @@ let make = () => {
                     dispatch(FetchDataX(ss.input));
                 }}>
 
-                <label htmlFor="search"> {str("Request: ")} </label>
-                // <input 
-                //     id="search" 
-                //     name="search " 
-                //     value={ss.input} 
-                //     onChange={ev => {
-                //         let value = ReactEvent.Form.target(ev)##value;
-                //         dispatch(UpdateInput(value))
-                //     }}
-                // />
-                
+                <label htmlFor="search"> {str("Request: ")} </label>                
                 <input 
                     style=(ReactDOMRe.Style.make(~width="600px", () ))  
                     id="x2_input_id" 
@@ -190,7 +178,13 @@ let make = () => {
                         }}>
                     {str("X2->X3")}
                 </button>
-                
+                <br />
+                <button 
+                    onClick={_ev => {
+                        setX3(_ => "")
+                        }}>
+                    {str("X2->\"\"")}
+                </button>               
             </form>
         <br />
 
