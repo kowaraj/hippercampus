@@ -6,10 +6,15 @@
 ## Run it
 ```
 npm install
-npm start = to trans-pile *.re to *.js
 
-# In another tab
-npm run webpack = to bundle *.js to Index.js
+# Tab 1
+`npm start` = to trans-pile *.re to *.js
+
+# Tab 2
+`npm run webpack` = to bundle *.js to Index.js
+
+# Tab 3
+`npm run server` = to start a web server
 ```
 
 ## Run the _test_be
