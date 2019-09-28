@@ -40,9 +40,10 @@ let doFetchData_ql = (x2) => {
 };
 
 let doFetchData = () => {
-    Js.log("doFetchData: fetching :3000/test_be/2 ");
+    Js.log("doFetchData: fetching :3003/ .... ");
     Js.Promise.(
-        Fetch.fetch("http://localhost:3000/test_be/2")
+        // Fetch.fetch("http://localhost:3000/test_be/2")
+        Fetch.fetch("http://localhost:3003/getmemes")
         |> then_(Fetch.Response.json)
         |> then_({res => {
             res
@@ -106,26 +107,26 @@ let make = () => {
          | x3 => {
             Js.log("Fired: useEffect1, X3 == [" ++ x3 ++ "] ")
             setZ3(_=>x3)
-            Js.Promise.(
-                doFetchData_ql(x3)
-                |> then_( result => {
-                            switch (result) {
-                                | Some(data) => {
-                                    Js.log("End of promise! data = ")
-                                    Js.log(data);
-                                    setY(_ => "X3: some files have been fetched!");
-                                    setZ2(_ => data);
-                                    resolve();
-                                    }
-                                | None => {
-                                    Js.log("NONE! no data fetched");
-                                    setY(_ => "X3: no data fetched");
-                                    resolve();
-                                    }
-                            }
-                        })
-                |> ignore                            
-            )
+            // Js.Promise.(
+            //     doFetchData_ql(x3)
+            //     |> then_( result => {
+            //                 switch (result) {
+            //                     | Some(data) => {
+            //                         Js.log("End of promise! data = ")
+            //                         Js.log(data);
+            //                         setY(_ => "X3: some files have been fetched!");
+            //                         setZ2(_ => data);
+            //                         resolve();
+            //                         }
+            //                     | None => {
+            //                         Js.log("NONE! no data fetched");
+            //                         setY(_ => "X3: no data fetched");
+            //                         resolve();
+            //                         }
+            //                 }
+            //             })
+            //     |> ignore                            
+            // )
             None;
          }}
         },          
@@ -200,7 +201,7 @@ let make = () => {
         (
             List.map(
                 (zi : Decode.f) => {
-                    let i : RenderItem2.item = { url: "http://localhost:3000/uploads/" ++ zi.fn, id: zi.id};
+                    let i : RenderItem2.item = { url: "http://localhost:3003/uploads/" ++ zi.fn, id: zi.id};
                     <RenderItem2 key=string_of_int(zi.id) item=i />
                 },
                 z)
