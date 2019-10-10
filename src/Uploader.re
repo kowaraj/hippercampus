@@ -82,17 +82,17 @@ let make = () => {
         </div>
 
 
-        <div>
-            {str("QL:")} <br />
-            <form 
-                id="uploadForm"
-                action= (Config.url_ql ++ ql_req)
-                method="post"
-                encType="text/plain">
-                <input type_="text" name="query" /> <br />
-                <input type_="submit" value="Upload!" />
-            </form>
-        </div>
+        // <div>
+        //     {str("QL:")} <br />
+        //     <form 
+        //         id="uploadForm"
+        //         action= (Config.url_ql ++ ql_req)
+        //         method="post"
+        //         encType="text/plain">
+        //         <input type_="text" name="query" /> <br />
+        //         <input type_="submit" value="Upload!" />
+        //     </form>
+        // </div>
     </div>;
     }
 };

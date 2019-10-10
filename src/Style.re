@@ -1,1 +1,1 @@
-let h = {ReactDOMRe.Style.make(~border="2px solid #dddddd", ~padding="1rem", ~margin="5px", ~width="70%", () )};
+let h = {ReactDOMRe.Style.make(~border="2px solid #ffdddd", ~padding="1rem", ~margin="1px", ~width="fit-content", () )};

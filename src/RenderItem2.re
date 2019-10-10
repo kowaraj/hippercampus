@@ -23,7 +23,7 @@ let make = (~item) => {
     <div style=Style.h>
         <p> {str("RenderItem: id = " ++ string_of_int(item.id))} </p> 
         <img 
-            style=(ReactDOMRe.Style.make(~maxWidth="200px", ~maxHeight="100px", () ))  
+            style=(ReactDOMRe.Style.make(~maxWidth="100px", ~maxHeight="50px", () ))  
             src=item.url /> 
     </div>
 };
