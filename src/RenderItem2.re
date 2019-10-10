@@ -21,7 +21,7 @@ let make = (~item) => {
     {count: 0});
 
     <div style=Style.h>
-        <p> {str("id = " ++ string_of_int(item.id))} </p> 
+        <p> {str("RenderItem: id = " ++ string_of_int(item.id))} </p> 
         <img 
             style=(ReactDOMRe.Style.make(~maxWidth="200px", ~maxHeight="100px", () ))  
             src=item.url /> 
