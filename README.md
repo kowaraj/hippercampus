@@ -5,8 +5,8 @@
 
 # Hippercampus
 
-- Frontend (localhost:3002), the current project `https://github.com/kowaraj/hippercampus`
-- Backend (localhost:3003), see `flask run  --host localhost --port 3003` in here `https://github.com/kowaraj/hippercampus_py_neo4j_v2`
+- Frontend (localhost:3002), the current project https://github.com/kowaraj/hippercampus
+- Backend (localhost:3003), see `flask run  --host localhost --port 3003` in here https://github.com/kowaraj/hippercampus_py_neo4j_v2
 
 ## Run it (frontend)
 ```
