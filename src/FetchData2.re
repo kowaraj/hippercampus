@@ -71,7 +71,7 @@ let make = () => {
     // .state 
 
     let (x, setX) = React.useState( () => "initial value of x" );
-    let (current_meme, setCurrentMeme) = React.useState( () => "name3" );
+    let (current_meme, setCurrentMeme) = React.useState( () => "name1" );
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
     let (fetched_meme, setFetchedMeme) = React.useState( () => [] );
 
@@ -166,80 +166,81 @@ let make = () => {
 
     <div>
 
-        {str("SEARCH:")} <br />
-        <br />
-            <form
-                onSubmit={ ev => {
-                    Js.log("onSubmit called...")
-                    Js.log(ev);
-                    // let _ev_val = ReactEvent.Form.target(ev)##value;
-                    // ReactEvent.Form.preventDefault(ev);
-                    Js.log("current_meme == " ++ current_meme)
-                    dispatch(FetchDataX(current_meme));
-                }}>
-                <label htmlFor="search"> {str("Fetch a meme: ")} </label>                
-                <input 
-                    style=(ReactDOMRe.Style.make(~width="600px", () ))  
-                    id="x2_input_id" 
-                    name="x2_input_name" 
-                    value={current_meme} 
-                    onChange={ev => {
-                        let value = ReactEvent.Form.target(ev)##value;
-                        setCurrentMeme(value)
-                    }}
-                />
-            </form>
-        <br />
+        // {str("SEARCH:")} <br />
+        // <br />
+        //     <form
+        //         onSubmit={ ev => {
+        //             Js.log("onSubmit called...")
+        //             Js.log(ev);
+        //             // let _ev_val = ReactEvent.Form.target(ev)##value;
+        //             // ReactEvent.Form.preventDefault(ev);
+        //             Js.log("current_meme == " ++ current_meme)
+        //             dispatch(FetchDataX(current_meme));
+        //         }}>
+        //         <label htmlFor="search"> {str("Fetch a meme: ")} </label>                
+        //         <input 
+        //             style=(ReactDOMRe.Style.make(~width="600px", () ))  
+        //             id="x2_input_id" 
+        //             name="x666_input_name666" 
+        //             value={current_meme} 
+        //             onChange={ev => {
+        //                 let value = ReactEvent.Form.target(ev)##value;
+        //                 setCurrentMeme(value)
+        //             }}
+        //         />
+        //     </form>
+        // <br />
 
-        <RenderItemList items=fetched_meme />
+        //<RenderItemList items=fetched_meme />
 
-        <RenderItemList items=z />
-
-        {str("RESULTS OF THE FETCH")} <br /> 
-
-        {str("Input: " ++ ss.input ++ ", isLoading? = " ++ string_of_bool(ss.isLoading))}
-        <br/>
-        {str("Y === " ++ y)}
-        <br/>
-        <br/>        {str("Z3 (request)=== " ++ z3)}        <br/>
-        <br/>        {str("Z2 (reply)=== " ++ z2)}        <br/>
+      <RenderItemList items=z />
 
 
-        {str("FETCH DATA FORM")} <br />
-        <br />
-            <form
-                onSubmit={ ev => {
-                    Js.log("onSubmit called...")
-                    let _ev_val = ReactEvent.Form.target(ev)##value;
-                    ReactEvent.Form.preventDefault(ev);
-                    dispatch(FetchDataX(ss.input));
-                }}>
-                <label htmlFor="search"> {str("Request: ")} </label>                
-                <input 
-                    style=(ReactDOMRe.Style.make(~width="600px", () ))  
-                    id="x2_input_id" 
-                    name="x2_input_name" 
-                    value={x2} 
-                    onChange={ev => {
-                        let value = ReactEvent.Form.target(ev)##value;
-                        setX2(value)
-                    }}
-                />
-                <button 
-                    onClick={_ev => {
-                        setX3(_ => x2)
-                        }}>
-                    {str("X2->X3")}
-                </button>
-                <br />
-                <button 
-                    onClick={_ev => {
-                        setX3(_ => "")
-                        }}>
-                    {str("X2->\"\"")}
-                </button>               
-            </form>
-        <br />
+        // {str("---RESULTS OF THE FETCH")} <br /> 
+
+        // {str("Input: " ++ ss.input ++ ", isLoading? = " ++ string_of_bool(ss.isLoading))}
+        // <br/>
+        // {str("Y === " ++ y)}
+        // <br/>
+        // <br/>        {str("Z3 (request)=== " ++ z3)}        <br/>
+        // <br/>        {str("Z2 (reply)=== " ++ z2)}        <br/>
+
+
+        // {str("FETCH DATA FORM")} <br />
+        // <br />
+        //     <form
+        //         onSubmit={ ev => {
+        //             Js.log("onSubmit called...")
+        //             let _ev_val = ReactEvent.Form.target(ev)##value;
+        //             ReactEvent.Form.preventDefault(ev);
+        //             dispatch(FetchDataX(ss.input));
+        //         }}>
+        //         <label htmlFor="search"> {str("Request: ")} </label>                
+        //         <input 
+        //             style=(ReactDOMRe.Style.make(~width="600px", () ))  
+        //             id="x2_input_id" 
+        //             name="x777_input_name777" 
+        //             value={x2} 
+        //             onChange={ev => {
+        //                 let value = ReactEvent.Form.target(ev)##value;
+        //                 setX2(value)
+        //             }}
+        //         />
+        //         <button 
+        //             onClick={_ev => {
+        //                 setX3(_ => x2)
+        //                 }}>
+        //             {str("X2->X3")}
+        //         </button>
+        //         <br />
+        //         <button 
+        //             onClick={_ev => {
+        //                 setX3(_ => "")
+        //                 }}>
+        //             {str("X2->\"\"")}
+        //         </button>               
+        //     </form>
+        // <br />
 
     </div>
     }
