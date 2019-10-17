@@ -4,16 +4,17 @@ type state = {
     count: int
 };
 
-type item = {
-    url: string, 
-    id: int
+type memeType = {
+    id: int, 
+    name: string, 
+    url: string
 };
 
 type action = 
   | Check;
 
 [@react.component]
-let make = (~items) => {
+let make = (~m) => {
     let (_state, _dispatch) = React.useReducer( (state, action) => 
     switch (action) { 
     | Check => {count: state.count + 1}
@@ -23,17 +24,12 @@ let make = (~items) => {
     <div>
        {str("THE FETCHED MEME")} <br /> 
 
-        <div className="items-list-files">
-        (
-            List.map(
-                (zi : Decode.f) => {
-                    let i : RenderItem2.item = { url: "http://localhost:3003/uploads/" ++ zi.fn, id: zi.id};
-                    <RenderItem2 key=string_of_int(zi.id) item=i />
-                },
-                items)
-            |> Array.of_list
-            |> React.array
-        )
+        <div style=Style.h_meme>
+            <p> {str("id = " ++ string_of_int(m.id) ++ ", name = " ++ m.name)} </p> 
+            <img 
+                style=Style.h_meme_url 
+                src=m.url /> 
         </div>
+
     </div>
 };

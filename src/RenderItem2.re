@@ -6,7 +6,8 @@ type state = {
 
 type item = {
     url: string, 
-    id: int
+    id: int, 
+    name: string
 };
 
 type action = 
@@ -21,7 +22,8 @@ let make = (~item) => {
     {count: 0});
 
     <div style=Style.h>
-        <p> {str("RenderItem: id = " ++ string_of_int(item.id))} </p> 
+        <p> {str("id = " ++ string_of_int(item.id) ++ ", name = " ++ item.name)} </p> 
+
         <img 
             style=(ReactDOMRe.Style.make(~maxWidth="100px", ~maxHeight="50px", () ))  
             src=item.url /> 

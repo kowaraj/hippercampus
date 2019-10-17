@@ -6,6 +6,12 @@ type state = {
 type action = 
     | FetchDataX(string);
 
+type memeType = {
+    id: int, 
+    name: string, 
+    url: string
+};
+
 
 
 
@@ -104,8 +110,18 @@ let make = () => {
         <br />
         <br />
 
-        <RenderMeme items=fetched_meme />
-
+        <div className="items-list-files">
+        (
+            List.map(
+                (zi : Decode.f) => {
+                    let i : RenderMeme.memeType = { url: "http://localhost:3003/uploads/" ++ zi.fn, id: zi.id, name: zi.name};
+                    <RenderMeme key=string_of_int(zi.id) m=i />
+                },
+                fetched_meme)
+            |> Array.of_list
+            |> React.array
+        )
+        </div>
  
     </div>
     }

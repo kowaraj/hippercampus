@@ -6,7 +6,8 @@ type state = {
 
 type item = {
     url: string, 
-    id: int
+    id: int, 
+    name: string
 };
 
 type action = 
@@ -21,13 +22,13 @@ let make = (~items) => {
     {count: 0});
 
     <div>
-       {str("LIST of FETCHED items")} <br /> 
+       {str("dump of the database...")} <br /> 
 
         <div className="items-list-files">
         (
             List.map(
                 (zi : Decode.f) => {
-                    let i : RenderItem2.item = { url: "http://localhost:3003/uploads/" ++ zi.fn, id: zi.id};
+                    let i : RenderItem2.item = { url: "http://localhost:3003/uploads/" ++ zi.fn, id: zi.id, name: zi.name};
                     <RenderItem2 key=string_of_int(zi.id) item=i />
                 },
                 items)
