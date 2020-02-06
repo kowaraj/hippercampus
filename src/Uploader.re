@@ -53,7 +53,7 @@ let make = () => {
             {str("FILE UPLOADER:")} <br />
             <form 
                 id="uploadForm"
-                action= (Config.url_be ++ "?test_arg_var=test_arg_val")
+                action= (Config.url_be_create ++ "?test_arg_var=test_arg_val")
                 method="post"
                 encType="multipart/form-data">
                 <input type_="file" name="sampleFile" /> <br />

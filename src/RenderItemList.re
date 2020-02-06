@@ -28,7 +28,7 @@ let make = (~items) => {
         (
             List.map(
                 (zi : Decode.f) => {
-                    let i : RenderItem2.item = { url: "http://localhost:3003/uploads/" ++ zi.fn, id: zi.id, name: zi.name};
+                    let i : RenderItem2.item = { url: Config.url_be_root++"uploads/" ++ zi.fn, id: zi.id, name: zi.name};
                     <RenderItem2 key=string_of_int(zi.id) item=i />
                 },
                 items)
