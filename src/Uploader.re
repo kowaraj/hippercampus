@@ -55,9 +55,9 @@ let make = () => {
                 id="uploadForm"
                 action= (Config.url_be_create ++ "?test_arg_var=test_arg_val")
                 method="post"
-                encType="multipart/form-data">
+                encType="multipart/form-data">                
                 <input type_="file" name="sampleFile" /> <br />
-                <input type_="submit" value="Upload!" /> <br />
+                <label> {str("Name:")} </label>                
                 <input 
                     type_="text"
                     name="name" 
@@ -67,6 +67,8 @@ let make = () => {
                         dispatch(UpdateName(value))
                     }}
                 />
+                <br />
+                <label> {str("Tags:")} </label>                
                 <input 
                     type_="text"
                     id="search" 
@@ -77,6 +79,7 @@ let make = () => {
                         dispatch(UpdateTags(value))
                     }}
                 />
+                <input type_="submit" value="Upload!" /> <br />
 
             </form>
         </div>

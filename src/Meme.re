@@ -83,31 +83,31 @@ let make = () => {
 
     // .render
 
-    <div>
-
-        {str("SEARCH FOR A MEME:")} <br />
+    <div style=Style.h_component>
+        //{str("SEARCH FOR A MEME:")} <br />
         <br />
-                <label htmlFor="search"> {str("Fetch a meme: ")} </label>                
-                <input 
-                    style=(ReactDOMRe.Style.make(~width="600px", () ))  
-                    id="MemeSearch_Input_id" 
-                    name="MemeSearch_Input_name" 
-                    value={current_meme} 
-                    onKeyPress={ev=>{
-                        let k = ReactEvent.Keyboard.key(ev)
-                        if (k == "Enter") {
-                            dispatch(FetchDataX(current_meme))
-                        }
-                        }}
-                    onChange={ev => {
-                        let v = ReactEvent.Form.target(ev)##value
-                        setCurrentMeme(v)
-                    }}
-                />
-                <button id="MemeSearchButton" onClick={_ev => {
-                    dispatch(FetchDataX(current_meme)); }}> {str("Dispatch!")}
-                </button>
+        <label htmlFor="search"> {str("Fetch a meme: ")} </label>                
         <br />
+        <input 
+            style=Style.h_meme_fetch
+            id="MemeSearch_Input_id" 
+            name="MemeSearch_Input_name" 
+            value={current_meme} 
+            onKeyPress={ev=>{
+                let k = ReactEvent.Keyboard.key(ev)
+                if (k == "Enter") {
+                    dispatch(FetchDataX(current_meme))
+                }
+                }}
+            onChange={ev => {
+                let v = ReactEvent.Form.target(ev)##value
+                setCurrentMeme(v)
+            }}
+        />
+        <br />
+            <button id="MemeSearchButton" onClick={_ev => {
+                dispatch(FetchDataX(current_meme)); }}> {str("Dispatch!")}
+            </button>
         <br />
 
         <div className="items-list-files">

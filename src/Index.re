@@ -4,4 +4,4 @@
 // ReactDOMRe.renderToElementWithId(<FetchData2 />, "index_content");
 
 ReactDOMRe.renderToElementWithId(<App />, "root");
-ReasonReact.Router.push("home");
+ReasonReact.Router.push("meme");

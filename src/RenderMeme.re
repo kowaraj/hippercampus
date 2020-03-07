@@ -22,10 +22,11 @@ let make = (~m) => {
     {count: 0});
 
     <div>
-       {str("THE FETCHED MEME")} <br /> 
-
+       //{str(" ")} 
+       //<br /> 
         <div style=Style.h_meme>
-            <p> {str("id = " ++ string_of_int(m.id) ++ ", name = " ++ m.name)} </p> 
+            <p> {str("id = " ++ string_of_int(m.id))} </p> 
+            <p> {str("name = " ++ m.name)} </p> 
             <img 
                 style=Style.h_meme_url 
                 src=m.url /> 
