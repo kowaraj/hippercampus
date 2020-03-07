@@ -1,31 +1,41 @@
-/* State declaration */
-type state = {
-  count: int,
-  show: bool,
-};
+let str = ReasonReact.string;
 
-/* Action declaration */
-type action =
-  | Click
-  | Toggle;
+type route =
+  | Home
+  | Upload
+  | Meme
+  | DBDump;
 
 [@react.component]
-let make = (~greeting) => {
-  let (state, dispatch) = React.useReducer((state, action) =>
-  switch (action) {
-  | Click => {...state, count: state.count + 1}
-  | Toggle => {...state, show: ! state.show}
-  }, {count: 0, show: true});
+let make = () => {
+  let url = ReasonReactRouter.useUrl();
 
-  let message =
-    "You've clicked this " ++ string_of_int(state.count) ++ " times(s)";
+  // Js.log("The current URL: ")
+  // Js.log(url.path);
   <div>
-    <button onClick={_event => dispatch(Click)}>
-      {ReasonReact.string(message)}
-    </button>
-    <button onClick={_event => dispatch(Toggle)}>
-      {ReasonReact.string("Toggle greeting")}
-    </button>
-    {state.show ? ReasonReact.string(greeting) : ReasonReact.null}
+    <p> {str("Navigation menu:")} </p>
+    <Nav />
+    {switch (url.path) {
+    | ["home"] => {
+        //Js.log("Going to 'home' page"); 
+        <Home />
+      } 
+    | ["meme"] => {
+        //Js.log("Going to 'meme' page"); 
+        <Meme /> 
+      }
+    | ["upload"] => {
+        //Js.log("Going to 'upload' page"); 
+        <Uploader /> 
+      }
+
+    | _ => {
+        Js.log("Going to default page"); 
+        <FetchData2 /> 
+      } 
+    }}
   </div>;
 };
+
+
+
