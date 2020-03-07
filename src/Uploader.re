@@ -4,18 +4,15 @@ type state = {
   count: int,
   show: bool,
   tags: string,
-  name: string
+  name: string, 
+  text: string
 };
 
 type action =
   | Click
   | UpdateTags(string)
+  | UpdateText(string)
   | UpdateName(string);
-//   | Toggle
-//   | GetForm
-//   | Upload
-//   | Submit
-//   | InputText(string);
 
 // let upload_file = () => {
 //     Js.log("real uploading with fetch")
@@ -41,9 +38,10 @@ let make = () => {
       switch (action) {
       | Click => {...state, count: state.count + 1}
       | UpdateTags(tags_string) => {...state, tags: tags_string}
+      | UpdateText(text_string) => {...state, text: text_string}
       | UpdateName(name_string) => {...state, name: name_string}
       }, 
-      {count: 0, show: true, tags: "", name: ""});
+      {count: 0, show: true, tags: "", text: "", name: ""});
   
     // .render
 
@@ -79,6 +77,19 @@ let make = () => {
                         dispatch(UpdateTags(value))
                     }}
                 />
+                <br />
+                <label> {str("Text:")} </label>                
+                <input 
+                    type_="text"
+                    id="searchtext" 
+                    name="text" 
+                    value={ss.text} 
+                    onChange={ev => {
+                        let value = ReactEvent.Form.target(ev)##value;
+                        dispatch(UpdateText(value))
+                    }}
+                />
+                <br />
                 <input type_="submit" value="Upload!" /> <br />
 
             </form>

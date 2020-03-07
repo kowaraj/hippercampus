@@ -7,6 +7,7 @@ type state = {
 type memeType = {
     id: int, 
     name: string, 
+    text: string, 
     url: string
 };
 
@@ -27,6 +28,7 @@ let make = (~m) => {
         <div style=Style.h_meme>
             <p> {str("id = " ++ string_of_int(m.id))} </p> 
             <p> {str("name = " ++ m.name)} </p> 
+            <p> {str("text = " ++ m.text)} </p> 
             <img 
                 style=Style.h_meme_url 
                 src=m.url /> 

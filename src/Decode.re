@@ -1,6 +1,7 @@
 type f  = {
     id: int,
     name: string, 
+    text: string, 
     fn: string, 
     tags: list(string)
     };
@@ -9,6 +10,7 @@ let file_decoder = file_json => {
     Json.Decode.{
         id: field("id", Json.Decode.int, file_json),
         name: field("name", string, file_json),
+        text: field("text", string, file_json),
         fn: field("fn", string, file_json),
         tags: field("tags", list(string), file_json)
     }

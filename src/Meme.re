@@ -9,6 +9,7 @@ type action =
 type memeType = {
     id: int, 
     name: string, 
+    text: string, 
     url: string
 };
 
@@ -114,7 +115,12 @@ let make = () => {
         (
             List.map(
                 (zi : Decode.f) => {
-                    let i : RenderMeme.memeType = { url: Config.url_be_root++"uploads/" ++ zi.fn, id: zi.id, name: zi.name};
+                    let i : RenderMeme.memeType = { 
+                        url: Config.url_be_root++"uploads/" ++ zi.fn, 
+                        id: zi.id, 
+                        text: zi.text,
+                        name: zi.name
+                        };
                     <RenderMeme key=string_of_int(zi.id) m=i />
                 },
                 fetched_meme)
