@@ -19,7 +19,7 @@ let file_decoder = file_json => {
 
 let files = json => {
     Js.log("Decode.files: json source is: <commented out>")
-    //Js.log(json);
+    Js.log(json);
     Json.Decode.list(file_decoder, json);
 }
 

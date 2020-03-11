@@ -46,7 +46,7 @@ let doFetchData = () => {
             |> Decode.files 
             |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
             }})
-        |> catch({_err => { /*Js.log(_err);*/     resolve(None); } })
+        |> catch({_err => { Js.log(_err);     resolve(None); } })
     );
 };
 
@@ -98,7 +98,7 @@ let make = () => {
                                     resolve();
                                     }
                                 | None => {
-                                    Js.log("NONE! no data fetched");
+                                    Js.log("OBSOLETE? NONE! no data fetched");
                                     setY(_ => "no data fetched");
                                     resolve();
                                     }
@@ -123,7 +123,7 @@ let make = () => {
                                     resolve();
                                     }
                                 | None => {
-                                    Js.log("NONE! no data fetched");
+                                    Js.log("THIS one - NONE! no data fetched");
                                     setY(_ => "no data fetched");
                                     resolve();
                                     }
