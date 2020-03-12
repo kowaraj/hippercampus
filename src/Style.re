@@ -23,3 +23,14 @@ let h_meme_fetch = {ReactDOMRe.Style.make(
     ~width="150px", 
     () )};  
 
+let h_tone_slider_wrapper = {ReactDOMRe.Style.make(
+    ~width="20px", 
+    ~height="300px", 
+    () )};  
+
+let h_tone_slider = {ReactDOMRe.Style.make(
+    ~width="300px", 
+    ~height="20px", 
+    ~transformOrigin="10px 10px",
+    ~transform="rotate(90deg)",
+    () )};      

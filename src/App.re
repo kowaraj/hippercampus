@@ -28,7 +28,9 @@ let make = () => {
         //Js.log("Going to 'upload' page"); 
         <Uploader /> 
       }
-
+    | ["tones"] => {
+        <EmotionalTones /> 
+      }
     | _ => {
         Js.log("Going to default page"); 
         <FetchData2 /> 

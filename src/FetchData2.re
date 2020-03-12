@@ -155,8 +155,8 @@ let make = () => {
         React.useReducer( 
             (state, action) => switch (action) { 
                 | UpdateInput(newInput) => {...state, input: newInput}
-                | FetchData => { Js.log("STATE=2"); setX(_ => "test"); {...state, isLoading: true }}
-                | FetchDataX(m) => { Js.log("STATE=3, m=="++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
+                | FetchData => { Js.log("fetchdata: STATE=2"); setX(_ => "test"); {...state, isLoading: true }}
+                | FetchDataX(m) => { Js.log("fetchdata: STATE=3, m=="++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
                 },
             {input: "Initial input", isLoading: false}
         );

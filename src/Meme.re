@@ -40,6 +40,7 @@ let make = () => {
     let (current_meme, setCurrentMeme) = React.useState( () => "name1" );
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
     let (fetched_meme, setFetchedMeme) = React.useState( () => [] );
+    //let (fetching_state, setFetchingState) = React.useState( () => false );
 
  
     // .effect
@@ -54,6 +55,7 @@ let make = () => {
                                 | Some(data) => {
                                     Js.log(data);
                                     setFetchedMeme(_ => data);
+                                    //setFetchingState(_ => false); 
                                     resolve();
                                     }
                                 | None => {
@@ -76,7 +78,7 @@ let make = () => {
     let (ss, dispatch) = 
         React.useReducer( 
             (state, action) => switch (action) { 
-                | FetchDataX(m) => { Js.log("STATE=3, m=="++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
+                | FetchDataX(m) => { Js.log("meme:STATE=3, m=="++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
                 },
             {input: "Initial input", isLoading: false}
         );
