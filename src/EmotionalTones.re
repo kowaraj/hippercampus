@@ -18,6 +18,8 @@ let tones_data : list(list(string)) = {
 };
 Js.log(tones_data);
 
+
+
 let getToneLabel = (tone_index) => {
     let t : list(string) = List.find( { 
             (tone_level) => {
@@ -34,31 +36,11 @@ let make = () => {
     let (tone_label, setToneLabel) = React.useState( () => "undefined");
     let (xname, setXName) = React.useState( () => "me");
 
-    // React.useEffect1( 
-    //     () => { 
-    //         Js.log("Fired!")
-    //         None;
-    //         },
-    //     [|tone|],
-    // );
-
     {
     <div>
 
         <div>
             {str("EMOTIONAL TONES:")} <br />
-
-            // <datalist id="slider-datalist">
-            // (
-            //         List.map( o => {
-            //                             <option key=List.nth(o,0) value=List.nth(o,0) label=List.nth(o,1)></option> 
-            //                         }   
-            //             , slider_data)
-            //         |> Array.of_list
-            //         |> React.array
-            // )
-            // </datalist>
-        
             <form 
                 id="uploadFormTones"
                 action= (Config.url_tones) // ++ "?name=" ++ ss.name ++ "&tone=" ++ string_of_float(tone))
@@ -68,14 +50,7 @@ let make = () => {
                 <label> {str("Name:")} </label>                
                 <input 
                     id="emo_tones_name_id" 
-                    //name="emo_tones_name_name" 
                     value={xname} 
-                    // onKeyPress={ev=>{
-                    //     let k = ReactEvent.Keyboard.key(ev)
-                    //     if (k == "Enter") {
-                    //         setName(current_meme))
-                    //     }
-                    //     }}
                     onChange={ev => {
                         let v = ReactEvent.Form.target(ev)##value
                         setXName(v)
@@ -85,48 +60,85 @@ let make = () => {
                 <br />
  
                 <br />
+                <div style=Style.h_div_split2_container>
+                    <div style=Style.h_div_split2_vertical_p0>
+                        <div>
+                            <div style=Style.h_tone_slider_wrapper>
+                            <input 
+                                style=Style.h_tone_slider
+                                type_="range"
+                                min=0
+                                max="40"
+                                step=1.0
+                                value={f2s(tone)}
+                                onInput={ev => {
+                                    let v = ReactEvent.Form.target(ev)##value;
+                                    setTone(_ => v)
+                                    let tone_label = getToneLabel(v)
+                                    setToneLabel(_=> tone_label)
+                                    }
+                                }
+                                onChange={ev => {
+                                    let value = ReactEvent.Form.target(ev)##value 
+                                    Js.log(value)
+                                }}
+                                id="toneScale"
+                            />
+                            </div>
+                        </div>
+                //                        <p> {str("part 1")} </p>
+                    </div>
+                    <div style=Style.h_div_split2_vertical_pi>
 
-                <div style=Style.h_tone_slider_wrapper>
-                <input 
-                    style=Style.h_tone_slider
-                    type_="range"
-                    min=0
-                    max="40"
-                    step=1.0
-                    value={f2s(tone)}
-                    onInput={ev => {
-                        Js.log("tones: onInput")
-                        let v = ReactEvent.Form.target(ev)##value;
-                        setTone(_ => v)
-                        let tone_label = getToneLabel(v)
-                        Js.log("The found tone label is:")
-                        Js.log(tone_label)
-                        setToneLabel(_=> tone_label)
-                        //dispatch(UpdateTone(value_f))
-                        Js.log("dispatched")
-                        }
-                    }
-                    onChange={ev => {
-                        Js.log("onchange")
-                        let value = ReactEvent.Form.target(ev)##value;
-                        Js.log(value)
-                        //dispatch(UpdateTone(float(value)))
-                        Js.log("onchangeed");
-                    }}
+                        <table id="tones-table">
+                        <tbody>
+                        (
+                            {
+                                let cellClick = (x, ev) => {
+                                    let value = ReactEvent.Mouse.target(ev);
+                                    Js.log(value);
+                                    Js.log(x);
+                                    setTone(_ => int_of_string(x));
+                                    let tone_label = getToneLabel(x);
+                                    setToneLabel(_=> tone_label);
 
-                    id="toneScale"
-                />
+                                    ()
+                                };
+                                let len = List.length(tones_data)
+                                let a = Array.of_list(tones_data)
+                                let t0 = Belt.Array.slice(a, ~offset=0,     ~len=len/2 )
+                                let t1 = Belt.Array.slice(a, ~offset=len/2, ~len=len   )
+                                let t_pairs = Belt.Array.zip(t0,t1)
+
+                                Array.map( o => {
+
+                                    let (e1,e2) = o;
+                                    <tr key=List.nth(e1,0)>
+                                        <td style=Style.h_emotones_cell onClick=cellClick(List.nth(e1,0)) key=List.nth(e1,0)> {str(List.nth(e1,2))}</td>
+                                        <td style=Style.h_emotones_cell onClick=cellClick(List.nth(e2,0)) key=List.nth(e2,0)> {str(List.nth(e2,2))}</td>
+                                    </tr> 
+
+                                }   
+                                , t_pairs)
+
+                            |> React.array
+                            }
+                        )
+                        </tbody>
+                        </table>
+                            
+                        //<p> {str("part 2")} </p>
+                    </div>
+                    // <div style=Style.h_div_split2_vertical_pi>
+                    //     <p> {str("part 3")} </p>
+                    // </div>
                 </div>
-                <br />
 
+
+                <br />            
                 <label> {str(tone_label)} </label>                
-
-
-
                 <br />
-
                 <input type_="submit" value="Upload!" /> <br />
-
             </form>
         </div>
 
