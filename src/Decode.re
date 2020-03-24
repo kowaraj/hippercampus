@@ -23,4 +23,18 @@ let files = json => {
     Json.Decode.list(file_decoder, json);
 }
 
+type p  = {
+    data: string,
+    };
 
+let post_decoder = post_json => {
+    Json.Decode.{
+        data: field("data", string, post_json)
+    }
+}
+
+let posts = json => {
+    Js.log("Decode.posts: json source is: <commented out>")
+    Js.log(json);
+    Json.Decode.list(post_decoder, json);
+}

@@ -30,12 +30,64 @@ let getToneLabel = (tone_index) => {
     t_label
 };
 
+let getTone = (tone_index) => {
+    let t : list(string) = List.find( { 
+            (tone_level) => {
+                List.nth(tone_level, 0) == tone_index
+                }
+        }, tones_data);
+    t
+};
+
+
+let doFetchData = () => {
+    Js.log("Fetching the backend database... (doFetchData)");
+    Js.Promise.(
+        Fetch.fetch(Config.url_tones ++ "posts")
+        |> then_(Fetch.Response.json)
+        |> then_({res => {
+            Js.log(res);
+            res
+            |> Decode.posts 
+            |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
+            }})
+        |> catch({_err => { Js.log(_err);     resolve(None); } })
+    );
+};
+
 [@react.component]
 let make = () => {
     let (tone, setTone) = React.useState( () => 1);
     let (tone_label, setToneLabel) = React.useState( () => "undefined");
+    let (tone_value, setToneValue) = React.useState( () => 0.0);
     let (xname, setXName) = React.useState( () => "me");
+    let (posts, setPosts) = React.useState( () => "");
 
+
+
+    React.useEffect0(
+        () => { 
+
+            Js.Promise.(
+                doFetchData()
+                |> then_( result => {
+                            switch (result) {
+                                | Some(data) => {
+                                    Js.log(data)
+                                    setPosts(_ => "asdf");//Array.get(data,0));//[0]"asdf");
+                                    resolve();
+                                    }
+                                | None => {
+                                    setPosts(_ => "no data fetched");
+                                    resolve();
+                                    }
+                            }
+                        })
+                |> ignore                            
+            )
+            None;
+            }, 
+    );
     {
     <div>
 
@@ -43,7 +95,7 @@ let make = () => {
             {str("EMOTIONAL TONES:")} <br />
             <form 
                 id="uploadFormTones"
-                action= (Config.url_tones) // ++ "?name=" ++ ss.name ++ "&tone=" ++ string_of_float(tone))
+                action=(Config.url_tones ++ "create") // ++ "create?user=" ++ xname ++ "&tone='" ++ tone_label ++ "'")
                 method="post"
                 encType="multipart/form-data">                
 
@@ -51,6 +103,7 @@ let make = () => {
                 <input 
                     id="emo_tones_name_id" 
                     value={xname} 
+                    name="user"
                     onChange={ev => {
                         let v = ReactEvent.Form.target(ev)##value
                         setXName(v)
@@ -72,10 +125,12 @@ let make = () => {
                                 step=1.0
                                 value={f2s(tone)}
                                 onInput={ev => {
-                                    let v = ReactEvent.Form.target(ev)##value;
-                                    setTone(_ => v)
-                                    let tone_label = getToneLabel(v)
-                                    setToneLabel(_=> tone_label)
+                                    let tone_index = ReactEvent.Form.target(ev)##value;
+                                    setTone(_ => tone_index)
+                                    let t = getTone(tone_index)
+                                    Js.log(t)
+                                    setToneLabel(_ => List.nth(t,2))
+                                    setToneValue(_ => float_of_string(List.nth(t,1)))
                                     }
                                 }
                                 onChange={ev => {
@@ -94,13 +149,16 @@ let make = () => {
                         <tbody>
                         (
                             {
-                                let cellClick = (x, ev) => {
+                                let cellClick = (tone_index, ev) => {
                                     let value = ReactEvent.Mouse.target(ev);
                                     Js.log(value);
-                                    Js.log(x);
-                                    setTone(_ => int_of_string(x));
-                                    let tone_label = getToneLabel(x);
-                                    setToneLabel(_=> tone_label);
+                                    Js.log(tone_index);
+                                    setTone(_ => int_of_string(tone_index));
+
+                                    let t = getTone(tone_index);
+                                    Js.log(t);
+                                    setToneLabel(_ => List.nth(t,2));
+                                    setToneValue(_ => float_of_string(List.nth(t,1)));
 
                                     ()
                                 };
@@ -136,9 +194,29 @@ let make = () => {
 
 
                 <br />            
-                <label> {str(tone_label)} </label>                
+                <input 
+                    id="emo_tones_tonelabel_id" 
+                    value={tone_label} 
+                    name="tone_label"
+                    readOnly=true
+                />
+                <input 
+                    id="emo_tones_tonevalue_id" 
+                    value={string_of_float(tone_value)} 
+                    name="tone_value"
+                    readOnly=true
+                />
+
+
                 <br />
                 <input type_="submit" value="Upload!" /> <br />
+
+                <br />
+                <input 
+                    value={posts} 
+                    name="tone_value"
+                    readOnly=true
+                />
             </form>
         </div>
 
