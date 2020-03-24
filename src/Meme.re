@@ -19,7 +19,7 @@ let doFetchMeme = (m) => {
     Js.log("Fetching a meme from the backend database... (doFetchMeme)");
     Js.Promise.(
         //Fetch.fetch("http://localhost:3003/getmeme/"++m)
-        Fetch.fetch(Config.url_be_root++"getmeme/"++m)
+        Fetch.fetch(Config.url_be_root++"/getmeme/"++m)
         |> then_(Fetch.Response.json)
         |> then_({res => {
             Js.log(res);
@@ -118,7 +118,7 @@ let make = () => {
             List.map(
                 (zi : Decode.f) => {
                     let i : RenderMeme.memeType = { 
-                        url: Config.url_be_root++"uploads/" ++ zi.fn, 
+                        url: Config.url_be_root++"/uploads/" ++ zi.fn, 
                         id: zi.id, 
                         text: zi.text,
                         name: zi.name

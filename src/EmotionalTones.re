@@ -40,20 +40,20 @@ let getTone = (tone_index) => {
 };
 
 
-let doFetchData = () => {
-    Js.log("Fetching the backend database... (doFetchData)");
-    Js.Promise.(
-        Fetch.fetch(Config.url_tones ++ "posts")
-        |> then_(Fetch.Response.json)
-        |> then_({res => {
-            Js.log(res);
-            res
-            |> Decode.posts 
-            |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
-            }})
-        |> catch({_err => { Js.log(_err);     resolve(None); } })
-    );
-};
+// let doFetchData = () => {
+//     Js.log("Fetching the backend database... (doFetchData)");
+//     Js.Promise.(
+//         Fetch.fetch(Config.url_tones ++ "posts")
+//         |> then_(Fetch.Response.json)
+//         |> then_({res => {
+//             Js.log(res);
+//             res
+//             |> Decode.posts 
+//             |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
+//             }})
+//         |> catch({_err => { Js.log(_err);     resolve(None); } })
+//     );
+// };
 
 [@react.component]
 let make = () => {
@@ -61,33 +61,33 @@ let make = () => {
     let (tone_label, setToneLabel) = React.useState( () => "undefined");
     let (tone_value, setToneValue) = React.useState( () => 0.0);
     let (xname, setXName) = React.useState( () => "me");
-    let (posts, setPosts) = React.useState( () => "");
+    //let (posts, setPosts) = React.useState( () => "");
 
 
 
-    React.useEffect0(
-        () => { 
+    // React.useEffect0(
+    //     () => { 
 
-            Js.Promise.(
-                doFetchData()
-                |> then_( result => {
-                            switch (result) {
-                                | Some(data) => {
-                                    Js.log(data)
-                                    setPosts(_ => "asdf");//Array.get(data,0));//[0]"asdf");
-                                    resolve();
-                                    }
-                                | None => {
-                                    setPosts(_ => "no data fetched");
-                                    resolve();
-                                    }
-                            }
-                        })
-                |> ignore                            
-            )
-            None;
-            }, 
-    );
+    //         Js.Promise.(
+    //             doFetchData()
+    //             |> then_( result => {
+    //                         switch (result) {
+    //                             | Some(data) => {
+    //                                 Js.log(data)
+    //                                 setPosts(_ => "asdf");//Array.get(data,0));//[0]"asdf");
+    //                                 resolve();
+    //                                 }
+    //                             | None => {
+    //                                 setPosts(_ => "no data fetched");
+    //                                 resolve();
+    //                                 }
+    //                         }
+    //                     })
+    //             |> ignore                            
+    //         )
+    //         None;
+    //         }, 
+    // );
     {
     <div>
 
@@ -213,7 +213,7 @@ let make = () => {
 
                 <br />
                 <input 
-                    value={posts} 
+                    value="no posts here" //{posts} 
                     name="tone_value"
                     readOnly=true
                 />

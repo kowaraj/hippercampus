@@ -38,7 +38,7 @@ type action =
 let doFetchData = () => {
     Js.log("Fetching the backend database... (doFetchData)");
     Js.Promise.(
-        Fetch.fetch(Config.url_be_root++"getmemes")
+        Fetch.fetch(Config.url_be_root++"/getmemes")
         |> then_(Fetch.Response.json)
         |> then_({res => {
             Js.log(res);
@@ -53,7 +53,7 @@ let doFetchData = () => {
 let doFetchMeme = (m) => {
     Js.log("Fetching a meme from the backend database... (doFetchMeme)");
     Js.Promise.(
-        Fetch.fetch(Config.url_be_root++"getmeme/"++m)
+        Fetch.fetch(Config.url_be_root++"/getmeme/"++m)
         |> then_(Fetch.Response.json)
         |> then_({res => {
             Js.log(res);
