@@ -37,12 +37,10 @@ let make = () => {
     // .state 
 
     let (x, setX) = React.useState( () => "initial value of x" );
-    let (current_meme, setCurrentMeme) = React.useState( () => "name1" );
+    let (current_meme, setCurrentMeme) = React.useState( () => "" ); // name of the meme to fetch
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
     let (fetched_meme, setFetchedMeme) = React.useState( () => [] );
-    //let (fetching_state, setFetchingState) = React.useState( () => false );
 
- 
     // .effect
 
     React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
@@ -55,12 +53,10 @@ let make = () => {
                                 | Some(data) => {
                                     Js.log(data);
                                     setFetchedMeme(_ => data);
-                                    //setFetchingState(_ => false); 
                                     resolve();
                                     }
                                 | None => {
                                     Js.log("NONE! no data fetched");
-                                    //setY(_ => "no data fetched");
                                     resolve();
                                     }
                             }
@@ -86,11 +82,13 @@ let make = () => {
 
     // .render
 
+    let f_dispatch = () => {
+        //TODO: find a way to distiguish b/w mouse and keyboard events
+        dispatch(FetchDataX(current_meme))
+    };
+
     <div style=Style.h_component>
-        //{str("SEARCH FOR A MEME:")} <br />
-        <br />
-        <label htmlFor="search"> {str("Fetch a meme: ")} </label>                
-        <br />
+        <label htmlFor="search"> {str("Fetch a meme: ")} </label>    <br />
         <input 
             style=Style.h_meme_fetch
             id="MemeSearch_Input_id" 
@@ -98,9 +96,7 @@ let make = () => {
             value={current_meme} 
             onKeyPress={ev=>{
                 let k = ReactEvent.Keyboard.key(ev)
-                if (k == "Enter") {
-                    dispatch(FetchDataX(current_meme))
-                }
+                if (k == "Enter") { f_dispatch() }
                 }}
             onChange={ev => {
                 let v = ReactEvent.Form.target(ev)##value
@@ -108,10 +104,7 @@ let make = () => {
             }}
         />
         <br />
-            <button id="MemeSearchButton" onClick={_ev => {
-                dispatch(FetchDataX(current_meme)); }}> {str("Dispatch!")}
-            </button>
-        <br />
+        <button id="MemeSearchButton" onClick={_ev => f_dispatch()}> {str("Fetch!")} </button> <br />
 
         <div className="items-list-files">
         (
