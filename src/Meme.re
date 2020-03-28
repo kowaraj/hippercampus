@@ -13,16 +13,13 @@ type memeType = {
     url: string
 };
 
-
-
 let doFetchMeme = (m) => {
-    Js.log("Fetching a meme from the backend database... (doFetchMeme)");
+    Js.log("fetch: a meme from the backend");
     Js.Promise.(
-        //Fetch.fetch("http://localhost:3003/getmeme/"++m)
-        Fetch.fetch(Config.url_be_root++"/getmeme/"++m)
+        Fetch.fetch(Config.url_be_root ++ "/getmeme/" ++ m)
         |> then_(Fetch.Response.json)
         |> then_({res => {
-            Js.log(res);
+            //Js.log(res);
             res
             |> Decode.files 
             |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
@@ -45,13 +42,13 @@ let make = () => {
 
     React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
         () => { 
-            Js.log("Fired! - useEffect1(meme_to_fetch) with current_meme == [" ++ current_meme ++ "]")
+            Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
             Js.Promise.(
                 doFetchMeme(current_meme)
                 |> then_( result => {
                             switch (result) {
                                 | Some(data) => {
-                                    Js.log(data);
+                                    //Js.log(data);
                                     setFetchedMeme(_ => data);
                                     resolve();
                                     }
@@ -68,13 +65,12 @@ let make = () => {
         [|meme_to_fetch|],
     );
 
-
     // .reducer
 
-    let (ss, dispatch) = 
+    let (_ss, dispatch) = 
         React.useReducer( 
             (state, action) => switch (action) { 
-                | FetchDataX(m) => { Js.log("meme:STATE=3, m=="++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
+                | FetchDataX(m) => { /*Js.log("meme:STATE=3, m=="++m);*/ setMemeToFetch(_ => m); {...state, isLoading: true }}
                 },
             {input: "Initial input", isLoading: false}
         );
@@ -106,6 +102,7 @@ let make = () => {
         <br />
         <button id="MemeSearchButton" onClick={_ev => f_dispatch()}> {str("Fetch!")} </button> <br />
 
+        // render teh list of fetched memes
         <div className="items-list-files">
         (
             List.map(
