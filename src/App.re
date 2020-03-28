@@ -33,7 +33,8 @@ let make = () => {
       }
     | _ => {
         Js.log("Going to default page"); 
-        <FetchData2 /> 
+        <p> {str("None")} </p>
+        // unused: <FetchData2 /> 
       } 
     }}
   </div>;
