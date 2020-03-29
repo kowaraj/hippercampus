@@ -40,8 +40,7 @@ let make = () => {
 
     // .effect
 
-    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
-        () => { 
+    let useEffectFunction = () => {
             Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
             Js.Promise.(
                 doFetchMeme(current_meme)
@@ -61,6 +60,30 @@ let make = () => {
                 |> ignore                            
             )
             None;
+    };
+
+    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
+        () => { 
+            // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
+            // Js.Promise.(
+            //     doFetchMeme(current_meme)
+            //     |> then_( result => {
+            //                 switch (result) {
+            //                     | Some(data) => {
+            //                         //Js.log(data);
+            //                         setFetchedMeme(_ => data);
+            //                         resolve();
+            //                         }
+            //                     | None => {
+            //                         Js.log("NONE! no data fetched");
+            //                         resolve();
+            //                         }
+            //                 }
+            //             })
+            //     |> ignore                            
+            // )
+            // None;
+            useEffectFunction();
             }, 
         [|meme_to_fetch|],
     );
@@ -101,6 +124,7 @@ let make = () => {
         />
         <br />
         <button id="MemeSearchButton" onClick={_ev => f_dispatch()}> {str("Fetch!")} </button> <br />
+        <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction(); ()}}> {str("Fetch2!")} </button> <br />
 
         // render teh list of fetched memes
         <div className="items-list-files">
