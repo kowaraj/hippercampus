@@ -107,24 +107,7 @@ let make = () => {
     };
 
     <div style=Style.h_component>
-        <label htmlFor="search"> {str("Fetch a meme: ")} </label>    <br />
-        <input 
-            style=Style.h_meme_fetch
-            id="MemeSearch_Input_id" 
-            name="MemeSearch_Input_name" 
-            value={current_meme} 
-            onKeyPress={ev=>{
-                let k = ReactEvent.Keyboard.key(ev)
-                if (k == "Enter") { f_dispatch() }
-                }}
-            onChange={ev => {
-                let v = ReactEvent.Form.target(ev)##value
-                setCurrentMeme(v)
-            }}
-        />
-        <br />
-        <button id="MemeSearchButton" onClick={_ev => f_dispatch()}> {str("Fetch!")} </button> <br />
-        <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction(); ()}}> {str("Fetch2!")} </button> <br />
+        <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction(); ()}}> {str("Fetch Random")} </button> <br />
 
         // render teh list of fetched memes
         <div className="items-list-files">
@@ -144,6 +127,25 @@ let make = () => {
             |> React.array
         )
         </div>
+
+        <label htmlFor="search"> {str("Fetch a meme: ")} </label>    <br />
+        <input 
+            style=Style.h_meme_fetch
+            id="MemeSearch_Input_id" 
+            name="MemeSearch_Input_name" 
+            value={current_meme} 
+            onKeyPress={ev=>{
+                let k = ReactEvent.Keyboard.key(ev)
+                if (k == "Enter") { f_dispatch() }
+                }}
+            onChange={ev => {
+                let v = ReactEvent.Form.target(ev)##value
+                setCurrentMeme(v)
+            }}
+        />
+        <br />
+        <button id="MemeSearchButton" onClick={_ev => f_dispatch()}> {str("Fetch!")} </button> <br />
+
  
     </div>
     }

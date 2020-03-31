@@ -9,10 +9,24 @@ let h_component = {ReactDOMRe.Style.make(
 
 let h_meme = {ReactDOMRe.Style.make(
     ~border="3px solid #ffdddd", 
-    //~padding="0.3rem", 
-    //~margin="0.3px", 
+    ~padding="0rem", 
+    ~margin="0px", 
     ~width="fit-content", 
     () )};
+
+let h_meme_name = {ReactDOMRe.Style.make(
+    ~position="center",
+    () )};  
+
+let h_meme_text = {ReactDOMRe.Style.make(
+    ~position="left",
+    () )};  
+
+
+let h_meme_image = {ReactDOMRe.Style.make(
+    ~maxWidth="100%", 
+    ~maxHeight="100%", 
+    () )};  
 
 let h_meme_url = {ReactDOMRe.Style.make(
     ~maxWidth="200px", 

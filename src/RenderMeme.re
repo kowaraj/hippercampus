@@ -26,11 +26,11 @@ let make = (~m) => {
        //{str(" ")} 
        //<br /> 
         <div style=Style.h_meme>
-            <p> {str("id = " ++ string_of_int(m.id))} </p> 
-            <p> {str("name = " ++ m.name)} </p> 
-            <p> {str("text = " ++ m.text)} </p> 
+            //<p> {str("id = " ++ string_of_int(m.id))} </p> 
+            <p style=Style.h_meme_name> {str("{" ++ m.name ++ "}")} </p> 
+            <p style=Style.h_meme_text> {str("<" ++ m.text ++ ">")} </p> 
             <img 
-                style=Style.h_meme_url 
+                style=Style.h_meme_image 
                 src=m.url /> 
         </div>
 

@@ -13,8 +13,6 @@ let make = () => {
   // Js.log("The current URL: ")
   // Js.log(url.path);
   <div>
-    <p> {str("Navigation menu:")} </p>
-    <Nav />
     {switch (url.path) {
     | ["home"] => {
         //Js.log("Going to 'home' page"); 
@@ -37,6 +35,9 @@ let make = () => {
         // unused: <FetchData2 /> 
       } 
     }}
+//    <p> {str("Navigation menu:")} </p>
+    <Nav />
+
   </div>;
 };
 
