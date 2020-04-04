@@ -1,12 +1,5 @@
 let str = ReasonReact.string;
 
-type state = {
-    count: int
-};
-
-type action = 
-  | Check;
-
 [@react.component]
 let make = (~m : Decode.meme_t) => {
 
