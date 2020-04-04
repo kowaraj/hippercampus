@@ -3,21 +3,6 @@ let str = ReasonReact.string;
 type state = {
     count: int
 };
-// type meme_t  = {
-//     id: int,
-//     name: string, 
-//     text: string, 
-//     fn: string, 
-//     tags: list(string)
-//     };
-
-// type memeType = {
-//     id: int, 
-//     name: string, 
-//     text: string, 
-//     fn: string, 
-//     tags: list(string)
-// };
 
 type action = 
   | Check;
