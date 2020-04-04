@@ -28,6 +28,21 @@ let doFetchMeme = (m) => {
     );
 };
 
+let doFetchMeme1 = () => {
+    Js.log("fetch: a SIGNLE meme from the backend");
+    Js.Promise.(
+        Fetch.fetch(Config.url_be_root ++ "/getmeme/")
+        |> then_(Fetch.Response.json)
+        |> then_({res => {
+            //Js.log(res);
+            res
+            |> Decode.meme 
+            |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
+            }})
+        |> catch({_err => { /*Js.log(_err);*/     resolve(None); } })
+    );
+};
+
 [@react.component]
 let make = () => {
 
@@ -36,7 +51,7 @@ let make = () => {
     let (x, setX) = React.useState( () => "initial value of x" );
     let (current_meme, setCurrentMeme) = React.useState( () => "" ); // name of the meme to fetch
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
-    let (fetched_meme, setFetchedMeme) = React.useState( () => [] );
+    let (fetched_memes, setFetchedMemes) = React.useState( () => [] );
 
     // .effect
 
@@ -48,7 +63,7 @@ let make = () => {
                             switch (result) {
                                 | Some(data) => {
                                     //Js.log(data);
-                                    setFetchedMeme(_ => data);
+                                    setFetchedMemes(_ => data);
                                     resolve();
                                     }
                                 | None => {
@@ -62,31 +77,52 @@ let make = () => {
             None;
     };
 
-    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
-        () => { 
-            // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
-            // Js.Promise.(
-            //     doFetchMeme(current_meme)
-            //     |> then_( result => {
-            //                 switch (result) {
-            //                     | Some(data) => {
-            //                         //Js.log(data);
-            //                         setFetchedMeme(_ => data);
-            //                         resolve();
-            //                         }
-            //                     | None => {
-            //                         Js.log("NONE! no data fetched");
-            //                         resolve();
-            //                         }
-            //                 }
-            //             })
-            //     |> ignore                            
-            // )
-            // None;
-            useEffectFunction();
-            }, 
-        [|meme_to_fetch|],
-    );
+    let useEffectFunction1 = () => {
+            Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
+            Js.Promise.(
+                doFetchMeme1()
+                |> then_( result => {
+                            switch (result) {
+                                | Some(data) => {
+                                    //Js.log(data);
+                                    setFetchedMemes(_ => data);
+                                    resolve();
+                                    }
+                                | None => {
+                                    Js.log("NONE! no data fetched");
+                                    resolve();
+                                    }
+                            }
+                        })
+                |> ignore                            
+            )
+            None;
+    };
+    // React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
+    //     () => { 
+    //         // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
+    //         // Js.Promise.(
+    //         //     doFetchMeme(current_meme)
+    //         //     |> then_( result => {
+    //         //                 switch (result) {
+    //         //                     | Some(data) => {
+    //         //                         //Js.log(data);
+    //         //                         setFetchedMeme(_ => data);
+    //         //                         resolve();
+    //         //                         }
+    //         //                     | None => {
+    //         //                         Js.log("NONE! no data fetched");
+    //         //                         resolve();
+    //         //                         }
+    //         //                 }
+    //         //             })
+    //         //     |> ignore                            
+    //         // )
+    //         // None;
+    //         useEffectFunction();
+    //         }, 
+    //     [|meme_to_fetch|],
+    // );
 
     // .reducer
 
@@ -107,14 +143,14 @@ let make = () => {
     };
 
     <div style=Style.h_component>
-        <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction(); ()}}> {str("Fetch Random")} </button> <br />
+        <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction1(); ()}}> {str("Fetch Random")} </button> <br />
 
-        // render teh list of fetched memes
+        // render the list of fetched memes
         <div className="items-list-files">
         (
             List.map(
-                (zi : Decode.f) => {
-                    let i : RenderMeme.memeType = { 
+                (zi : Decode.meme_t) => {
+                    let i : RenderMeme.memeType = {
                         url: Config.url_be_root++"/uploads/" ++ zi.fn, 
                         id: zi.id, 
                         text: zi.text,
@@ -122,7 +158,7 @@ let make = () => {
                         };
                     <RenderMeme key=string_of_int(zi.id) m=i />
                 },
-                fetched_meme)
+                fetched_memes)
             |> Array.of_list
             |> React.array
         )
