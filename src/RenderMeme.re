@@ -1,6 +1,10 @@
 [@react.component]
 let make = (~m : Decode.meme_t) => {
 
+    let (modal, setModal) = React.useState( () => false);
+    let invert_modal = () => setModal( _ => !modal);
+    let get_modal_style = () => { modal ? StyleMeme.modal : StyleMeme.non_modal };
+
     <div>
         <div style=StyleMeme.container>
             <p style=StyleMeme.name> {RR.str("{" ++ m.name ++ "}")} </p> 
@@ -11,15 +15,11 @@ let make = (~m : Decode.meme_t) => {
                 /> 
             <p style=StyleMeme.tags> {RR.str("[" ++ (String.concat("", m.tags)) ++ "]")} </p> 
 
-            <button id="myBtn"> {RR.str("open modal")}</button>
-            <div id="myModal" className="modal">
-                <div className="modal-content">
-
-                    // <span className="close">{ RR.str( {js|\u00a9|js}) }</span>
-                    // <span className="close">{ RR.str( {js|©|js})      }</span>
-                    // <span className="close">{ [%raw   {|'\u00a9'|}]   }</span>
-                    <span className="close">{ RR.str({js|\u2297|js})}</span>
-
+//            <button id="myBtn" onClick={e_=>{ setModal( _=> !modal); }}> {RR.str("open modal")}</button>
+            <button id="myBtn" onClick={ _=>invert_modal() }> {RR.str("open modal")}</button>
+            <div id="myModal" className="modal" style={ get_modal_style() }>
+                <div className="modal-content" style=StyleMeme.modal_content>
+                    <span className="close" onClick={ _=>invert_modal()}>{ RR.str({js|\u2297|js})}</span>
                     <p>{RR.str("Some text in the Modal..")}</p>
                 </div>
             </div>
