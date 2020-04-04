@@ -3,19 +3,28 @@ let str = ReasonReact.string;
 type state = {
     count: int
 };
+// type meme_t  = {
+//     id: int,
+//     name: string, 
+//     text: string, 
+//     fn: string, 
+//     tags: list(string)
+//     };
 
-type memeType = {
-    id: int, 
-    name: string, 
-    text: string, 
-    url: string
-};
+// type memeType = {
+//     id: int, 
+//     name: string, 
+//     text: string, 
+//     fn: string, 
+//     tags: list(string)
+// };
 
 type action = 
   | Check;
 
 [@react.component]
-let make = (~m) => {
+let make = (~m : Decode.meme_t) => {
+
     let (_state, _dispatch) = React.useReducer( (state, action) => 
     switch (action) { 
     | Check => {count: state.count + 1}
@@ -31,7 +40,8 @@ let make = (~m) => {
             <p style=Style.h_meme_text> {str("<" ++ m.text ++ ">")} </p> 
             <img 
                 style=Style.h_meme_image 
-                src=m.url /> 
+                src=m.fn /> 
+            <p style=Style.h_meme_text> {str("[" ++ (String.concat("", m.tags)) ++ "]")} </p> 
         </div>
 
     </div>

@@ -98,31 +98,31 @@ let make = () => {
             )
             None;
     };
-    // React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
-    //     () => { 
-    //         // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
-    //         // Js.Promise.(
-    //         //     doFetchMeme(current_meme)
-    //         //     |> then_( result => {
-    //         //                 switch (result) {
-    //         //                     | Some(data) => {
-    //         //                         //Js.log(data);
-    //         //                         setFetchedMeme(_ => data);
-    //         //                         resolve();
-    //         //                         }
-    //         //                     | None => {
-    //         //                         Js.log("NONE! no data fetched");
-    //         //                         resolve();
-    //         //                         }
-    //         //                 }
-    //         //             })
-    //         //     |> ignore                            
-    //         // )
-    //         // None;
-    //         useEffectFunction();
-    //         }, 
-    //     [|meme_to_fetch|],
-    // );
+    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
+        () => { 
+            // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
+            // Js.Promise.(
+            //     doFetchMeme(current_meme)
+            //     |> then_( result => {
+            //                 switch (result) {
+            //                     | Some(data) => {
+            //                         //Js.log(data);
+            //                         setFetchedMeme(_ => data);
+            //                         resolve();
+            //                         }
+            //                     | None => {
+            //                         Js.log("NONE! no data fetched");
+            //                         resolve();
+            //                         }
+            //                 }
+            //             })
+            //     |> ignore                            
+            // )
+            // None;
+            useEffectFunction();
+            }, 
+        [|meme_to_fetch|],
+    );
 
     // .reducer
 
@@ -150,11 +150,13 @@ let make = () => {
         (
             List.map(
                 (zi : Decode.meme_t) => {
-                    let i : RenderMeme.memeType = {
-                        url: Config.url_be_root++"/uploads/" ++ zi.fn, 
+                    let i : Decode.meme_t = {
+                    // let i : RenderMeme.memeType = {
+                        fn: Config.url_be_root++"/uploads/" ++ zi.fn, 
                         id: zi.id, 
                         text: zi.text,
-                        name: zi.name
+                        name: zi.name, 
+                        tags: zi.tags
                         };
                     <RenderMeme key=string_of_int(zi.id) m=i />
                 },
