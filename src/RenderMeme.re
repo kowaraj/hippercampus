@@ -17,7 +17,7 @@ let make = (~m : Decode.meme_t) => {
 
             <p style=StyleMeme.name> {RR.str("{" ++ m.name ++ "}")} </p> 
             <p style=StyleMeme.text> {RR.str("<" ++ m.text ++ ">")} </p> 
-            <img style=StyleMeme.image src=m.fn /> 
+//            <img style=StyleMeme.image src=m.fn /> 
             <p style=StyleMeme.tags> {RR.str("[" ++ (String.concat("", m.tags)) ++ "]")} </p> 
 
 // //            <button id="myBtn" onClick={e_=>{ setModal( _=> !modal); }}> {RR.str("open modal")}</button>

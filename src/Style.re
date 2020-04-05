@@ -34,7 +34,10 @@ let h_meme_url = {ReactDOMRe.Style.make(
     () )};  
 
 let h_meme_fetch = {ReactDOMRe.Style.make(
-    ~width="150px", 
+    // ~width="150px", 
+    ~maxWidth="100%", 
+    ~maxHeight="100%", 
+
     () )};  
 
 // let h_tone_slider_wrapper = {ReactDOMRe.Style.make(

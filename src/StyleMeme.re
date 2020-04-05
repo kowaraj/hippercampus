@@ -1,8 +1,20 @@
+
+let component = {ReactDOMRe.Style.make(
+    ~border="2px solid #ddddff", 
+    ~padding="0.2rem", 
+    ~margin="0.2px", 
+    ~width="fit-content", 
+    ~height="fit-content", 
+    ~maxWidth="100%", 
+    ~maxHeight="100%", 
+    () )};
+
 let container = {ReactDOMRe.Style.make(
     ~border="3px solid #ffdddd", 
     ~padding="0rem", 
     ~margin="0px", 
     ~width="fit-content", 
+    ~height="fit-content", 
     () )};
 
 let name = {ReactDOMRe.Style.make(
@@ -76,6 +88,8 @@ let modal_hover_focus = {ReactDOMRe.Style.make(
 
 
 let image2 = {ReactDOMRe.Style.make(
+    ~width="20%", /* Full width */
+    ~height="20%", /* Full height */
     ~maxWidth="20%", 
     ~maxHeight="20%", 
     () )};  

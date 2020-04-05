@@ -142,11 +142,11 @@ let make = () => {
         dispatch(FetchDataX(current_meme))
     };
 
-    <div style=Style.h_component>
+    <div id="div-render-meme" style=StyleMeme.component>
         <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction1(); ()}}> {str("Fetch Random")} </button> <br />
 
         // render the list of fetched memes
-        <div className="items-list-files">
+        <div id="div-render-rendermeme" className="items-list-files">
         (
             List.map(
                 (zi : Decode.meme_t) => {

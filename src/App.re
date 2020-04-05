@@ -36,7 +36,7 @@ let make = () => {
       } 
     }}
 //    <p> {str("Navigation menu:")} </p>
-    <Nav />
+//    <Nav />
 
   </div>;
 };
