@@ -3,18 +3,20 @@ let component = {ReactDOMRe.Style.make(
     ~border="10px solid #0000ff", 
     ~padding="0.2rem", 
     ~margin="0.2px", 
-    ~width="fit-content", 
-    ~height="fit-content", 
-    ~maxWidth="100%", 
-    ~maxHeight="100%", 
+    // ~width="fit-content", 
+    // ~height="fit-content", 
+    ~width="95vw",
+    ~height="95vh",
+    // ~maxWidth="100%", 
+    // ~maxHeight="100%", 
     () )};
 
 let container = {ReactDOMRe.Style.make(
     ~border="5px solid #ff0000", 
     ~padding="0rem", 
     ~margin="0px", 
-    ~width="95vw",
-    ~height="95vh",
+    ~width="94vw",
+    ~height="85vh",
 //    ~display="inline-flex",
 //    ~width="fit-content", 
 //    ~height="fit-content", 
@@ -25,6 +27,7 @@ let button_fetch = {ReactDOMRe.Style.make(
     ~margin="1px",
     ~height="5vh",
     ~width="20vh",
+    ~fontSize="2vh",
     () )};  
 
 let name = {ReactDOMRe.Style.make(
@@ -32,6 +35,8 @@ let name = {ReactDOMRe.Style.make(
     ~margin="1px",
     ~fontSize="15vw",
     ~textAlign="center",
+    ~maxWidth="40vw", 
+    ~maxHeight="40vh", 
     () )};  
 
 let text = {ReactDOMRe.Style.make(
