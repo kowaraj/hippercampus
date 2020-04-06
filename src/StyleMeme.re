@@ -30,6 +30,15 @@ let button_fetch = {ReactDOMRe.Style.make(
     ~fontSize="2vh",
     () )};  
 
+let name_f = (len) => {ReactDOMRe.Style.make(
+    ~border="1px solid #aaaaaa", 
+    ~margin="1px",
+    ~fontSize=len++"vw",
+    ~textAlign="center",
+    //~maxWidth="40vw", 
+    ~maxHeight="40vh", 
+    () )};  
+
 let name = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
     ~margin="1px",

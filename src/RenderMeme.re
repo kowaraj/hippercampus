@@ -4,11 +4,16 @@ let make = (~m : Decode.meme_t) => {
     let (modal, setModal) = React.useState( () => false);
     let invert_modal = () => setModal( _ => !modal);
     let get_modal_style = () => { modal ? StyleMeme.modal : StyleMeme.non_modal };
+    let y = String.length(m.name);
+    Js.log(y);
+    let x = string_of_int( 12 - y/3 );
+    Js.log(x);
 
     <div>
         <div style=StyleMeme.container>
 
-            <p style=StyleMeme.name> {RR.str("{" ++ m.name ++ "}")} </p> 
+//            <p style=StyleMeme.name_f(string_of_int(30-String.length(m.name)))> {RR.str("{" ++ m.name ++ "}")} </p> 
+            <p style=StyleMeme.name_f(x)> {RR.str("{" ++ m.name ++ "}")} </p> 
             <p style=StyleMeme.text> {RR.str("<" ++ m.text ++ ">")} </p> 
             <p style=StyleMeme.tags> {RR.str("[" ++ (String.concat("", m.tags)) ++ "]")} </p> 
 
