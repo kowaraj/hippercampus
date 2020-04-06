@@ -31,7 +31,22 @@ let doFetchMeme = (m) => {
 let doFetchMeme1 = () => {
     Js.log("fetch: a SIGNLE meme from the backend");
     Js.Promise.(
-        Fetch.fetch(Config.url_be_root ++ "/getmeme/")
+        Fetch.fetch(Config.url_be_root ++ "/getmeme/" ++ "AD: DNS + KERBEROS")
+        |> then_(Fetch.Response.json)
+        |> then_({res => {
+            //Js.log(res);
+            res
+            |> Decode.meme 
+            |> ( fs => {  /*Js.log(fs);*/    Some(fs)   }    |> resolve)
+            }})
+        |> catch({_err => { /*Js.log(_err);*/     resolve(None); } })
+    );
+};
+
+let doFetchMemeRandom = () => {
+    Js.log("fetch: a SIGNLE meme from the backend");
+    Js.Promise.(
+        Fetch.fetch(Config.url_be_root ++ "/getmemerandom/")
         |> then_(Fetch.Response.json)
         |> then_({res => {
             //Js.log(res);
@@ -98,6 +113,28 @@ let make = () => {
             )
             None;
     };
+
+    let useEffectFunction2 = () => {
+            Js.log("useEffect: on meme_to_fetch [RANDOM]")
+            Js.Promise.(
+                doFetchMemeRandom()
+                |> then_( result => {
+                            switch (result) {
+                                | Some(data) => {
+                                    //Js.log(data);
+                                    setFetchedMemes(_ => data);
+                                    resolve();
+                                    }
+                                | None => {
+                                    Js.log("NONE! no data fetched");
+                                    resolve();
+                                    }
+                            }
+                        })
+                |> ignore                            
+            )
+            None;
+    };
     React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
         () => { 
             // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
@@ -119,7 +156,7 @@ let make = () => {
             //     |> ignore                            
             // )
             // None;
-            useEffectFunction();
+            useEffectFunction2();
             }, 
         [|meme_to_fetch|],
     );
@@ -143,7 +180,7 @@ let make = () => {
     };
 
     <div id="div-render-meme" style=StyleMeme.component>
-        <button id="MemeSearchButton2" onClick={_ev => {useEffectFunction1(); ()}}> {str("Fetch Random")} </button> <br />
+        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {useEffectFunction2(); ()}}> {str("Fetch Random")} </button> <br />
 
         // render the list of fetched memes
         <div id="div-render-rendermeme" className="items-list-files">

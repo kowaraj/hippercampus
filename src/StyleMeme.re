@@ -1,6 +1,6 @@
 
 let component = {ReactDOMRe.Style.make(
-    ~border="2px solid #ddddff", 
+    ~border="10px solid #0000ff", 
     ~padding="0.2rem", 
     ~margin="0.2px", 
     ~width="fit-content", 
@@ -10,29 +10,53 @@ let component = {ReactDOMRe.Style.make(
     () )};
 
 let container = {ReactDOMRe.Style.make(
-    ~border="3px solid #ffdddd", 
+    ~border="5px solid #ff0000", 
     ~padding="0rem", 
     ~margin="0px", 
-    ~width="fit-content", 
-    ~height="fit-content", 
+    ~width="95vw",
+    ~height="95vh",
+//    ~display="inline-flex",
+//    ~width="fit-content", 
+//    ~height="fit-content", 
     () )};
 
+let button_fetch = {ReactDOMRe.Style.make(
+    ~border="1px solid #aaaaaa", 
+    ~margin="1px",
+    ~height="5vh",
+    ~width="20vh",
+    () )};  
+
 let name = {ReactDOMRe.Style.make(
-    ~position="center",
+    ~border="1px solid #aaaaaa", 
+    ~margin="1px",
+    ~fontSize="15vw",
+    ~textAlign="center",
     () )};  
 
 let text = {ReactDOMRe.Style.make(
-    ~position="left",
+    ~border="1px solid #aaaaaa", 
+    ~margin="5px",
+    ~position="center",
+    ~fontSize="10vw",
+    ~textAlign="left",
+    ~wordBreak="break-all",
     () )};  
 
 let image = {ReactDOMRe.Style.make(
-    ~maxWidth="100%", 
-    ~maxHeight="100%", 
+    ~border="1px solid #aaaaaa", 
+    ~maxWidth="80vw", 
+    ~maxHeight="80vh", 
     () )};  
 
 let tags = {ReactDOMRe.Style.make(
-    ~position="left",
-    () )};  
+    ~border="1px solid #aaaaaa", 
+    ~margin="2px",
+    ~position="center",
+    ~fontSize="5vw",
+    ~textAlign="right",
+//    ~wordBreak="break-all",
+     () )};  
 
 
 let modal = {ReactDOMRe.Style.make(
@@ -62,13 +86,20 @@ let non_modal = {ReactDOMRe.Style.make(
     ~backgroundColor="rgba(0,0,0,0.4)", /* Black w/ opacity */
     () )};
 
+// let modal_content = {ReactDOMRe.Style.make(
+//     // /* Modal Content/Box */
+//     ~backgroundColor="#fefefe",
+//     ~margin="15% auto",  /* 15% from the top and centered */
+//     ~padding="20px", 
+//     ~border="1px solid #888",
+//     ~width="80%", /* Could be more or less, depending on screen size */
+//     () )};
 let modal_content = {ReactDOMRe.Style.make(
     // /* Modal Content/Box */
-    ~backgroundColor="#fefefe",
-    ~margin="15% auto",  /* 15% from the top and centered */
-    ~padding="20px", 
-    ~border="1px solid #888",
-    ~width="80%", /* Could be more or less, depending on screen size */
+    ~display="block", /* Hidden by default */
+    ~margin="auto",  /* 15% from the top and centered */
+ //   ~maxWidth="700px",
+    ~width="100%", /* Could be more or less, depending on screen size */
     () )};
 
 let modal_close = {ReactDOMRe.Style.make(
@@ -94,40 +125,33 @@ let image2 = {ReactDOMRe.Style.make(
     ~maxHeight="20%", 
     () )};  
 
-let modal2 = {ReactDOMRe.Style.make(
-/* The Modal (background) */
-    ~display="block", /* Hidden by default */
-    ~position="fixed",  /* Stay in place */
-    ~zIndex="1", /* Sit on top */
-    ~left="0",
-    ~top="0",
-    ~width="100%", /* Full width */
-    ~height="100%", /* Full height */
-    ~overflow="auto", /* Enable scroll if needed */
-//    ~backgroundColor="rgb(0,0,0)", /* Fallback color */
-    ~backgroundColor="rgba(0,0,0,0.4)", /* Black w/ opacity */
-    () )};
-let non_modal2 = {ReactDOMRe.Style.make(
-/* The Modal (background) */
-    ~display="none", /* Hidden by default */
-    ~position="fixed",  /* Stay in place */
-    ~zIndex="1", /* Sit on top */
-    ~left="0",
-    ~top="0",
-    ~width="100%", /* Full width */
-    ~height="100%", /* Full height */
-    ~overflow="auto", /* Enable scroll if needed */
-//    ~backgroundColor="rgb(0,0,0)", /* Fallback color */
-    ~backgroundColor="rgba(0,0,0,0.4)", /* Black w/ opacity */
-    () )};
+// let modal2 = {ReactDOMRe.Style.make(
+// /* The Modal (background) */
+//     ~display="block", /* Hidden by default */
+//     ~position="fixed",  /* Stay in place */
+//     ~zIndex="1", /* Sit on top */
+//     ~left="0",
+//     ~top="0",
+//     ~width="100%", /* Full width */
+//     ~height="100%", /* Full height */
+//     ~overflow="auto", /* Enable scroll if needed */
+// //    ~backgroundColor="rgb(0,0,0)", /* Fallback color */
+//     ~backgroundColor="rgba(0,0,0,0.4)", /* Black w/ opacity */
+//     () )};
+// let non_modal2 = {ReactDOMRe.Style.make(
+// /* The Modal (background) */
+//     ~display="none", /* Hidden by default */
+//     ~position="fixed",  /* Stay in place */
+//     ~zIndex="1", /* Sit on top */
+//     ~left="0",
+//     ~top="0",
+//     ~width="100%", /* Full width */
+//     ~height="100%", /* Full height */
+//     ~overflow="auto", /* Enable scroll if needed */
+// //    ~backgroundColor="rgb(0,0,0)", /* Fallback color */
+//     ~backgroundColor="rgba(0,0,0,0.4)", /* Black w/ opacity */
+//     () )};
 
-let modal_content2 = {ReactDOMRe.Style.make(
-    // /* Modal Content/Box */
-    ~display="block", /* Hidden by default */
-    ~margin="auto",  /* 15% from the top and centered */
-    ~maxWidth="700px",
-    ~width="100%", /* Could be more or less, depending on screen size */
-    () )};
 
 let modal_close2 = {ReactDOMRe.Style.make(
     /* The Close Button */
