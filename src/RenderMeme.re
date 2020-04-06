@@ -30,7 +30,7 @@ let make = (~m : Decode.meme_t) => {
 //             </div>
 
             <img id="myImg2" style=StyleMeme.image2 src=m.fn alt="meme image2" onClick={ _=>my_image_on_click() }/> 
-            <div id="myModal2" className="modal2" style={ get_modal_style2() }>
+            <div id="myModal2" className="modal2" style={ get_modal_style2() } onClick={ _=>invert_modal2()}>
                 //<span style=StyleMeme.modal_close2 className="close2" onClick={ _=>invert_modal2()}>{ RR.str({js|\u2297|js})}</span>
                 <img id="img02" src=m.fn style=StyleMeme.modal_content2 onClick={ _=>invert_modal2()}/> 
                 <div id="caption2"></div>
