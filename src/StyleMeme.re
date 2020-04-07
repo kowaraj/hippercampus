@@ -52,7 +52,7 @@ let text = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
     ~margin="5px",
     ~position="center",
-    ~fontSize="10vw",
+    ~fontSize="5vw",
     ~textAlign="left",
     ~wordBreak="break-all",
     () )};  
