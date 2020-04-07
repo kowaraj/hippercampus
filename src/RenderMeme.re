@@ -1,3 +1,5 @@
+//[%bs.raw {|require('./meme.css')|}];
+
 [@react.component]
 let make = (~m : Decode.meme_t) => {
 
@@ -11,8 +13,6 @@ let make = (~m : Decode.meme_t) => {
 
     <div>
         <div style=StyleMeme.container>
-
-//            <p style=StyleMeme.name_f(string_of_int(30-String.length(m.name)))> {RR.str("{" ++ m.name ++ "}")} </p> 
             <p style=StyleMeme.name_f(x)> {RR.str("{" ++ m.name ++ "}")} </p> 
             <p style=StyleMeme.text> {RR.str("<" ++ m.text ++ ">")} </p> 
             <p style=StyleMeme.tags> {RR.str("[" ++ (String.concat("", m.tags)) ++ "]")} </p> 

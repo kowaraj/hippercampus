@@ -13,6 +13,7 @@ let make = () => {
   // Js.log("The current URL: ")
   // Js.log(url.path);
   <div>
+    <Nav />
     {switch (url.path) {
     | ["home"] => {
         //Js.log("Going to 'home' page"); 
@@ -36,7 +37,6 @@ let make = () => {
       } 
     }}
 //    <p> {str("Navigation menu:")} </p>
-//    <Nav />
 
   </div>;
 };
