@@ -22,7 +22,7 @@ let input = {ReactDOMRe.Style.make(
     ~fontSize="8vw",
     ~textAlign="left",
     ~wordBreak="break-all",
-    // ~maxWidth="95vw", 
+    ~maxWidth="88vw", 
     // ~maxHeight="30vh", 
     () )};  
 
@@ -33,7 +33,8 @@ let textarea = {ReactDOMRe.Style.make(
     ~fontSize="8vw",
     ~textAlign="left",
     ~wordBreak="break-all",
-    ~height="50vh", 
+    ~maxWidth="88vw", 
+    ~height="48vh", 
     () )};  
 
 let label = {ReactDOMRe.Style.make(
