@@ -1,0 +1,17 @@
+{
+    "name": "HCampus", 
+    "short_name": "HCC", 
+    "start_url": "/meme",
+    "display": "standalone", 
+    "background_color": "red",
+    "theme_color": "#ffe1c4",
+    "orientation":"portrait-primary",
+    "icons":[
+        {
+            "src": "/img/icons/icon-96x96.png", 
+            "type": "image/png",
+            "sizes": "96x96"
+        }
+
+    ]
+}
