@@ -4,5 +4,4 @@
 // ReactDOMRe.renderToElementWithId(<FetchData2 />, "index_content");
 
 ReactDOMRe.renderToElementWithId(<App />, "root");
-ReactDOMRe.renderToElementWithId(<p> {RR.str("TEST")} </p>, "test");
 ReasonReact.Router.push("meme");
