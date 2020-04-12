@@ -43,8 +43,8 @@ let files = json => {
 }
 
 let meme = json => {
-    Js.log("Decode.files: json source is: <commented out>")
-    Js.log(json);
+    // Js.log("Decode.files: json source is: <commented out>")
+    // Js.log(json);
     let decoded_meme_list : list(meme_t) = Json.Decode.list(meme_decoder, json);
     decoded_meme_list
 }
