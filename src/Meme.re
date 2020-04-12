@@ -29,7 +29,7 @@ let doFetchMeme = (m) => {
 };
 
 let doFetchMeme1 = () => {
-    Js.log("fetch: a SIGNLE meme from the backend");
+    //Js.log("fetch: a SIGNLE meme from the backend");
     Js.Promise.(
         Fetch.fetch(Config.url_be_root ++ "/getmeme/" ++ "AD: DNS + KERBEROS")
         |> then_(Fetch.Response.json)
@@ -44,7 +44,7 @@ let doFetchMeme1 = () => {
 };
 
 let doFetchMemeRandom = () => {
-    Js.log("fetch: a SIGNLE meme from the backend");
+    //Js.log("fetch: a SINGLE meme from the backend");
     Js.Promise.(
         Fetch.fetch(Config.url_be_root ++ "/getmemerandom/")
         |> then_(Fetch.Response.json)
