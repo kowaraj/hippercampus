@@ -1,12 +1,13 @@
 
 let component = {ReactDOMRe.Style.make(
-    ~border="2px solid #0000ff", 
-    ~padding="0.2rem", 
-    ~margin="0.1px", 
+    ~border="1px solid #0000ff", 
+    //~padding="0.2px", 
+    //~margin="0.1px", 
     // ~width="fit-content", 
     // ~height="fit-content", 
     ~width="99vw",
     ~height="99vh",
+    ~boxSizing="border-box",
     // ~maxWidth="100%", 
     // ~maxHeight="100%", 
     () )};
