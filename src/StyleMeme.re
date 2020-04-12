@@ -1,21 +1,27 @@
 
 let component = {ReactDOMRe.Style.make(
-    ~border="10px solid #0000ff", 
+    ~border="2px solid #0000ff", 
     ~padding="0.2rem", 
-    ~margin="0.2px", 
+    ~margin="0.1px", 
     // ~width="fit-content", 
     // ~height="fit-content", 
-    ~width="95vw",
-    ~height="95vh",
+    ~width="99vw",
+    ~height="99vh",
     // ~maxWidth="100%", 
     // ~maxHeight="100%", 
     () )};
 
+let render_div = {ReactDOMRe.Style.make(
+    ~border="0 solid #000000", 
+    ~padding="0", 
+    ~margin="0", 
+    () )};
+
 let container = {ReactDOMRe.Style.make(
-    ~border="5px solid #ff0000", 
+    ~border="1px solid #ff0000", 
     ~padding="0rem", 
-    ~margin="0px", 
-    ~width="94vw",
+    ~margin="auto", 
+    ~width="98vw",
     ~height="85vh",
 //    ~display="inline-flex",
 //    ~width="fit-content", 
@@ -24,7 +30,7 @@ let container = {ReactDOMRe.Style.make(
 
 let button_fetch = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
-    ~margin="1px",
+    ~marginTop="30px",
     ~height="5vh",
     ~width="20vh",
     ~fontSize="2vh",
@@ -55,7 +61,7 @@ let text = {ReactDOMRe.Style.make(
     ~fontSize="5vw",
     ~textAlign="left",
     ~wordBreak="break-all",
-    () )};  
+    () )};
 
 let image = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
@@ -66,6 +72,7 @@ let image = {ReactDOMRe.Style.make(
 let tags = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
     ~margin="2px",
+    ~marginRight="10px",
     ~position="center",
     ~fontSize="5vw",
     ~textAlign="right",

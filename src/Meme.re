@@ -183,7 +183,7 @@ let make = () => {
         <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {useEffectFunction2(); ()}}> {str("Fetch Random")} </button> <br />
 
         // render the list of fetched memes
-        <div id="div-render-rendermeme" className="items-list-files">
+        <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">
         (
             List.map(
                 (zi : Decode.meme_t) => {

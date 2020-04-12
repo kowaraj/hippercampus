@@ -13,9 +13,9 @@ let make = (~m : Decode.meme_t) => {
 
     <div>
         <div style=StyleMeme.container>
-            <p style=StyleMeme.name_f(x)> {RR.str("{" ++ m.name ++ "}")} </p> 
-            <p style=StyleMeme.text> {RR.str("<" ++ m.text ++ ">")} </p> 
-            <p style=StyleMeme.tags> {RR.str("[" ++ (String.concat("", m.tags)) ++ "]")} </p> 
+            <p style=StyleMeme.name_f(x)> {RR.str(m.name)} </p> 
+            <p style=StyleMeme.text> {RR.str(m.text)} </p> 
+            <p style=StyleMeme.tags> {RR.str((String.concat("", m.tags)))} </p> 
 
             <img style=StyleMeme.image src=m.fn alt="meme image" onClick={ _=>invert_modal() }/> 
             <div className="modal" style={ get_modal_style() } onClick={ _=>invert_modal()}>

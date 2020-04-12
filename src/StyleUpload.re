@@ -30,11 +30,12 @@ let textarea = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
     ~margin="5px",
     ~position="center",
-    ~fontSize="8vw",
+    ~fontSize="4vw",
     ~textAlign="left",
     ~wordBreak="break-all",
     ~maxWidth="88vw", 
-    ~height="48vh", 
+    ~height="28vh", 
+    ~width="85vw",
     () )};  
 
 let label = {ReactDOMRe.Style.make(
