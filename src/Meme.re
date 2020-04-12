@@ -71,7 +71,7 @@ let make = () => {
     // .effect
 
     let useEffectFunction = () => {
-            Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
+            //Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
             Js.Promise.(
                 doFetchMeme(current_meme)
                 |> then_( result => {
@@ -93,7 +93,7 @@ let make = () => {
     };
 
     let useEffectFunction1 = () => {
-            Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
+            //Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
             Js.Promise.(
                 doFetchMeme1()
                 |> then_( result => {
@@ -115,7 +115,7 @@ let make = () => {
     };
 
     let useEffectFunction2 = () => {
-            Js.log("useEffect: on meme_to_fetch [RANDOM]")
+            //Js.log("useEffect: on meme_to_fetch [RANDOM]")
             Js.Promise.(
                 doFetchMemeRandom()
                 |> then_( result => {
@@ -188,7 +188,6 @@ let make = () => {
             List.map(
                 (zi : Decode.meme_t) => {
                     let i : Decode.meme_t = {
-                    // let i : RenderMeme.memeType = {
                         fn: Config.url_be_root++"/uploads/" ++ zi.fn, 
                         id: zi.id, 
                         text: zi.text,
