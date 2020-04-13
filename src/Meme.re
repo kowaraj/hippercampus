@@ -63,14 +63,14 @@ let make = () => {
 
     // .state 
 
-    let (x, setX) = React.useState( () => "initial value of x" );
+    let (_x, _setX) = React.useState( () => "initial value of x" );
     let (current_meme, setCurrentMeme) = React.useState( () => "" ); // name of the meme to fetch
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
     let (fetched_memes, setFetchedMemes) = React.useState( () => [] );
 
     // .effect
 
-    let useEffectFunction = () => {
+    let _useEffectFunction = () => {
             //Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
             Js.Promise.(
                 doFetchMeme(current_meme)
@@ -92,7 +92,7 @@ let make = () => {
             None;
     };
 
-    let useEffectFunction1 = () => {
+    let _useEffectFunction1 = () => {
             //Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
             Js.Promise.(
                 doFetchMeme1()
@@ -180,7 +180,7 @@ let make = () => {
     };
 
     <div id="div-render-meme" style=StyleMeme.component>
-        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {useEffectFunction2(); ()}}> {str("Fetch Random")} </button> <br />
+        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(); ()}}> {str("Fetch Random")} </button> <br />
 
         // render the list of fetched memes
         <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">
