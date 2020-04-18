@@ -180,6 +180,10 @@ let make = () => {
     };
 
     <div id="div-render-meme" style=StyleMeme.component>
+
+        <div>
+            <FetchData3 />            
+        </div>        
         <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(); ()}}> {str("Fetch Random")} </button> <br />
 
         // render the list of fetched memes

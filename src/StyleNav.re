@@ -19,5 +19,5 @@ let li = {ReactDOMRe.Style.make(
     ~fontSize="2vh",
     ~margin="1vw 5vw",
     ~padding="1vw 2vw",
-    ~width="30vw",
+    ~width="20vw",
     () )};

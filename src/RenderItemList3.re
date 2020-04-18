@@ -22,14 +22,12 @@ let make = (~items) => {
     {count: 0});
 
     <div>
-       {str("dump of the database...")} <br /> 
-
-        <div className="items-list-files">
+        <div style=StyleRenderItem3.list>
         (
             List.map(
                 (zi : Decode.meme_t) => {
-                    let i : RenderItem2.item = { url: Config.url_be_root++"/uploads/" ++ zi.fn, id: zi.id, name: zi.name};
-                    <RenderItem2 key=string_of_int(zi.id) item=i />
+                    let i : RenderItem3.item = { url: Config.url_be_root++"/uploads/" ++ zi.fn, id: zi.id, name: zi.name};
+                    <RenderItem3 key=string_of_int(zi.id) item=i />
                 },
                 items)
             |> Array.of_list
