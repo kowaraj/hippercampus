@@ -4,10 +4,7 @@ type state = {
     isLoading: bool
 };
 type action = 
-    // | UpdateInput(string)
     | FetchData
-    // | FetchDataX(string);
-
 
 let doFetchData = () => {
     Js.log("Fetching the backend database... (doFetchData)");
@@ -40,25 +37,11 @@ let doFetchMeme = (m) => {
 };
 
 [@react.component]
-let make = () => {
-
-    // .state 
-
+let make = (~cb) => {
     let (x, setX) = React.useState( () => "initial value of x" );
-    // let (current_meme, setCurrentMeme) = React.useState( () => "name1" );
-    // let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
-    // let (fetched_meme, setFetchedMeme) = React.useState( () => [] );
-
-    // let (x2, setX2) = React.useState( () => "{\"query\":\"{allPosts {edges {node {id } }}}\"}" );
-    // let (x3, setX3) = React.useState( () => "initial value of x3" );
-    // let (y, setY) = React.useState( () => "initial y" );
     let (z, setZ) = React.useState( () => [] );
-    // let (z2, setZ2) = React.useState( () => "");
-    // let (z3, setZ3) = React.useState( () => "");
 
-    // .effect
-
-    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
+    React.useEffect1( 
         () => { 
             Js.log("Fired! - useEffect1(x) with x == [" ++ x ++ "]")
             Js.Promise.(
@@ -66,14 +49,11 @@ let make = () => {
                 |> then_( result => {
                             switch (result) {
                                 | Some(data) => {
-                                    //Js.log(data);
-                                    // setY(_ => "some files have been fetched!");
                                     setZ(_ => data);
                                     resolve();
                                     }
                                 | None => {
                                     Js.log("OBSOLETE? NONE! no data fetched");
-                                    // setY(_ => "no data fetched");
                                     resolve();
                                     }
                             }
@@ -84,61 +64,30 @@ let make = () => {
             }, 
         [|x|],
     );
-    // React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
-    //     () => { 
-    //         Js.log("Fired! - useEffect1(meme_to_fetch) with current_meme == [" ++ current_meme ++ "]")
-    //         Js.Promise.(
-    //             doFetchMeme(current_meme)
-    //             |> then_( result => {
-    //                         switch (result) {
-    //                             | Some(data) => {
-    //                                 Js.log(data);
-    //                                 setFetchedMeme(_ => data);
-    //                                 resolve();
-    //                                 }
-    //                             | None => {
-    //                                 Js.log("THIS one - NONE! no data fetched");
-    //                                 setY(_ => "no data fetched");
-    //                                 resolve();
-    //                                 }
-    //                         }
-    //                     })
-    //             |> ignore                            
-    //         )
-    //         None;
-    //         }, 
-    //     [|meme_to_fetch|],
-    // );
-
-    // React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
-    //     () => { 
-    //      switch (x3) {
-    //      | "" => {Js.log("x3 hasn't changed"); None}
-    //      | x3 => {
-    //         Js.log("Fired! useEffect1(x3) with x3 == [" ++ x3 ++ "] ")
-    //         setZ3(_=>x3)
-    //         None;
-    //      }}
-    //     },          
-    //     [|x3|],
-    // );
-     
-    // .reducer
-
+   
     let (_ss, _dispatch) = 
         React.useReducer( 
             (state, action) => switch (action) { 
-                // | UpdateInput(newInput) => {...state, input: newInput}
                 | FetchData => { Js.log("fetchdata: STATE=2"); setX(_ => "test"); {...state, isLoading: true }}
-                // | FetchDataX(m) => { Js.log("fetchdata: STATE=3, m=="++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
                 },
             {input: "Initial input", isLoading: false}
         );
 
     // .render
+
+    let local_f : string => unit = item_name => {
+        //let meme_index = Random.int(10)
+        //let meme_name = List.nth(z, meme_index)
+        //Js.log("random meme name = "++ meme_name.name)
+        Js.log(item_name)
+        // cb(meme_name.name)
+        cb(item_name)
+    };
+
     {
     <div>
-      <RenderItemList3 items=z />
+//        <button style=StyleRenderItem3.button onClick={_ => local_f}> {RR.str("clickme")}</button>
+      <RenderItemList3 items=z list_cb=local_f/>
     </div>
     }
 };

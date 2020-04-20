@@ -114,49 +114,50 @@ let make = () => {
             None;
     };
 
-    let useEffectFunction2 = () => {
-            //Js.log("useEffect: on meme_to_fetch [RANDOM]")
+    // Triggered by:
+    // - useEffect on meme_to_fetch
+    // - button click
+    let useEffectFunction2 = (m) => {
+        switch (m) {
+        | "" => {
             Js.Promise.(
                 doFetchMemeRandom()
                 |> then_( result => {
                             switch (result) {
                                 | Some(data) => {
-                                    //Js.log(data);
                                     setFetchedMemes(_ => data);
                                     resolve();
                                     }
                                 | None => {
                                     Js.log("NONE! no data fetched");
                                     resolve();
-                                    }
-                            }
-                        })
-                |> ignore                            
-            )
+                                    }}})
+                |> ignore)                            
             None;
+        }
+        | memename => {
+            Js.Promise.(
+                doFetchMeme(memename)
+                |> then_( result => {
+                            switch (result) {
+                                | Some(data) => {
+                                    setFetchedMemes(_ => data);
+                                    resolve();
+                                    }
+                                | None => {
+                                    Js.log("NONE! no data fetched");
+                                    resolve();
+                                    }}})
+                |> ignore)                            
+            None;
+
+        }
+        }
     };
-    React.useEffect1( // TODO: (no need?) How NOT to trigger this "effect" at the componentMount time
+    
+    React.useEffect1( 
         () => { 
-            // Js.log("useEffect: on meme_to_fetch [" ++ current_meme ++ "]")
-            // Js.Promise.(
-            //     doFetchMeme(current_meme)
-            //     |> then_( result => {
-            //                 switch (result) {
-            //                     | Some(data) => {
-            //                         //Js.log(data);
-            //                         setFetchedMeme(_ => data);
-            //                         resolve();
-            //                         }
-            //                     | None => {
-            //                         Js.log("NONE! no data fetched");
-            //                         resolve();
-            //                         }
-            //                 }
-            //             })
-            //     |> ignore                            
-            // )
-            // None;
-            useEffectFunction2();
+            useEffectFunction2(meme_to_fetch);
             }, 
         [|meme_to_fetch|],
     );
@@ -179,12 +180,16 @@ let make = () => {
         dispatch(FetchDataX(current_meme))
     };
 
+    let f_test_cb = s => {
+        Js.log("callback value = " ++ s)
+        setMemeToFetch(_ => s)
+    };
     <div id="div-render-meme" style=StyleMeme.component>
 
         <div>
-            <FetchData3 />            
+            <FetchData3 cb=f_test_cb/>            
         </div>        
-        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(); ()}}> {str("Fetch Random")} </button> <br />
+        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random")} </button> <br />
 
         // render the list of fetched memes
         <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">
