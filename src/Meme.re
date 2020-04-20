@@ -167,7 +167,7 @@ let make = () => {
     let (_ss, dispatch) = 
         React.useReducer( 
             (state, action) => switch (action) { 
-                | FetchDataX(m) => { /*Js.log("meme:STATE=3, m=="++m);*/ setMemeToFetch(_ => m); {...state, isLoading: true }}
+                | FetchDataX(m) => { Js.log("IS IT EVER CLICKED????"++m); setMemeToFetch(_ => m); {...state, isLoading: true }}
                 },
             {input: "Initial input", isLoading: false}
         );
