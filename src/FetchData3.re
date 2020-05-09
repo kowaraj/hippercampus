@@ -7,7 +7,7 @@
 //     | FetchData
 
 let doFetchData = () => {
-    Js.log("Fetching the backend database... (doFetchData)");
+    //Js.log("Fetching the backend database... (doFetchData)");
     Js.Promise.(
         Fetch.fetch(Config.url_be_root++"/getmemes")
         |> then_(Fetch.Response.json)
@@ -28,7 +28,7 @@ let make = (~cb) => {
 
     React.useEffect1( 
         () => { 
-            Js.log("Fired! - useEffect1(x) with x == [" ++ x ++ "]")
+            //Js.log("FetchData3.re: Fired! - useEffect1(x) with x == [" ++ x ++ "]")
             Js.Promise.(
                 doFetchData()
                 |> then_( result => {
@@ -38,7 +38,7 @@ let make = (~cb) => {
                                     resolve();
                                     }
                                 | None => {
-                                    Js.log("OBSOLETE? NONE! no data fetched");
+                                    Js.log("FetchData3.re: NONE! no data fetched");
                                     resolve();
                                     }
                             }

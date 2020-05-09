@@ -1,4 +1,4 @@
-const staticCacheName = 'site-static-v2';
+const staticCacheName = 'site-static-v5';
 
 // assets for pre-caching
 const assets = [
@@ -19,7 +19,7 @@ const assets = [
 
 // install service worker 
 self.addEventListener('install', evt => {
-    console.log('service worker has been installed')
+    //console.log('service worker has been installed')
     evt.waitUntil(
         caches.open(staticCacheName).then(cache => {
             console.log(staticCacheName + ' opened')
@@ -44,7 +44,7 @@ self.addEventListener('activate', evt => {
 
 // reacting to a 'fetch' request
 self.addEventListener('fetch', evt => {
-    console.log('fetch event', evt.request.url)
+    //console.log('fetch event', evt.request.url)
 
     evt.respondWith(
         caches.match(evt.request).then( cacheResp => {

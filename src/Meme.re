@@ -189,7 +189,9 @@ let make = () => {
         <div>
             <FetchData3 cb=f_test_cb/>            
         </div>        
-        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random-v2")} </button> <br />
+        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={
+            _ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random")
+            } </button> <br />
 
         // render the list of fetched memes
         <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">
