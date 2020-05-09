@@ -1,4 +1,5 @@
-const staticCacheName = 'site-static-v5';
+const staticCacheName = 'site-static-v7';
+const dynamicCacheName = 'site-dynamic-v0';
 
 // assets for pre-caching
 const assets = [
@@ -44,11 +45,18 @@ self.addEventListener('activate', evt => {
 
 // reacting to a 'fetch' request
 self.addEventListener('fetch', evt => {
-    //console.log('fetch event', evt.request.url)
-
+    // console.log('fetch event', evt.request.url)
     evt.respondWith(
         caches.match(evt.request).then( cacheResp => {
-            return cacheResp || fetch(evt.request)
+            return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
+                console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
+//                console.log(fetchResp)
+                return caches.open(dynamicCacheName).then( cache => {
+//                    console.log("--: opened a dynamic cache")
+                    cache.put(fetchResp.url, fetchResp.clone())
+                    return fetchResp
+                })
+            })
         })
     )
 })
