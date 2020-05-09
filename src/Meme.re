@@ -14,7 +14,7 @@ type memeType = {
 };
 
 let doFetchMeme = (m) => {
-    Js.log("fetch: a meme from the backend");
+    //Js.log("fetch: a meme from the backend");
     Js.Promise.(
         Fetch.fetch(Config.url_be_root ++ "/getmeme/" ++ m)
         |> then_(Fetch.Response.json)
@@ -181,7 +181,7 @@ let make = () => {
     };
 
     let f_test_cb = s => {
-        Js.log("callback value = " ++ s)
+        //Js.log("callback value = " ++ s)
         setMemeToFetch(_ => s)
     };
     <div id="div-render-meme" style=StyleMeme.component>
@@ -189,7 +189,7 @@ let make = () => {
         <div>
             <FetchData3 cb=f_test_cb/>            
         </div>        
-        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random")} </button> <br />
+        <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={_ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random-v2")} </button> <br />
 
         // render the list of fetched memes
         <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">

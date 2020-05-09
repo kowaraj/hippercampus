@@ -22,7 +22,7 @@ let make = (~items, ~list_cb) => {
     {count: 0});
 
     let list_item_cb = (_e, item_name) => {
-        Js.log(item_name)
+        //Js.log(item_name)
         list_cb(item_name)
     };
 
