@@ -30,6 +30,80 @@ npm install
 
 It expects a backend to be found on `localhost:3003`
 
+
+# CORS configuration
+
+Actors: 
+- frontend: 
+  - rendered img tag with src="http://localhost:4666/uploads/image1"
+  - fetched meme with src="http://localhost:4666/meme/meme1"
+  - service worker (interrupting the fetch and checking cache)
+  - dynamic cache itself
+- backend:
+  - flask \__init__.py with CORS(app, resources={...})
+  - flask route for GET of '/uploads/<\fn>'
+- browser (+ DevTools):
+  - Application tab: Service worker
+  - Application tab: Cache storage
+  - "Update on reaload" checkbox
+  - "Offline" checkbox
+
+
+image tag:
+```
+  <img src=m.fn style=StyleMeme.modal_content onClick={ _=>invert_modal()}/> 
+```
+ 
+fetching a meme:
+```
+  Fetch.fetch(Config.url_be_root++"/getmemes")
+```
+
+sw.js:
+```
+self.addEventListener('fetch', evt => {
+    evt.respondWith(
+        caches.match(evt.request).then( cacheResp => {
+            return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
+                return caches.open(dynamicCacheName).then( cache => {
+                    cache.put(fetchResp.url, fetchResp.clone())
+                    return fetchResp
+  ...
+```
+
+Flask's \__init__:
+```
+cors = CORS(app, resources={
+    r"/uploads/*": {"Access-Control-Allow-Origin": "http://localhost:3666"},
+    r"/getmemes*": {"origins": "*"}, 
+    r"/getmeme/*": {"origins": "*"}
+    })
+```
+
+Flask's route:
+```
+@bp.route('/uploads/<fn>', methods=['GET'])
+def uploads(fn):
+    ...
+    resp.headers["Access-Control-Allow-Origin"] =  "http://localhost:3666"
+    resp.headers["Access-Control-Allow-Credentials"] =  "true"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # How it works
 
 index.html has 2 tags - index_uploader and index_content
