@@ -36,7 +36,7 @@ self.addEventListener('activate', evt => {
         caches.keys().then(keys => {
             //console.log(keys)
             return Promise.all(keys
-                .filter(key => key !== staticCacheName)
+                .filter(key => key !== staticCacheName && key !== dynamicCacheName)
                 .map(key => caches.delete(key))
                 )
         })
@@ -47,7 +47,8 @@ self.addEventListener('activate', evt => {
 self.addEventListener('fetch', evt => {
     // console.log('fetch event', evt.request.url)
     evt.respondWith(
-        caches.match(evt.request).then( cacheResp => {
+        caches.match(evt.request)
+        .then( cacheResp => {
             return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
                 console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
 //                console.log(fetchResp)
@@ -58,6 +59,14 @@ self.addEventListener('fetch', evt => {
                 })
             })
         })
+        .catch( cacheMiss => 
+            // console.log("missed: " + cacheMiss); 
+            // caches.match('http://localhost:4666/getmeme/macos').then( cacheResp => { 
+            //     console.log("missed: returning a default page")
+            //     return cacheResp
+            // })
+            caches.match('http://localhost:4666/getmeme/macos')
+        )
     )
 })
 
