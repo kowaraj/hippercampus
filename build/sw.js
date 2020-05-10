@@ -60,13 +60,16 @@ self.addEventListener('fetch', evt => {
             })
         })
         .catch( cacheMiss => 
-            // console.log("missed: " + cacheMiss); 
-            // caches.match('http://localhost:4666/getmeme/macos').then( cacheResp => { 
-            //     console.log("missed: returning a default page")
-            //     return cacheResp
-            // })
             caches.match('http://localhost:4666/getmeme/macos')
         )
+        .catch( cacheMiss => {
+            if (evt.request.url.indexOf('getmeme/') !== -1) {
+                return caches.match('http://localhost:4666/getmeme/macos')
+            }
+            if (evt.request.url.indexOf('uploads/') !== -1) {
+                return caches.match('http://localhost:4666/uploads/ShiftDisplay.png')
+            }
+        })
     )
 })
 
