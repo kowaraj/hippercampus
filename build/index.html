@@ -24,6 +24,28 @@
   </div>
   </div>
   <script src="Index.js"></script>
+
+  <!-- Google Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDKgLIY98451LpSR5DLrnp02LIFz-a4XvE",
+      authDomain: "hippercampus-cd55f.firebaseapp.com",
+      databaseURL: "https://hippercampus-cd55f.firebaseio.com",
+      projectId: "hippercampus-cd55f",
+      storageBucket: "hippercampus-cd55f.appspot.com",
+      messagingSenderId: "599976378486",
+      appId: "1:599976378486:web:9d535ab187b7241f935f57",
+      measurementId: "G-YEPYH48RXR"
+    };
+    firebase.initializeApp(firebaseConfig);
+    df = firebase.firestore();
+    firebase.analytics();
+  </script>
+
   <script src="app.js"></script>
+  <script src="db.js"></script>
 </body>
 </html>

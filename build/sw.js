@@ -18,6 +18,17 @@ const assets = [
     // 'http://localhost:4666/uploads/Screen%20Shot%202020-02-04%20at%2018.47.03.png'
 ];
 
+// limit cache size
+const limitCacheSize = (name, size) => {
+    caches.open(name).then(cache => {
+        cache.keys().then(keys => {
+            if (keys.length > size) {
+                cache.delete(keys[0]).then(limitCacheSize(name, size));
+            }
+        })
+    })
+};
+
 // install service worker 
 self.addEventListener('install', evt => {
     //console.log('service worker has been installed')
@@ -45,46 +56,27 @@ self.addEventListener('activate', evt => {
 
 // reacting to a 'fetch' request
 self.addEventListener('fetch', evt => {
-    // console.log('fetch event', evt.request.url)
-    evt.respondWith(
-        caches.match(evt.request)
-        .then( cacheResp => {
-            return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
-                console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
-//                console.log(fetchResp)
-                return caches.open(dynamicCacheName).then( cache => {
-//                    console.log("--: opened a dynamic cache")
-                    cache.put(fetchResp.url, fetchResp.clone())
-                    return fetchResp
-                })
-            })
-        })
-        .catch( cacheMiss => 
-            caches.match('http://localhost:4666/getmeme/macos')
-        )
-        .catch( cacheMiss => {
-            if (evt.request.url.indexOf('getmeme/') !== -1) {
-                return caches.match('http://localhost:4666/getmeme/macos')
-            }
-            if (evt.request.url.indexOf('uploads/') !== -1) {
-                return caches.match('http://localhost:4666/uploads/ShiftDisplay.png')
-            }
-        })
-    )
+    // COMMENTED OUT: while working with Firestore db...
+    // evt.respondWith(
+    //     caches.match(evt.request)
+    //     .then( cacheResp => {
+    //         return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
+    //             console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
+    //             return caches.open(dynamicCacheName).then( cache => {
+    //                 cache.put(fetchResp.url, fetchResp.clone())
+    //                 limitCacheSize(dynamicCacheName, 20)
+    //                 return fetchResp
+    //             })
+    //         })
+    //     })
+    //     .catch( cacheMiss => {
+    //         if (evt.request.url.indexOf('getmeme/') !== -1) {
+    //             return caches.match('http://localhost:4666/getmeme/macos')
+    //         }
+    //         if (evt.request.url.indexOf('uploads/') !== -1) {
+    //             return caches.match('http://localhost:4666/uploads/ShiftDisplay.png')
+    //         }
+    //     })
+    // )
 })
-
-// // reacting to a 'fetch' request
-// self.addEventListener('fetch', evt => {
-//     console.log('fetch event', evt.request.url)
-
-//     evt.respondWith(
-//         caches.match(evt.request)
-//         .then( cacheResp => {
-//             if (cacheResp) {
-//                 console.log('HIT')
-//                 return cacheResp
-//             } else {
-//                 console.log('MISS')
-//                 fetch(evt.request)
-//             }}))});
 
