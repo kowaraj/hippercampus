@@ -39,25 +39,21 @@ let button_fetch = {ReactDOMRe.Style.make(
 
 let antd_container = {ReactDOMRe.Style.make(
     ~border="2px solid #ff0000", 
-    ~height="15vh",
     ~width="100%",
-    ~boxSizing="border-box",
-    ~lineHeight="2em",
-    ~margin="0 0",
+    ~lineHeight="4em",
     () )};  
 let antd = {ReactDOMRe.Style.make(
     ~border="2px solid #00ff00", 
-    ~height="200%",
     ~width="100%",
+    ~height="60px",
     ~fontSize="4em",
-    ~lineHeight="2em",
+    ~lineHeight="8em",
     () )};      
 let antd_option = {ReactDOMRe.Style.make(
-    ~height="5vh",
-    ~width="100%",
     ~border="2px solid #0000ff", 
-    ~fontSize="4em",
-    ~lineHeight="1.5em",
+    ~fontSize="3em",
+    ~lineHeight="2em",
+    ~width="100%", 
     () )};      
 
 let name_f = (len) => {ReactDOMRe.Style.make(
