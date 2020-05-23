@@ -9,10 +9,8 @@ type route =
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
-
-  // Js.log("The current URL: ")
-  // Js.log(url.path);
   <div>
+
     <Nav />
     {switch (url.path) {
     | ["home"] => {
@@ -29,10 +27,8 @@ let make = () => {
       }
     | _ => {
         <p> {str("None")} </p>
-        // unused: <FetchData2 /> 
       } 
     }}
-//    <p> {str("Navigation menu:")} </p>
 
   </div>;
 };

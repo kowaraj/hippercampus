@@ -185,14 +185,13 @@ let make = () => {
         setMemeToFetch(_ => s)
     };
     <div id="div-render-meme" style=StyleMeme.component>
-
         <div>
             <FetchData3 cb=f_test_cb/>            
-        </div>        
+        </div>     
         <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={
             _ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random")
             } </button> <br />
-
+        <AntTest />
         // render the list of fetched memes
         <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">
         (

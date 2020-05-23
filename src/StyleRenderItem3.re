@@ -16,6 +16,6 @@ let item = { ReactDOMRe.Style.make(
     ~margin="0 0", 
     ~fontSize="7vw",
     ~lineHeight="100%",
-    ~width="99vw", 
+ //   ~width="99vw", 
     () )};
 

@@ -5,8 +5,8 @@ let component = {ReactDOMRe.Style.make(
     //~margin="0.1px", 
     // ~width="fit-content", 
     // ~height="fit-content", 
-    ~width="99vw",
-    ~height="99vh",
+ //   ~width="99vw",
+ //   ~height="99vh",
     ~boxSizing="border-box",
     // ~maxWidth="100%", 
     // ~maxHeight="100%", 
@@ -22,8 +22,8 @@ let container = {ReactDOMRe.Style.make(
     ~border="1px solid #ff0000", 
     ~padding="0rem", 
     ~margin="auto", 
-    ~width="98vw",
-    ~height="85vh",
+//    ~width="98vw",
+ //   ~height="85vh",
 //    ~display="inline-flex",
 //    ~width="fit-content", 
 //    ~height="fit-content", 
@@ -36,6 +36,29 @@ let button_fetch = {ReactDOMRe.Style.make(
     ~width="20vh",
     ~fontSize="2vh",
     () )};  
+
+let antd_container = {ReactDOMRe.Style.make(
+    ~border="2px solid #ff0000", 
+    ~height="15vh",
+    ~width="100%",
+    ~boxSizing="border-box",
+    ~lineHeight="2em",
+    ~margin="0 0",
+    () )};  
+let antd = {ReactDOMRe.Style.make(
+    ~border="2px solid #00ff00", 
+    ~height="200%",
+    ~width="100%",
+    ~fontSize="4em",
+    ~lineHeight="2em",
+    () )};      
+let antd_option = {ReactDOMRe.Style.make(
+    ~height="5vh",
+    ~width="100%",
+    ~border="2px solid #0000ff", 
+    ~fontSize="4em",
+    ~lineHeight="1.5em",
+    () )};      
 
 let name_f = (len) => {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
