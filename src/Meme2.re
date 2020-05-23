@@ -34,13 +34,13 @@ let make = () => {
         () => { do_fetch(meme_to_fetch); }, 
         [|meme_to_fetch|],
     );
-    
+
     let f_test_cb = s => { setMemeToFetch(_ => s)  };
 
     <div id="div-render-meme" style=StyleMeme.component>
         <FetchData3 cb=f_test_cb/>            
         <AntTest />
-        <RenderMeme2 fetched_memes=fetched_memes />
+        <RenderMemeWrapper fetched_memes=fetched_memes />
     </div>
 };
 
