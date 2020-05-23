@@ -17,7 +17,7 @@ let li = {ReactDOMRe.Style.make(
     ~border="3px solid #00ff00", 
     ~display="inline-block",
     ~fontSize="2vh",
-    ~margin="1vw 5vw",
-    ~padding="1vw 2vw",
-    ~width="20vw",
+    ~margin="1vh 1vw",
+    ~padding="1vh 1vw",
+    ~width="22vw",
     () )};

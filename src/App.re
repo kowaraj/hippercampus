@@ -19,6 +19,9 @@ let make = () => {
     | ["meme"] => {
         <Meme /> 
       }
+    | ["meme2"] => {
+        <Meme2 /> 
+      }
     | ["upload"] => {
         <Uploader /> 
       }
