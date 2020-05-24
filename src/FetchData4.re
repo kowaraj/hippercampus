@@ -34,6 +34,17 @@ let make = (~cb) => {
         }
     }
 
+    let extract_all_tags = memes => {
+        let tags = List.fold_left( (extracted_tags, (meme: Decode.meme_t)) => {
+                    List.append(extracted_tags, meme.tags)
+                }, [], memes)
+
+        Js.log(tags |> Array.of_list)
+        let tags_u = List.sort_uniq( (t1,t2) => compare(t1,t2),tags)
+        Js.log(tags_u |> Array.of_list)
+        tags_u
+    }
+
     React.useEffect1( () => { 
         Js.Promise.(
             doFetchMemes()
@@ -41,6 +52,7 @@ let make = (~cb) => {
                 switch (result) {
                     | Some(data) => {
                         setFetchedMemes(_ => filter_data_by_tags(data, sel_tags));
+                        setAllTags(_ => extract_all_tags(data))
                         resolve(); }
                     | None => {
                         Js.log("FetchData3.re: NONE! no data fetched");
