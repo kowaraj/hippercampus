@@ -13,21 +13,26 @@ let make = () => {
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
     let (fetched_memes, setFetchedMemes) = React.useState( () => [] );
 
+    let filter_fetched = (memes, tags) => {
+        Js.log(memes);
+        Js.log(tags);
+        memes
+    }
+
     let do_fetch = (memename) => {
-            Js.Promise.(
-                doFetchMeme(memename)
-                |> then_( result => {
-                            switch (result) {
-                                | Some(data) => {
-                                    setFetchedMemes(_ => data);
-                                    resolve();
-                                    }
-                                | None => {
-                                    Js.log("NONE! no data fetched");
-                                    resolve();
-                                    }}})
-                |> ignore)                            
-            None;
+        Js.Promise.(
+            doFetchMeme(memename)
+            |> then_( result => {
+                switch (result) {
+                    | Some(data) => {
+                        setFetchedMemes(_ => data);
+                        resolve();
+                        }
+                    | None => {
+                        Js.log("NONE! no data fetched");
+                        resolve();}
+                }}) |> ignore) 
+        None;
     };
     
     React.useEffect1( 
@@ -35,11 +40,10 @@ let make = () => {
         [|meme_to_fetch|],
     );
 
-    let f_test_cb = s => { setMemeToFetch(_ => s)  };
+    let cb_selected_meme = s => { setMemeToFetch(_ => s)  };
 
     <div id="div-render-meme" style=StyleMeme.component>
-        <FetchData3 cb=f_test_cb/>            
-        <AntTest />
+        <FetchData4 cb=cb_selected_meme/>            
         <RenderMemeWrapper fetched_memes=fetched_memes />
     </div>
 };

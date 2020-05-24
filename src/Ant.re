@@ -1,6 +1,13 @@
 // import { Select } from 'antd';
 // source: https://www.youtube.com/watch?v=30J8Yv9eq7c&t=268s
 module Select = {
+
+    // [@bs.deriving]
+    // type mode_t = 
+    // | [@bs.as "multiple"] Multiple
+    // | [@bs.as "default"] Default 
+    // | [@bs.as "tags"] Tags;
+
     [@bs.module "Antd"]
     [@react.component]
     external make : (
@@ -26,6 +33,7 @@ module Select = {
         // ~maxTagPlaceholder: ReactNode/function(omittedValues)=?,
         // ~tagRender: (props) => ReactNode=?,
         ~mode: string=?, //~mode: multiple | tags=?,
+//        ~mode: mode_t=?,
         //~notFoundContent: ReactNode=?,
         ~optionFilterProp: string=?,
         ~optionLabelProp: string=?,
@@ -45,6 +53,7 @@ module Select = {
         // ~onBlur: function=?,
         // ~onChange: function(value=?, option:Option/Array<Option>)=?,
         // ~onDeselect: function(string|int|LabeledValue)=?,
+        ~onDeselect: (string => unit)=?,
         // ~onFocus: function=?,
         // ~onInputKeyDown: function=?,
         // ~onMouseEnter: function=?,
@@ -52,6 +61,7 @@ module Select = {
         // ~onPopupScroll: function=?,
         // ~onSearch: function(value: string)=?,
         // ~onSelect: function(string|int|LabeledValue=?, option:Option)=?,
+        ~onSelect: (string => unit)=?,
         ~defaultOpen: bool=?,
         // ~open: bool=?,
         // ~onDropdownVisibleChange: function(open)=?,

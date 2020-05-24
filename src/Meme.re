@@ -191,7 +191,7 @@ let make = () => {
         // <button style=StyleMeme.button_fetch id="MemeSearchButton2" onClick={
         //     _ev => {let _x = useEffectFunction2(""); ()}}> {str("Fetch Random")
         //     } </button> <br />
-        <AntTest />
+        //<AntTest />
         // render the list of fetched memes
         <div id="div-render-rendermeme" style=StyleMeme.render_div className="items-list-files">
         (
