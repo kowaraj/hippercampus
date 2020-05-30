@@ -1,3 +1,4 @@
+
 let doFetchMeme = (m) => {
     Js.Promise.(
         Fetch.fetch(Config.url_be_root ++ "/getmeme/" ++ m)
@@ -13,11 +14,11 @@ let make = () => {
     let (meme_to_fetch, setMemeToFetch) = React.useState( () => "initial value of meme_to_fetch" );
     let (fetched_memes, setFetchedMemes) = React.useState( () => [] );
 
-    let filter_fetched = (memes, tags) => {
-        Js.log(memes);
-        Js.log(tags);
-        memes
-    }
+    // let filter_fetched = (memes, tags) => {
+    //     //Js.log(memes);
+    //     //Js.log(tags);
+    //     memes
+    // }
 
     let do_fetch = (memename) => {
         Js.Promise.(

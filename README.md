@@ -5,7 +5,7 @@
 
 TODO:
 - add a timestamp to the image files, like: image_filename_ts.png
-
+- Replace getmeme/<meme/name> with getmeme_by_id/<id>
 
 # Hippercampus
 

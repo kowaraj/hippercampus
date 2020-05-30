@@ -1,5 +1,5 @@
 let doFetchMemes = () => {
-    Js.log("doFetchMemes:")
+    //Js.log("doFetchMemes:")
 
     Js.Promise.(
         Fetch.fetch(Config.url_be_root++"/getmemes")
@@ -45,9 +45,9 @@ let make = (~cb) => {
                         }, [], memes)
         //Re::String::trim - The characters regarded as whitespace are: ' ', '\012', '\n', '\r', and '\t'. If 
         let tags_peeled = List.map( tag => String.trim(tag), tags)
-        Js.log(tags_peeled |> Array.of_list)
+        //Js.log(tags_peeled |> Array.of_list)
         let tags_u = List.sort_uniq( (t1,t2) => compare(t1,t2), tags_peeled)
-        Js.log(tags_u |> Array.of_list)
+        //Js.log(tags_u |> Array.of_list)
         tags_u
     }
 
