@@ -20,6 +20,8 @@ let make = (~cb) => {
     let (all_tags, setAllTags) = React.useState( () => ["bash", "ssh", "linux"] );
     let (sel_tags, setSelTags) = React.useState( () => [] );
 
+    // Take: List of memes, List of selected tags
+    // Return: List of memes whose tags contain all of the selected tags
     let filter_data_by_tags = (memes, sel_tags) => {
         switch (List.length(sel_tags)) {
         | 0 => memes
@@ -34,13 +36,17 @@ let make = (~cb) => {
         }
     }
 
+    // Take: List of memes
+    // Return: List of all the unique tags 
     let extract_all_tags = memes => {
-        let tags = List.fold_left( (extracted_tags, (meme: Decode.meme_t)) => {
-                    List.append(extracted_tags, meme.tags)
-                }, [], memes)
-
-        Js.log(tags |> Array.of_list)
-        let tags_u = List.sort_uniq( (t1,t2) => compare(t1,t2),tags)
+        let tags = List.fold_left( 
+                        (extracted_tags, (meme: Decode.meme_t)) => {
+                                                    List.append(extracted_tags, meme.tags)
+                        }, [], memes)
+        //Re::String::trim - The characters regarded as whitespace are: ' ', '\012', '\n', '\r', and '\t'. If 
+        let tags_peeled = List.map( tag => String.trim(tag), tags)
+        Js.log(tags_peeled |> Array.of_list)
+        let tags_u = List.sort_uniq( (t1,t2) => compare(t1,t2), tags_peeled)
         Js.log(tags_u |> Array.of_list)
         tags_u
     }
