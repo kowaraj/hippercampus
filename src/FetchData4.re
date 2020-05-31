@@ -1,6 +1,4 @@
 let doFetchMemes = () => {
-    //Js.log("doFetchMemes:")
-
     Js.Promise.(
         Fetch.fetch(Config.url_be_root++"/getmemes")
         |> then_(Fetch.Response.json)
