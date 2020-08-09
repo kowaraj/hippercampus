@@ -23,36 +23,41 @@
       font-size: 1em;
     }    
   </style>
-  <title>ReasonReact Examples</title>
+  <title>HipperCampus</title>
 </head>
 
 <body class="root0">
   <div>
     <div id="root"> <p> no javascript </p>  </div> <!-- PWA audit -->
   </div>
-  <script src="Index.js"></script>
 
-    <!-- Google Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
-    <script>
-      var firebaseConfig = {
-        apiKey: "AIzaSyDKgLIY98451LpSR5DLrnp02LIFz-a4XvE",
-        authDomain: "hippercampus-cd55f.firebaseapp.com",
-        databaseURL: "https://hippercampus-cd55f.firebaseio.com",
-        projectId: "hippercampus-cd55f",
-        storageBucket: "hippercampus-cd55f.appspot.com",
-        messagingSenderId: "599976378486",
-        appId: "1:599976378486:web:9d535ab187b7241f935f57",
-        measurementId: "G-YEPYH48RXR"
-      };
-      firebase.initializeApp(firebaseConfig);
-      db = firebase.firestore();
-      firebase.analytics();
-    </script>
+
+  
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+     var firebaseConfig = {
+      apiKey: "AIzaSyDz1wxTwSaZQupaMxgPygYLHVlgWvatAQM",
+      authDomain: "hippercampus-pwa.firebaseapp.com",
+      databaseURL: "https://hippercampus-pwa.firebaseio.com",
+      projectId: "hippercampus-pwa",
+      storageBucket: "hippercampus-pwa.appspot.com",
+      messagingSenderId: "498686373457",
+      appId: "1:498686373457:web:89418ae315cb26489d1270"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const firestore_db = firebase.firestore()
+    const test_db_apashnin = "test_db_apashnin";
+  </script>
+
     
   <script src="app.js"></script>
-  <script src="db.js"></script>
+  // <script src="db.js"></script>
+
+  <script src="Index.js"></script>
+
 </body>
 </html>

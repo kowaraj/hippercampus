@@ -22,6 +22,9 @@ let make = () => {
     | ["meme2"] => {
         <Meme2 /> 
       }
+    | ["meme3"] => {
+        <Meme3 /> 
+      }
     | ["upload"] => {
         <Uploader /> 
       }
@@ -33,6 +36,7 @@ let make = () => {
       } 
     }}
 
+    <Db />
   </div>;
 };
 
