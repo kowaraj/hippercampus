@@ -37,32 +37,35 @@ let make = () => {
     //     memes
     // }
 
-    let do_fetch = (memename) => {
-        Js.Promise.(
-            doFetchMeme(memename)
-            |> then_( result => {
-                switch (result) {
-                    | Some(data) => {
-                        setFetchedMemes(_ => data);
-                        resolve();
-                        }
-                    | None => {
-                        Js.log("NONE! no data fetched");
-                        resolve();}
-                }}) |> ignore) 
-        None;
-    };
+    // let do_fetch = (memename) => {
+    //     Js.Promise.(
+    //         doFetchMeme(memename)
+    //         |> then_( result => {
+    //             switch (result) {
+    //                 | Some(data) => {
+    //                     setFetchedMemes(_ => data);
+    //                     resolve();
+    //                     }
+    //                 | None => {
+    //                     Js.log("NONE! no data fetched");
+    //                     resolve();}
+    //             }}) |> ignore) 
+    //     None;
+    // };
     
-    React.useEffect1( 
-        () => { do_fetch(meme_to_fetch); }, 
-        [|meme_to_fetch|],
-    );
+    // React.useEffect1( 
+    //     () => { do_fetch(meme_to_fetch); }, 
+    //     [|meme_to_fetch|],
+    // );
 
     let cb_selected_meme = s => { setMemeToFetch(_ => s)  };
+    let cb_add_meme = m => { setFetchedMemes(memes => List.append(memes, [m]))   };
 
     <div id="div-render-meme" style=StyleMeme.component>
-        <FetchData5 cb=cb_selected_meme/>            
-        <RenderMemeWrapper fetched_memes=fetched_memes />
+        <Db />
+
+//        <FetchData5 cb=cb_selected_meme/>            
+//        <RenderMemeWrapper fetched_memes=fetched_memes />
     </div>
 };
 
