@@ -1,3 +1,17 @@
+# History:
+
+- Firestore.js = pure JS code
+ - `firestore_db` gets initialized in Firestore.js as `firebase.firestore()`
+ - `memes_onSnapshot` 
+
+- Db.re = ReasonML interface for the Firestore
+  - defines `external fs_memes_onSnapshot` as a wrapper for "memes_onSnapshot" (pure JS function)
+
+
+
+
+# Info
+
 - TEST (React) Express (backend), see: https://github.com/kowaraj/hippercampus_test_be
 - TEST React client (frontend), see: https://github.com/kowaraj/hippercampus_test_fe
 - ACTUAL frontend (localhost:3002), the current project https://github.com/kowaraj/hippercampus

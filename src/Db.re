@@ -1,5 +1,6 @@
+
 [@bs.module "./Firestore.js"]
-external fs_memes_onSnapshot: ( (string, string) => unit) => unit = "memes_onSnapshot";
+external fs_memes_onSnapshot: ( (string, TT.fs_meme_t) => unit) => unit = "memes_onSnapshot";
 
 
 [@react.component]
@@ -7,11 +8,12 @@ let make = () => {
 
     let (memes, setMemes) = React.useState( () => [] );
 
-    let add_meme = (m_id, m_name) => {
-        Js.log(m_id)
-        Js.log(m_name)
+    let add_meme = (m_id, m:TT.fs_meme_t) => {
+        Js.log(">>> add_meme:")
+        Js.log(m)
+//        Js.log(nameGet(m))
 
-        let mm : TT.fs_meme_t = {id: m_id, name: m_name, text: "text", fn: "fn", tags: ["t1", "t2"]};
+        let mm : TT.fs_meme_t = {id: m_id, name: m.name, text: m.text, fn: m.fn, tags: m.tags};
         setMemes( ms => List.append(ms, [ mm ] ) )
     };
 

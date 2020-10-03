@@ -2,29 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="theme-color" content="#ffe1c4"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="manifest" href="/public/manifest.json">
-  <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
+  <meta name="theme-color" content="#ffe1c4"/><!-- PWA audit -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/><!-- PWA audit -->
+  <link rel="manifest" href="/public/manifest.json"><!-- PWA audit -->
+  <link rel="apple-touch-icon" href="/icons/icon-96x96.png"><!-- PWA audit -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.2.0/antd.css" >
+
   <style>
     .root0 {
       border: 1px solid rgb(226, 121, 8);
       margin: 0 0;
       background-color: rgb(255, 232, 202);
+      /* box-sizing: "border-box"; */
     }
+    #ant-containder-id span {
+      height: 95px;
+      line-height: 2em;
+    }
+    #ant-containder-id span {
+      font-size: 1em;
+    }    
   </style>
-  <title>ReasonReact Examples</title>
+  <title>HipperCampus</title>
 </head>
 
 <body class="root0">
   <div>
-    <p> TEST </p>
-  <div id="root">
+    <div id="root"> <p> no javascript </p>  </div> <!-- PWA audit -->
+  </div>
 
-  </div>
-  </div>
+
+  
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-analytics.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyDsc8jkTX8_0OWYwwNVnwyjvD6jldSc_Os",
+      authDomain: "hippercampus-pwa-d1c5f.firebaseapp.com",
+      databaseURL: "https://hippercampus-pwa-d1c5f.firebaseio.com",
+      projectId: "hippercampus-pwa-d1c5f",
+      storageBucket: "hippercampus-pwa-d1c5f.appspot.com",
+      messagingSenderId: "617721243888",
+      appId: "1:617721243888:web:25029859bb57106f163a35",
+      measurementId: "G-PX0NCB7SWB"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+    
+  <script src="app.js"></script>
+  //<script src="db.js"></script>
 
   <script src="Index.js"></script>
-  <script src="app.js"></script>
+
 </body>
 </html>
