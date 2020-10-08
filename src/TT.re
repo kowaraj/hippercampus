@@ -15,3 +15,11 @@ type fs_meme_t  = {
     fn: string, 
     tags: list(string)
     };
+
+let default_meme  = {
+    id: "noid",
+    name: "noname",
+    text: "notext", 
+    fn: "nofn", 
+    tags: ["notags"]
+    };    

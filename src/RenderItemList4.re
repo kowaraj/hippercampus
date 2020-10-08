@@ -1,5 +1,9 @@
 [@react.component]
-let make = (~items) => {
+let make = (~items, ~cb_selection) => {
+
+    let list_item_selected = (_e, item_name) => {
+        cb_selection(item_name)
+    };
 
     <div>
         <div style=StyleRenderItem3.list>
@@ -11,7 +15,7 @@ let make = (~items) => {
                         id: zi.id, 
                         name: zi.name
                         };
-                    <RenderItem4 key=zi.id item=i />
+                    <RenderItem4 cb_on_selection=list_item_selected key=zi.id item=i />
                 },
                 items)
             |> Array.of_list
