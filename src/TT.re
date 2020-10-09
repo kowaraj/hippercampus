@@ -23,3 +23,11 @@ let default_meme  = {
     fn: "nofn", 
     tags: ["notags"]
     };    
+
+type new_meme_t  = {
+    .
+    "name": string, 
+    "text": string, 
+    "fn": string, 
+    "tags": string
+};

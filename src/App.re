@@ -26,7 +26,7 @@ let make = () => {
         <Meme3 /> 
       }
     | ["upload"] => {
-        <Uploader /> 
+        <Uploader4 /> 
       }
     | ["dbdump"] => {
         <FetchData2 /> 

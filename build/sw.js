@@ -1,5 +1,5 @@
-const staticCacheName = 'site-static-v7';
-const dynamicCacheName = 'site-dynamic-v0';
+const staticCacheName =   'site-static-v9';
+const dynamicCacheName = 'site-dynamic-v9';
 
 // assets for pre-caching
 const assets = [
@@ -56,27 +56,38 @@ self.addEventListener('activate', evt => {
 
 // reacting to a 'fetch' request
 self.addEventListener('fetch', evt => {
-    // COMMENTED OUT: while working with Firestore db...
-    // evt.respondWith(
-    //     caches.match(evt.request)
-    //     .then( cacheResp => {
-    //         return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
-    //             console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
-    //             return caches.open(dynamicCacheName).then( cache => {
-    //                 cache.put(fetchResp.url, fetchResp.clone())
-    //                 limitCacheSize(dynamicCacheName, 20)
-    //                 return fetchResp
-    //             })
-    //         })
-    //     })
-    //     .catch( cacheMiss => {
-    //         if (evt.request.url.indexOf('getmeme/') !== -1) {
-    //             return caches.match('http://localhost:4666/getmeme/macos')
-    //         }
-    //         if (evt.request.url.indexOf('uploads/') !== -1) {
-    //             return caches.match('http://localhost:4666/uploads/ShiftDisplay.png')
-    //         }
-    //     })
-    // )
+
+    fspos = evt.request.url.indexOf('firestore.googleapis.com')
+    if (fspos === -1) {
+
+        evt.respondWith(
+            caches.match(evt.request)
+            .then( cacheResp => {
+
+//                return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
+                return cacheResp || fetch(evt.request).then( fetchResp => {
+                        console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
+                    return caches.open(dynamicCacheName).then( cache => {
+                        cache.put(fetchResp.url, fetchResp.clone())
+                        limitCacheSize(dynamicCacheName, 200)
+                        return fetchResp
+                    })
+                })
+            })
+            .catch( cacheMiss => {
+
+                // if (evt.request.url.indexOf('getmeme/') !== -1) {
+                //     return caches.match('http://localhost:4666/getmeme/macos')
+                // }
+                // if (evt.request.url.indexOf('uploads/') !== -1) {
+                //     return caches.match('http://localhost:4666/uploads/ShiftDisplay.png')
+                // }
+            })
+        )
+
+    }
+    else {
+        console.log("firestore will not be cached")
+    }
 })
 

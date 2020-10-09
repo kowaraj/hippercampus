@@ -3,14 +3,19 @@
 [@bs.module "./Firestore.js"]
 external fs_memes_onSnapshot: ( (string, TT.fs_meme_t) => unit) => unit = "memes_onSnapshot";
 
-//[@bs.val] external document: 'a = "document";
-//[@bs.set] external setName: (textarea, string) => unit = "name";
-// call a method
-//document##addEventListener("mouseup", _event => {
-//  let loc = document##location;
-  ////    document##location##href = "rescript-lang.org";
-//  Js.log("clicked!");
-//});
+// [@bs.module "./Firestore.js"]
+// external fs_add_meme: ( unit => unit ) =  "add_meme";
+
+// [@bs.val] external document: 'a = "document";
+// document##addEventListener("mouseup", _event => {
+//     let loc = document##location;
+//     //Js.log(loc)
+//     //let ret = set_location_href(loc, "rescript-lang.org")
+//     let href = document##location##href;
+//     let ret = "rescript-lang.org"
+//     Js.log("clicked!");
+//     fs_add_meme()
+// });
 
 
 [@bs.get] external getName: TT.fs_meme_t => string = "name";
@@ -29,6 +34,8 @@ let make = (~cb_fetch_selected) => {
         //Js.log("Db.re: add_meme:")
         //Js.log(m)
         let tags = getTags(m) // option(string), bs.nullable => might be undefined!
+        Js.log("tags")
+        Js.log(tags)
         let tags_array = {
                 switch tags {
                 | Some(s) => Array.to_list(Js.String2.split(s, " "));
@@ -52,9 +59,9 @@ let make = (~cb_fetch_selected) => {
         None;
     });
 
-    // Get the meme from a selected name
-    let selected_meme : string => unit = _item_name => { 
-        let m = List.find( (mi : TT.fs_meme_t) => mi.name == _item_name, memes )
+    // Get the meme from a selected meme.id
+    let selected_meme : string => unit = item_id => { 
+        let m = List.find( (mi : TT.fs_meme_t) => mi.id == item_id, memes )
         cb_fetch_selected(m) 
     };
 

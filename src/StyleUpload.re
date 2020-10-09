@@ -25,7 +25,16 @@ let input = {ReactDOMRe.Style.make(
     ~maxWidth="88vw", 
     // ~maxHeight="30vh", 
     () )};  
-
+let input_tags = {ReactDOMRe.Style.make(
+    ~border="1px solid #aaaaaa", 
+    ~margin="5px",
+    ~position="center",
+    ~fontSize="4vw",
+    ~textAlign="left",
+    ~wordBreak="break-all",
+    ~maxWidth="88vw", 
+    // ~maxHeight="30vh", 
+    () )};  
 let textarea = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
     ~margin="5px",
@@ -73,4 +82,17 @@ let button = {ReactDOMRe.Style.make(
     ~maxWidth="50vw", 
     ~maxHeight="50vh", 
     ~width="50vw",
+    () )};  
+
+let add_meme_button = {ReactDOMRe.Style.make(
+    ~border="1px solid #aaaaaa", 
+    ~margin="5px",
+    ~position="center",
+    ~fontSize="10vw",
+    ~textAlign="center",
+    ~wordBreak="break-all",
+    ~maxWidth="50vw", 
+    ~maxHeight="50vh", 
+    ~width="30vw",
+    ~height="8vh",
     () )};  

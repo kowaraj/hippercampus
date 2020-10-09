@@ -5,31 +5,22 @@
 //firebase send a snapshot of the DB when it changed
 
 const firestore_db = firebase.firestore()
+firestore_db.enablePersistence().catch(err => {
+    if(err.code == 'failed-precondition') {
+        console.log("persistence failed"); 
+    } else if (err.code == 'unimplemented') {
+        console.log("persistence is not available")
+    }
+})
+
 var memes_onSnapshot = (
 function(cb) {
     firestore_db.collection('memes').onSnapshot( snapshot => {
         //console.log(snapshot.docChanges())
         snapshot.docChanges().forEach(change => {
             if (change.type === 'added') {
-                //console.log(change.type, change.doc.data(), change.doc.id)
-
-                var m = change.doc.data();
-//                console.log(m)
-                // var mm_001 = /* name */m[/* name */1];
-                // var mm_002 = /* text */m[/* text */2];
-                // var mm_003 = /* fn */m[/* fn */3];
-                // var mm_004 = /* tags */m[/* tags */4];
-                // var mm = /* record */[
-                //   /* id */m_id,
-                //   mm_001,
-                //   mm_002,
-                //   mm_003,
-                //   mm_004
-                // ];
-            
-                //                cb(change.doc.data().id, change.doc.data().name, {name: change.doc.data().name, text: change.doc.data().text}, change.doc.data())
-                cb(change.doc.id, m )
-
+                console.log(change.type, change.doc.data(), change.doc.id)
+                cb(change.doc.id, change.doc.data())
             }
             if (change.type === 'removed') {
                 // console.log(change)
@@ -39,5 +30,19 @@ function(cb) {
 }
 );
 
+var add_meme = (m_no_id) => {
+    console.log(m_no_id)
+    firestore_db.collection('memes').add(m_no_id)
+                .catch(err => console.log(err));
+};
+
+var del_meme = (meme_id) => {
+    firestore_db.collection('memes').doc(meme_id).delete()
+                .then(console.log("meme deleted:", meme_id))
+                .catch(err => console.log(err));
+};
+
 exports.memes_onSnapshot = memes_onSnapshot;
+exports.add_meme = add_meme;
+exports.del_meme = del_meme;
 
