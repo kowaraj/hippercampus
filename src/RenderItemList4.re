@@ -6,12 +6,13 @@ let make = (~items, ~cb_selection) => {
     };
 
     <div>
-        <div style=StyleRenderItem3.list>
+//        <div style=StyleRenderItem3.list>
+        <div>
         (
             List.map(
                 (zi : TT.fs_meme_t) => {
                     let i : TT.item = { 
-                        url: Config.url_be_root++"/uploads/" ++ zi.fn, 
+                        url: Config.url_be_root_uploads ++ zi.fn, 
                         id: zi.id, 
                         name: zi.name
                         };

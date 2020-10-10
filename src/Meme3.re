@@ -7,7 +7,8 @@ let make = () => {
     //RenderMemeWrapper: showing the selected meme
     let cb_selected_meme = m => { setMemeToShow(_ => m); Js.log(m)  };
 
-    <div id="div-render-meme" style=StyleMeme.component>
+//    <div id="div-render-meme" style=StyleMeme.component>
+    <div  className="row" id="div-render-meme">
         <Db cb_fetch_selected=cb_selected_meme />
         <RenderMemeWrapper4 fetched_meme=meme_to_show />
     </div>
