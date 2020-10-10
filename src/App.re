@@ -11,7 +11,7 @@ let make = () => {
   let url = ReasonReactRouter.useUrl();
   <div>
 
-    <Nav />
+    //<Nav />
     {switch (url.path) {
     | ["home"] => {
         <Home />
@@ -26,13 +26,14 @@ let make = () => {
         <Meme3 /> 
       }
     | ["upload"] => {
-        <Uploader4 /> 
+        <Uploader /> 
       }
     | ["dbdump"] => {
         <FetchData2 /> 
       }
     | _ => {
-        <p> {str("None")} </p>
+        <Meme3 /> 
+        //<p> {str("None")} </p>
       } 
     }}
 

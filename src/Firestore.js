@@ -14,16 +14,16 @@ firestore_db.enablePersistence().catch(err => {
 })
 
 var memes_onSnapshot = (
-function(cb) {
+function(db_callback) {
     firestore_db.collection('memes').onSnapshot( snapshot => {
         //console.log(snapshot.docChanges())
         snapshot.docChanges().forEach(change => {
+            console.log(change.type, change.doc.data(), change.doc.id)
             if (change.type === 'added') {
-                console.log(change.type, change.doc.data(), change.doc.id)
-                cb(change.doc.id, change.doc.data())
+                db_callback(change.doc.id, change.doc.data(), change.type)
             }
             if (change.type === 'removed') {
-                // console.log(change)
+                db_callback(change.doc.id, change.doc.data(), change.type)
             }
         });
     })

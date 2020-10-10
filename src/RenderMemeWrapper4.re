@@ -26,7 +26,7 @@ let make = (~fetched_meme : TT.fs_meme_t) => {
         setMemeName( _ => fetched_meme.name )
         setMemeText( _ => fetched_meme.text )
         setMemeFn( _ => fetched_meme.fn )
-        setMemeTags( _ => Js.String2.make(fetched_meme.tags) )
+        setMemeTags( _ => Utils.list2str(fetched_meme.tags) )
         None
         },
         [|fetched_meme|],

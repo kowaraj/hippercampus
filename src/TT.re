@@ -24,6 +24,7 @@ let default_meme  = {
     tags: ["notags"]
     };    
 
+// Required to pass info into JS-world: add_meme
 type new_meme_t  = {
     .
     "name": string, 

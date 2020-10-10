@@ -88,11 +88,11 @@ let add_meme_button = {ReactDOMRe.Style.make(
     ~border="1px solid #aaaaaa", 
     ~margin="5px",
     ~position="center",
-    ~fontSize="10vw",
+    ~fontSize="7vw",
     ~textAlign="center",
     ~wordBreak="break-all",
     ~maxWidth="50vw", 
     ~maxHeight="50vh", 
     ~width="30vw",
-    ~height="8vh",
+    ~height="4vh",
     () )};  
