@@ -5,9 +5,8 @@ let make = (~items, ~cb_selection) => {
         cb_selection(item_name)
     };
 
-    <div>
-//        <div style=StyleRenderItem3.list>
-        <div>
+    <div className="container">
+    <div className="row box2">
         (
             List.map(
                 (zi : TT.fs_meme_t) => {
@@ -22,6 +21,6 @@ let make = (~items, ~cb_selection) => {
             |> Array.of_list
             |> React.array
         )
-        </div>
+    </div>
     </div>
 };

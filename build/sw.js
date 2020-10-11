@@ -66,7 +66,7 @@ self.addEventListener('fetch', evt => {
 
 //                return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
                 return cacheResp || fetch(evt.request).then( fetchResp => {
-                        console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
+                        //console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
                     return caches.open(dynamicCacheName).then( cache => {
                         cache.put(fetchResp.url, fetchResp.clone())
                         limitCacheSize(dynamicCacheName, 200)
@@ -87,7 +87,7 @@ self.addEventListener('fetch', evt => {
 
     }
     else {
-        console.log("firestore will not be cached")
+        //console.log("firestore will not be cached")
     }
 })
 

@@ -8,37 +8,16 @@ type route =
 
 [@react.component]
 let make = () => {
-
   let url = ReasonReactRouter.useUrl();
-  <div className="container grey-text text-darken-1">
 
-    <p className="row"> {str("v.20200910.4")} </p>
-    //<Nav />
+  <div className="container orange lighten-5">
     {
       switch (url.path) {
-      // | ["home"] => {
-      //     <Home />
-      //   } 
-      // | ["meme"] => {
-      //     <Meme /> 
-      //   }
-      // | ["meme2"] => {
-      //     <Meme2 /> 
-      //   }
-      // | ["meme3"] => {
-      //     <Meme3 /> 
-      //   }
-      // | ["upload"] => {
-      //     <Uploader /> 
-      //   }
-      // | ["dbdump"] => {
-      //     <FetchData2 /> 
-      //   }
       | _ => {
-          <Meme3 /> 
-          //<p> {str("None")} </p>
-      } 
-    }}
+              <Meme3 /> 
+              } 
+      }
+    }
 
   </div>;
 };

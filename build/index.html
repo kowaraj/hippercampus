@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="theme-color" content="#ffe1c4"/><!-- PWA audit -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/><!-- PWA audit -->
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/> <!--PWA audit-->
   <link rel="manifest" href="/public/manifest.json"><!-- PWA audit -->
   <link rel="apple-touch-icon" href="/icons/icon-96x96.png"><!-- PWA audit -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.2.0/antd.css" >
@@ -11,33 +11,49 @@
   <!-- Materialize  -->
   <link type="text/css" href="/materialize.min.css" rel="stylesheet">
   <script type="text/javascript" src="/materialize.min.js"></script>
-  
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
   
   <style>
-    .testix {
-      font-size: 4em;
+    .box {
+      height: 200px;
+    }
+    .box2 {
+      height: 150px;
+      min-height: 100px;
+      max-height: 150px;
+      overflow: auto;
+    }
+    .memelistrow {
+      margin: 2px 0px;
+      padding: 2px;
+      /* border: 1px solid rgb(207, 149, 157); */
     }
     .root0 {
-      border: 1px solid rgb(226, 121, 8);
-      margin: 0 0;
+      /* border: 1px solid rgb(226, 121, 8);
+      margin: 0 0; */
       background-color: rgb(255, 232, 202);
     }
-    #ant-containder-id span {
+    /* #ant-containder-id span {
       height: 95px;
       line-height: 2em;
     }
     #ant-containder-id span {
       font-size: 1em;
-    }    
+    }     */
   </style>
   <title>HipperCampus</title>
 </head>
 
 <!-- <body class="root0"> -->
-<body class="root0">
+<body>
     <div>
-    <div id="root"> <p> no javascript </p>  </div> <!-- PWA audit -->
+      <div id="root"> <p> no javascript </p>  
+    </div> <!-- PWA audit -->
   </div>
 
 

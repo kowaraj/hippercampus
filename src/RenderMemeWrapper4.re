@@ -33,28 +33,43 @@ let make = (~fetched_meme : TT.fs_meme_t) => {
     );
 
     <div>
-        <input type_="text" name="name" value={memeName} 
+        <input className="orange-text text-darken-5 center-align flow-text" value={memeName} 
             onChange={ev => {setMemeName(ReactEvent.Form.target(ev)##value)}}
             /> 
-            <br />
-        <textarea type_="text" id="searchtext" name="text" value={memeText} 
+
+        <textarea className="box" value={memeText} 
             onChange={ev => {setMemeText(ReactEvent.Form.target(ev)##value)}}
             />                
-        <input type_="text" name="tags" value={memeTags} 
+        <input className="blue-text right-align" value={memeTags} 
             onChange={ev => {setMemeTags(ReactEvent.Form.target(ev)##value)}}
             /> 
-            <br />
-//        <img style=StyleMeme.image src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
-        <img src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
-//            <div className="modal" style={ get_modal_style() } onClick={ _=>invert_modal()}>
-            <div className="modal" onClick={ _=>invert_modal()}>
-//                <img src=memeFn style=StyleMeme.modal_content onClick={ _=>invert_modal()}/> 
-                <img src=memeFn onClick={ _=>invert_modal()}/> 
+
+        <div className="row">
+            <div className="col s6">
+                <button className="btn indigo" onClick=button_add_meme> {RR.str("Push")} </button> 
+
+                <button className="btn pink right" onClick=button_del_meme> 
+                    <span> {RR.str("Kill")} </span>
+                    <i className="material-icons right"> {RR.str("cancel")} </i>
+                </button> 
             </div>
-            <br />
-        <button onClick=button_add_meme> {RR.str("Pushd")} </button> 
-        <button onClick=button_del_meme> {RR.str("Kill")} </button> 
-        <br />
+
+            <div className="col s6">
+                <div className="right">
+                    //<img style=StyleMeme.image src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
+                    <img src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
+                        //<div className="modal" style={ get_modal_style() } onClick={ _=>invert_modal()}>
+                        <p className="right-align"> RR.v </p>
+                    <div className="modal" onClick={ _=>invert_modal()}>
+                        //<img src=memeFn style=StyleMeme.modal_content onClick={ _=>invert_modal()}/> 
+                        <img src=memeFn onClick={ _=>invert_modal()}/> 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
 
 };

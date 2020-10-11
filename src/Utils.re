@@ -5,12 +5,17 @@ let list2str : list(string) => string = ls => {
     Js.String2.make( Js.List.toVector(ls) )
 }
 
+let mlist2str : list(TT.fs_meme_t) => string = ls => {
+    Js.String2.make( Js.List.toVector(ls) )
+}
+
 let is_in = (el, set) => {
-    List.exists( i => i == el, set)
+    // String.trim(tag_of_a_meme) - to remove white spaces
+    List.exists( i => String.trim(i) == el, set)
 }
 
 let is_subset = (subset, set) => {
-    List.for_all( el => is_in(el, set), subset)
+    List.for_all( el => is_in(el, set), subset);
 }
 
 // Take: List of memes, List of selected tags

@@ -12,6 +12,7 @@ module Select = {
     [@react.component]
     external make : (
         ~style: ReactDOMRe.Style.t=?, 
+        ~className: string=?,
         ~allowClear: bool=?,
         ~autoClearSearchValue: bool=?,
         ~autoFocus: bool=?,
