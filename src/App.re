@@ -10,7 +10,7 @@ type route =
 let make = () => {
   let url = ReasonReactRouter.useUrl();
 
-  <div className="container orange lighten-5">
+  <div className=S.app_main>
     {
       switch (url.path) {
       | _ => {

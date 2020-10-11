@@ -1,3 +1,3 @@
 let str = ReasonReact.string;
 
-let v = str("v.1.1.0");
+let v = str("v.1.1.5");

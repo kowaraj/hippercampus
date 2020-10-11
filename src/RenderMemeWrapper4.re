@@ -45,7 +45,7 @@ let make = (~fetched_meme : TT.fs_meme_t) => {
             /> 
 
         <div className="row">
-            <div className="col s6">
+            <div className="col s8">
                 <button className="btn indigo" onClick=button_add_meme> {RR.str("Push")} </button> 
 
                 <button className="btn pink right" onClick=button_del_meme> 
@@ -54,10 +54,10 @@ let make = (~fetched_meme : TT.fs_meme_t) => {
                 </button> 
             </div>
 
-            <div className="col s6">
+            <div className="col s4">
                 <div className="right">
                     //<img style=StyleMeme.image src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
-                    <img src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
+                    <img src=memeFn alt="image" onClick={ _=>invert_modal() }/> 
                         //<div className="modal" style={ get_modal_style() } onClick={ _=>invert_modal()}>
                         <p className="right-align"> RR.v </p>
                     <div className="modal" onClick={ _=>invert_modal()}>

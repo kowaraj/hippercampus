@@ -36,7 +36,7 @@ let make = (~cb_fetch_selected) => {
     <div> 
         <Db cb_meme_added=db_ch_added cb_meme_removed=db_ch_removed/>
         <RenderItemList4 items=memesToShow cb_selection=selected_meme/>
-        <AntTest tags_in=all_tags cb_select=cb_select_tags cb_deselect=cb_deselect_tags />
+        <TagsSelector tags_in=all_tags cb_select=cb_select_tags cb_deselect=cb_deselect_tags />
     </div>
  
 };
