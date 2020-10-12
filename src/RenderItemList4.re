@@ -6,7 +6,6 @@ let make = (~items, ~cb_selection) => {
     };
 
     <div>
-        <button className=S.memes_button> {RR.str("M")} </button> 
         <div className="container">
             <div className="row box2">
                 

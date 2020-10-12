@@ -7,3 +7,6 @@ let url_be_root4 =  "http://to_be_defined:4666"
 let url_be_root_uploads = "http://to_be_defined:4666"
 let url_be_create4 =  url_be_root4 ++ "/creatememe";
 
+
+let app_uid = ref("");
+let mark = ref("INIT");

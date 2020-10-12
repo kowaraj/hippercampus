@@ -10,12 +10,6 @@ const assets = [
     '/sw.js',
     '/public/manifest',
     '/img/icons/icon-192x192.png'
-    //,
-    // 'http://localhost:4666/getmeme/shifts', 
-    // 'http://localhost:4666/uploads/ShiftDisplay.png'
-    // ,
-    // 'http://localhost:4666/getmeme/macos',
-    // 'http://localhost:4666/uploads/Screen%20Shot%202020-02-04%20at%2018.47.03.png'
 ];
 
 // limit cache size
@@ -55,39 +49,31 @@ self.addEventListener('activate', evt => {
 });
 
 // reacting to a 'fetch' request
-self.addEventListener('fetch', evt => {
+// self.addEventListener('fetch', evt => {
 
-    fspos = evt.request.url.indexOf('firestore.googleapis.com')
-    if (fspos === -1) {
+//     fspos = evt.request.url.indexOf('firestore.googleapis.com')
+//     if (fspos === -1) {
 
-        evt.respondWith(
-            caches.match(evt.request)
-            .then( cacheResp => {
+//         evt.respondWith(
+//             caches.match(evt.request)
+//             .then( cacheResp => {
 
-//                return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
-                return cacheResp || fetch(evt.request).then( fetchResp => {
-                        //console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
-                    return caches.open(dynamicCacheName).then( cache => {
-                        cache.put(fetchResp.url, fetchResp.clone())
-                        limitCacheSize(dynamicCacheName, 200)
-                        return fetchResp
-                    })
-                })
-            })
-            .catch( cacheMiss => {
-
-                // if (evt.request.url.indexOf('getmeme/') !== -1) {
-                //     return caches.match('http://localhost:4666/getmeme/macos')
-                // }
-                // if (evt.request.url.indexOf('uploads/') !== -1) {
-                //     return caches.match('http://localhost:4666/uploads/ShiftDisplay.png')
-                // }
-            })
-        )
-
-    }
-    else {
-        //console.log("firestore will not be cached")
-    }
-})
+// //                return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
+//                 return cacheResp || fetch(evt.request).then( fetchResp => {
+//                         //console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
+//                     return caches.open(dynamicCacheName).then( cache => {
+//                         cache.put(fetchResp.url, fetchResp.clone())
+//                         limitCacheSize(dynamicCacheName, 200)
+//                         return fetchResp
+//                     })
+//                 })
+//             })
+//             .catch( cacheMiss => {
+//             })
+//         )
+//     }
+//     else {
+//         //console.log("firestore will not be cached")
+//     }
+// })
 

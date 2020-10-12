@@ -18,7 +18,7 @@ function(db_callback) {
     firestore_db.collection('memes').onSnapshot( snapshot => {
         //console.log(snapshot.docChanges())
         snapshot.docChanges().forEach(change => {
-            console.log(change.type, change.doc.data(), change.doc.id)
+            //console.log(change.type, change.doc.data(), change.doc.id)
             if (change.type === 'added') {
                 db_callback(change.doc.id, change.doc.data(), change.type)
             }
@@ -34,13 +34,13 @@ function(db_callback) {
 );
 
 var add_meme = (m_no_id) => {
-    console.log(m_no_id)
+    // console.log(m_no_id)
     firestore_db.collection('memes').add(m_no_id)
                 .catch(err => console.log(err));
 };
 
 var mod_meme = (m) => {
-    console.log(m)
+    // console.log(m)
     firestore_db.collection('memes').doc(m.id).set(m)
                 .catch(err => console.log(err));
 };

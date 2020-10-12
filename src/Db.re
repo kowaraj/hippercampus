@@ -83,7 +83,13 @@ let make = (~cb_meme_added, ~cb_meme_updated, ~cb_meme_removed) => {
 
     // Render the list of memes
     <div>
-
+    // {
+    //     switch (Config.app_uid^) { 
+    //     | "" => { <h1> {RR.str("LOGGED IN")} </h1> }
+    //     | _ => { <h1> {RR.str("LOGGED OUT")} </h1> }
+    //     }
+    //     //<h1> {RR.str("LOG?")} </h1>
+    // }
     </div>
  
 };
