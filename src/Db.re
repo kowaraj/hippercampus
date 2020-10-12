@@ -9,7 +9,6 @@ external fs_memes_onSnapshot: ( (string, TT.fs_meme_t, string) => unit) => unit 
 [@bs.get] [@bs.return nullable] external getFn: TT.fs_meme_t => option(string) = "fn";
 [@bs.get] [@bs.return nullable] external getTags: TT.fs_meme_t => option(string) = "tags";
 
-
 [@react.component]
 let make = (~cb_meme_added, ~cb_meme_removed) => {
 
@@ -57,7 +56,7 @@ let make = (~cb_meme_added, ~cb_meme_removed) => {
 
     // Render the list of memes
     <div>
-        <br />
+
     </div>
  
 };
