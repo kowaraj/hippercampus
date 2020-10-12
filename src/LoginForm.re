@@ -13,8 +13,10 @@ external fs_login: ( string, string, (string => unit) ) => unit = "login";
 [@react.component]
 let make = () => {
 
-    let (username, setUsername) = React.useState( () => "kj@gmail.com" );
-    let (password, setPassword) = React.useState( () => "abracadabra" );
+    // let (username, setUsername) = React.useState( () => "kj@gmail.com" );
+    // let (password, setPassword) = React.useState( () => "abracadabra" );
+    let (username, setUsername) = React.useState( () => "" );
+    let (password, setPassword) = React.useState( () => "" );
 
     let set_uid = (uid) => {
 
@@ -46,6 +48,10 @@ let make = () => {
         ReasonReactRouter.push("/");
     };
 
+    let sign_cancel = _ => {
+        ReasonReactRouter.push("/");
+    };
+
     <div>
     // {
     //     switch (Config.mark^) {
@@ -55,10 +61,10 @@ let make = () => {
     //     }
 
     // }
-        <input type_="text" name="username" value={username} placeholder="user name"
+        <input type_="text" id="hippercampus.username" name="hippercampus.username" value={username} placeholder="user name"
             onChange= { ev => setUsername(ReactEvent.Form.target(ev)##value) } 
             />
-        <input type_="text" name="password" value={password} placeholder="pass word"
+        <input type_="text" id="hippercampus.password" name="hippercampus.password" value={password} placeholder="pass word"
             onChange= { ev => setPassword(ReactEvent.Form.target(ev)##value) } 
             />
         <button className="btn indigo" onClick=signup> {RR.str("Sign Up")} </button> 
@@ -70,6 +76,7 @@ let make = () => {
 
     }
 //        <button className="btn pink  " onClick=signin> {RR.str("Sign In")} </button> 
+        <button className="btn grey right" onClick=sign_cancel> {RR.str("Back")} </button> 
 
 
     </div>

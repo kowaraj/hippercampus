@@ -49,31 +49,31 @@ self.addEventListener('activate', evt => {
 });
 
 // reacting to a 'fetch' request
-// self.addEventListener('fetch', evt => {
+self.addEventListener('fetch', evt => {
 
-//     fspos = evt.request.url.indexOf('firestore.googleapis.com')
-//     if (fspos === -1) {
+    fspos = evt.request.url.indexOf('firestore.googleapis.com')
+    if (fspos === -1) {
 
-//         evt.respondWith(
-//             caches.match(evt.request)
-//             .then( cacheResp => {
+        evt.respondWith(
+            caches.match(evt.request)
+            .then( cacheResp => {
 
-// //                return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
-//                 return cacheResp || fetch(evt.request).then( fetchResp => {
-//                         //console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
-//                     return caches.open(dynamicCacheName).then( cache => {
-//                         cache.put(fetchResp.url, fetchResp.clone())
-//                         limitCacheSize(dynamicCacheName, 200)
-//                         return fetchResp
-//                     })
-//                 })
-//             })
-//             .catch( cacheMiss => {
-//             })
-//         )
-//     }
-//     else {
-//         //console.log("firestore will not be cached")
-//     }
-// })
+//                return cacheResp || fetch(evt.request, {mode: "cors"}).then( fetchResp => {
+                return cacheResp || fetch(evt.request).then( fetchResp => {
+                        //console.log("--> : " + evt.request.url + " == (" + fetchResp.type + ") " +  fetchResp.url)
+                    return caches.open(dynamicCacheName).then( cache => {
+                        cache.put(fetchResp.url, fetchResp.clone())
+                        limitCacheSize(dynamicCacheName, 200)
+                        return fetchResp
+                    })
+                })
+            })
+            .catch( cacheMiss => {
+            })
+        )
+    }
+    else {
+        //console.log("firestore will not be cached")
+    }
+})
 
