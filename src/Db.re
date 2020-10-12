@@ -10,10 +10,9 @@ external fs_memes_onSnapshot: ( (string, TT.fs_meme_t, string) => unit) => unit 
 [@bs.get] [@bs.return nullable] external getTags: TT.fs_meme_t => option(string) = "tags";
 
 [@react.component]
-let make = (~cb_meme_added, ~cb_meme_removed) => {
+let make = (~cb_meme_added, ~cb_meme_updated, ~cb_meme_removed) => {
 
-
-    let meme_added = (m_id, m) => {
+    let update_a_meme = (m_id, m)=> {
         let tags = getTags(m) // option(string), bs.nullable => might be undefined!
         let tags_array = {
             switch tags {
@@ -30,7 +29,34 @@ let make = (~cb_meme_added, ~cb_meme_removed) => {
             }
         }
         let mm : TT.fs_meme_t = {id: m_id, name: getName(m), text: getText(m), fn: fn_string, tags: tags_list};
+        mm
+    }
+
+    let meme_added = (m_id, m) => {
+        // let tags = getTags(m) // option(string), bs.nullable => might be undefined!
+        // let tags_array = {
+        //     switch tags {
+        //         | Some(s) => Js.String2.split(s, ",");
+        //         | None => Js.Array.from(Js.String.castToArrayLike("no tags found"))
+        //     }
+        // }
+        // let tags_list = Array.to_list(tags_array)
+        // let m_fn = getFn(m);
+        // let fn_string = {
+        //     switch m_fn {
+        //         | Some(fn) => fn;
+        //         | None => "no files attached"
+        //     }
+        // }
+        // let mm : TT.fs_meme_t = {id: m_id, name: getName(m), text: getText(m), fn: fn_string, tags: tags_list};
+        let mm = update_a_meme(m_id, m)
         cb_meme_added(mm);
+        ()
+    }
+
+    let meme_updated = (m_id, m) => {
+        let mm = update_a_meme(m_id, m)
+        cb_meme_updated(mm);
         ()
     }
 
@@ -44,6 +70,7 @@ let make = (~cb_meme_added, ~cb_meme_removed) => {
         switch change_type {
             | "added" => meme_added(m_id, m)
             | "removed" => meme_removed(m_id)
+            | "modified" => meme_updated(m_id, m)
             | _ => ()
         }
     };

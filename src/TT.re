@@ -32,3 +32,13 @@ type new_meme_t  = {
     "fn": string, 
     "tags": string
 };
+
+// Required to pass info into JS-world: mod_meme
+type upd_meme_t  = {
+    .
+    "id": string,
+    "name": string, 
+    "text": string, 
+    "fn": string, 
+    "tags": string
+};

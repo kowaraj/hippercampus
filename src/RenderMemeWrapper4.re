@@ -1,4 +1,5 @@
 [@bs.module "./Firestore.js"] external fs_add_meme: ( TT.new_meme_t => unit ) =  "add_meme";
+[@bs.module "./Firestore.js"] external fs_mod_meme: ( TT.upd_meme_t => unit ) =  "mod_meme";
 [@bs.module "./Firestore.js"] external fs_del_meme: ( string => unit ) =  "del_meme";
 
 [@react.component]
@@ -13,6 +14,10 @@ let make = (~fetched_meme : TT.fs_meme_t) => {
     let button_add_meme = (_e) => {
         let m = {"name": memeName, "text": memeText, "fn": memeFn, "tags": memeTags}
         fs_add_meme(m);
+    };
+    let button_mod_meme = (_e) => {
+        let m = {"id": memeId, "name": memeName, "text": memeText, "fn": memeFn, "tags": memeTags}
+        fs_mod_meme(m);
     };
     let button_del_meme = (_e) => {
         fs_del_meme(memeId);
@@ -45,27 +50,31 @@ let make = (~fetched_meme : TT.fs_meme_t) => {
             /> 
 
         <div className="row">
-            <div className="col s8">
+            <div className="col s3">
                 <button className="btn indigo" onClick=button_add_meme> {RR.str("Push")} </button> 
-
-                <button className="btn pink right" onClick=button_del_meme> 
-                    <span> {RR.str("Kill")} </span>
+            </div>
+            <div className="col s3">
+                <button className="btn pink" onClick=button_del_meme> 
+                    <span> {RR.str("DEL")} </span>
                     <i className="material-icons right"> {RR.str("cancel")} </i>
                 </button> 
             </div>
-
-            <div className="col s4">
-                <div className="right">
-                    //<img style=StyleMeme.image src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
-                    <img src=memeFn alt="image" onClick={ _=>invert_modal() }/> 
-                        //<div className="modal" style={ get_modal_style() } onClick={ _=>invert_modal()}>
-                        <p className="right-align"> RR.v </p>
-                    <div className="modal" onClick={ _=>invert_modal()}>
-                        //<img src=memeFn style=StyleMeme.modal_content onClick={ _=>invert_modal()}/> 
-                        <img src=memeFn onClick={ _=>invert_modal()}/> 
-                    </div>
-                </div>
+            <div className="col s3">
+                <button className="btn orange" onClick=button_mod_meme> {RR.str("UPD")} </button> 
             </div>
+
+            // <div className="hide col s4">
+            //     <div className="right">
+            //         //<img style=StyleMeme.image src=memeFn alt="meme image" onClick={ _=>invert_modal() }/> 
+            //         <img src=memeFn alt="image" onClick={ _=>invert_modal() }/> 
+            //             //<div className="modal" style={ get_modal_style() } onClick={ _=>invert_modal()}>
+            //             <p className="right-align"> RR.v </p>
+            //         <div className="modal" onClick={ _=>invert_modal()}>
+            //             //<img src=memeFn style=StyleMeme.modal_content onClick={ _=>invert_modal()}/> 
+            //             <img src=memeFn onClick={ _=>invert_modal()}/> 
+            //         </div>
+            //     </div>
+            // </div>
 
         </div>
 

@@ -37,6 +37,14 @@ let make = (~cb_fetch_selected) => {
         setMemes( ms => List.filter( (m:TT.fs_meme_t) => m.id != m_id, ms) )
     };
 
+    let db_ch_updated = (m_upd : TT.fs_meme_t) => {
+        setMemes( ms => {
+            let ms_1 = List.filter( (m:TT.fs_meme_t) => m.id != m_upd.id, ms)
+            let ms_2 = List.append(ms_1, [ m_upd ] )
+            ms_2
+        })
+    };
+
     React.useEffect2( () => {
         setMemesToShow(_ => Utils.filter_data_by_tags(memes, sel_tags));
         setAllTags(_ => Utils.extract_all_tags(memes))
@@ -48,7 +56,7 @@ let make = (~cb_fetch_selected) => {
     // Render the list of memes
     <div> 
         <button className="btn indigo" onClick={ _ => dumpDbIntoFile(Utils.mlist2str(memes)) }> {RR.str("DUMP")} </button> 
-        <Db cb_meme_added=db_ch_added cb_meme_removed=db_ch_removed/>
+        <Db cb_meme_added=db_ch_added cb_meme_updated=db_ch_updated cb_meme_removed=db_ch_removed/>
         <RenderItemList4 items=memesToShow cb_selection=selected_meme/>
         <TagsSelector tags_in=all_tags cb_select=cb_select_tags cb_deselect=cb_deselect_tags />
     </div>

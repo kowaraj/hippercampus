@@ -25,6 +25,9 @@ function(db_callback) {
             if (change.type === 'removed') {
                 db_callback(change.doc.id, change.doc.data(), change.type)
             }
+            if (change.type === 'modified') {
+                db_callback(change.doc.id, change.doc.data(), change.type)
+            }
         });
     })
 }
@@ -36,6 +39,12 @@ var add_meme = (m_no_id) => {
                 .catch(err => console.log(err));
 };
 
+var mod_meme = (m) => {
+    console.log(m)
+    firestore_db.collection('memes').doc(m.id).set(m)
+                .catch(err => console.log(err));
+};
+
 var del_meme = (meme_id) => {
     firestore_db.collection('memes').doc(meme_id).delete()
                 .then(console.log("meme deleted:", meme_id))
@@ -44,5 +53,6 @@ var del_meme = (meme_id) => {
 
 exports.memes_onSnapshot = memes_onSnapshot;
 exports.add_meme = add_meme;
+exports.mod_meme = mod_meme;
 exports.del_meme = del_meme;
 
