@@ -6,6 +6,7 @@ let make = () => {
     //RenderMemeWrapper: showing the selected meme
     let cb_selected_meme = m => { setMemeToShow(_ => m); Js.log(m)  };
 
+    Js.log(RR.v);
     <div id="div-render-meme">
         <RenderMemeList cb_fetch_selected=cb_selected_meme />
         <RenderMemeWrapper4 fetched_meme=meme_to_show />

@@ -55,7 +55,7 @@ let make = (~cb_fetch_selected) => {
 
     // Render the list of memes
     <div> 
-        <button className="btn indigo" onClick={ _ => dumpDbIntoFile(Utils.mlist2str(memes)) }> {RR.str("DUMP")} </button> 
+        <button className=S.db_dump_button onClick={ _ => dumpDbIntoFile(Utils.mlist2str(memes)) }> {RR.str("DUMP")} </button> 
         <Db cb_meme_added=db_ch_added cb_meme_updated=db_ch_updated cb_meme_removed=db_ch_removed/>
         <RenderItemList4 items=memesToShow cb_selection=selected_meme/>
         <TagsSelector tags_in=all_tags cb_select=cb_select_tags cb_deselect=cb_deselect_tags />
