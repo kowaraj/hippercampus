@@ -19,32 +19,19 @@ let make = () => {
     let (password, setPassword) = React.useState( () => "" );
 
     let set_uid = (uid) => {
-
-        Config.app_uid := uid
-
+        Js.log("loginform: set_uid: "++ uid)
     }
 
     let signup = (_e) => {
-//                Js.log("Signing UP:"++ username ++ password);
-                fs_create_user(username, password, set_uid);
+                Js.log("Sign-up has been disabled.");
+                //fs_create_user(username, password, set_uid);
     }
 
     let signin = (_e) => {
-        Js.log("signin: userID ======= " ++ Config.app_uid^ )
-        switch (Config.app_uid^) {
-        | "" => {
-                Js.log("Loging in:"++ username ++ password);
-                fs_login(username, password, set_uid);
-                Config.mark := "IN";
-            }
-        | _ => {
-                Js.log("Already logged in, uid: " ++ Config.app_uid^ ++ ", WIll log OUT")
-                fs_logout()
-                Config.app_uid := "";
-                Config.mark := "OUT";
-            }
-       }
-
+        switch (Config.is_logged_in()) {
+        | true => { fs_logout() }
+        | false => { fs_login(username, password, set_uid); }
+        }
         ReasonReactRouter.push("/");
     };
 
@@ -53,28 +40,31 @@ let make = () => {
     };
 
     <div>
-    // {
-    //     switch (Config.mark^) {
-    //     | "IN" => { <h1> {RR.str("LOGGED IN")} </h1> }
-    //     | "OUT" => { <h1> {RR.str("LOGGED OUT")} </h1> }
-    //     | _ => { <h1> {RR.str("INIT")} </h1> }
-    //     }
+ 
+        {
+            switch (Config.is_logged_in()) {
+                | true => { <p> {RR.str("User logged in")} </p> }
+                | false => { <p> {RR.str("User logged out")} </p> }
+            }
+        }
 
-    // }
-        <input type_="text" id="hippercampus.username" name="hippercampus.username" value={username} placeholder="user name"
+        <input type_="text" id="hippercampus.username" name="hippercampus.username" value={username} 
+            placeholder="user name" autoComplete="on"
             onChange= { ev => setUsername(ReactEvent.Form.target(ev)##value) } 
             />
-        <input type_="text" id="hippercampus.password" name="hippercampus.password" value={password} placeholder="pass word"
+        <input type_="text" id="hippercampus.password" name="hippercampus.password" value={password} 
+            placeholder="pass word" autoComplete="on"
             onChange= { ev => setPassword(ReactEvent.Form.target(ev)##value) } 
             />
         <button className="btn indigo" onClick=signup> {RR.str("Sign Up")} </button> 
-    {
-        switch (Config.mark^) {
-        | "IN" => { <button className="btn pink  " onClick=signin> {RR.str("Sign OUT")} </button> }
-        | _ => { <button className="btn green  " onClick=signin> {RR.str("Sign In")} </button>  }
+
+        {
+            switch (Config.is_logged_in()) {
+                | true =>  { <button className="btn pink  " onClick=signin> {RR.str("Sign OUT")} </button> }
+                | false => { <button className="btn green " onClick=signin> {RR.str("Sign In")} </button>  }
+            }
         }
 
-    }
 //        <button className="btn pink  " onClick=signin> {RR.str("Sign In")} </button> 
         <button className="btn grey right" onClick=sign_cancel> {RR.str("Back")} </button> 
 

@@ -1,5 +1,17 @@
 const firebase_auth = firebase.auth()
 
+var registerCallback_onAuthStateChanged = auth_callback => {
+    firebase_auth.onAuthStateChanged( user => {
+        if (user) {
+            console.log("fa: User logged in: ", user)
+            auth_callback(user.uid)
+        } else {
+            console.log("fa: User logged out")
+            auth_callback("")
+        }
+    })
+};
+
 var create_user = (n, p, cb) => {
     console.log("JS:", n,p)
 
@@ -39,6 +51,7 @@ var logout = () => {
     .catch( err => console.log("logout exception: ", err) )
 }
 
+exports.registerCallback_onAuthStateChanged = registerCallback_onAuthStateChanged;
 exports.create_user = create_user;
 exports.logout = logout;
 exports.login = login;

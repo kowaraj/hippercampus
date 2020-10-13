@@ -7,8 +7,8 @@ type route =
 let make = () => {
   let url = ReasonReactRouter.useUrl();
 
-
   <div className=S.app_main>
+  <Env />  
   {
       switch (url.path) {
       | ["login"] => {

@@ -53,23 +53,21 @@ let make = (~cb_fetch_selected) => {
         (memes, sel_tags),
     );
 
-
     {
-        switch (Config.mark^) {
-        | "IN" => {    
-
-    // Render the list of memes
-    <div> 
-        <button className=S.db_dump_button onClick={ _ => dumpDbIntoFile(Utils.mlist2str(memes)) }> {RR.str("DUMP")} </button> 
-        <Db cb_meme_added=db_ch_added cb_meme_updated=db_ch_updated cb_meme_removed=db_ch_removed/>
-        <RenderItemList4 items=memesToShow cb_selection=selected_meme/>
-        <TagsSelector tags_in=all_tags cb_select=cb_select_tags cb_deselect=cb_deselect_tags />
-    </div>             
-             }
-        | "OUT" => {     <p > {RR.str("OUT")} </p>}
-        | _ => {     <p > {RR.str("INIT")} </p>}
+        switch (Config.is_logged_in()) {
+            | true => { 
+                // Render the list of memes
+                <div> 
+                    <button className=S.db_dump_button onClick={ _ => dumpDbIntoFile(Utils.mlist2str(memes)) }> {RR.str("DUMP")} </button> 
+                    <Db cb_meme_added=db_ch_added cb_meme_updated=db_ch_updated cb_meme_removed=db_ch_removed/>
+                    <RenderItemList4 items=memesToShow cb_selection=selected_meme/>
+                    <TagsSelector tags_in=all_tags cb_select=cb_select_tags cb_deselect=cb_deselect_tags />
+                </div>             
+                }
+            | false => { 
+                <p > {RR.str("OUT")} </p> 
+                }
         }
-
     };
 
     // // Render the list of memes

@@ -14,17 +14,20 @@ let make = () => {
             <button className=S.memes_button onClick={_ => ReasonReactRouter.push("/login")}> {RR.str("M")} </button> 
         </div>
 
-{
-        switch (Config.mark^) {
-        | "IN" => {    
-            <div>
-            <RenderMemeList cb_fetch_selected=cb_selected_meme />
-            <RenderMemeWrapper4 fetched_meme=meme_to_show />
-            </div>
-             }
-        | _ => {     <p > {RR.str("PLEASE, LOG IN...")} </p>}
-        };
-}
+
+        {
+            switch (Config.is_logged_in()) {
+                | true => { 
+                    <div>
+                    <RenderMemeList cb_fetch_selected=cb_selected_meme />
+                    <RenderMemeWrapper4 fetched_meme=meme_to_show />
+                    </div>
+                    }
+                | false => {  <p > {RR.str("PLEASE, LOG IN...")} </p> }
+            }
+        }
+
+
     </div>
 
 
