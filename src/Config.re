@@ -16,8 +16,11 @@ type login_t =
 let login_state = ref(LOGGED_INIT);
 let is_logged_in = () => { 
     switch (login_state^) {
-        | LOGGED_INIT => {Js.log("config: is_logged_in: LOGIN STATE: INIT"); false}
-        | LOGGED_IN =>   {Js.log("config: is_logged_in: LOGIN STATE: IN"); true}
-        | LOGGED_OUT =>  {Js.log("config: is_logged_in: LOGIN STATE: OUT"); false}
+        // | LOGGED_INIT => {Js.log("config: is_logged_in: LOGIN STATE: INIT"); false}
+        // | LOGGED_IN =>   {Js.log("config: is_logged_in: LOGIN STATE: IN"); true}
+        // | LOGGED_OUT =>  {Js.log("config: is_logged_in: LOGIN STATE: OUT"); false}
+        | LOGGED_INIT => false
+        | LOGGED_IN =>   true
+        | LOGGED_OUT =>  false
     }
 }

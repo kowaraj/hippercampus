@@ -9,6 +9,12 @@ let mlist2str : list(TT.fs_meme_t) => string = ls => {
     Js.String2.make( Js.List.toVector(ls) )
 }
 
+let mlist2jsonstr : list(TT.fs_meme_t) => string = list_of_memes => {
+    let list_of_jsonstr = Js.Json.stringifyAny(list_of_memes)
+    //Js.log(list_of_jsonstr)
+    Js.String2.make(list_of_jsonstr)
+}
+
 let is_in = (el, set) => {
     // String.trim(tag_of_a_meme) - to remove white spaces
     List.exists( i => String.trim(i) == el, set)

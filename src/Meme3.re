@@ -7,9 +7,10 @@ let make = () => {
     let cb_selected_meme = m => { setMemeToShow(_ => m); Js.log(m)  };
 
     Js.log(RR.v);
-    //Js.log("MEME3.re mark = " ++ Config.mark^);
-
+    Js.log("react.component: Meme3.re");
     <div id="div-render-meme">
+        <div className="card">
+        </div>
         <div>
             <button className=S.memes_button onClick={_ => ReasonReactRouter.push("/login")}> {RR.str("M")} </button> 
         </div>
