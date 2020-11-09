@@ -2,6 +2,11 @@
 
 let memes_ref = ref([] : list(TT.fs_meme_t) );
 
+let get_memes = () => {
+    memes_ref^ 
+    |> Array.of_list
+};
+
 [@react.component]
 let make = (~cb_fetch_selected) => {
 

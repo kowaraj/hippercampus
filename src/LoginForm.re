@@ -90,10 +90,11 @@ let make = () => {
         <div className=S.generic_row>
             <button className=S.db_dump_button 
                 onClick={ _ => {
-                    let ms_json = Utils.mlist2jsonstr(RenderMemeList.memes_ref^);
+                    let ms_json = Utils.marray2jsonstr(RenderMemeList.get_memes());
                     dumpDbIntoFile(ms_json);
-                    //let result = parseIntoMyData(ms_json)
-                    //Js.log(result)
+                    let result = parseIntoMyData(ms_json)
+                    Js.log("JSON string parsed back into the array of memes:")
+                    Js.log(result)
                     } }
                 > {RR.str("DUMP")} </button> 
         </div>

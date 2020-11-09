@@ -11,8 +11,43 @@ let mlist2str : list(TT.fs_meme_t) => string = ls => {
 
 let mlist2jsonstr : list(TT.fs_meme_t) => string = list_of_memes => {
     let list_of_jsonstr = Js.Json.stringifyAny(list_of_memes)
-    //Js.log(list_of_jsonstr)
     Js.String2.make(list_of_jsonstr)
+}
+
+let oRIGINAL_marray2jsonstr : array(TT.fs_meme_t) => string = array_of_memes => {
+    Js.log("Original array of memes:")
+    Js.log(array_of_memes)
+    let array_of_jsonstr = Js.Json.stringifyAny(array_of_memes)
+    //Js.log(array_of_jsonstr)
+    Js.String2.make(array_of_jsonstr)
+}
+
+    // id: string,
+    // name: string, 
+    // text: string, 
+    // fn: string, 
+    // tags: list(string)
+let marray2jsonstr : array(TT.fs_meme_t) => string = array_of_memes => {
+
+    let f = (acc_array, m : TT.fs_meme_t) => {
+        let dict = Js.Dict.empty()
+        Js.Dict.set(dict, "id", Js.Json.string(m.id))
+        Js.Dict.set(dict, "name", Js.Json.string(m.name))
+        Js.Dict.set(dict, "text", Js.Json.string(m.text))
+        Js.Dict.set(dict, "fn", Js.Json.string(m.fn))
+        Js.Dict.set(dict, "tags", Js.Json.stringArray(Array.of_list(m.tags)))
+
+        Array.appendappend(dict)
+        dict
+    Js.Array.reduce( 
+        },
+        Array.make(),
+        array_of_memes);
+
+
+
+    //Js.log(array_of_jsonstr)
+    Js.String2.make(array_of_jsonstr)
 }
 
 let is_in = (el, set) => {
